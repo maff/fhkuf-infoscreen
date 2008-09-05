@@ -1,0 +1,48 @@
+#filterform
+{
+	margin: 1em 0;
+}
+
+#filterform .column label
+{
+	display: block;
+	margin: 0;
+	line-height: .75em;
+}
+
+#filterform .column input
+{
+	width: 95%;
+	margin-top: .5em;
+}
+
+#filterform .column select
+{
+	width: 100%;
+}
+
+#filterform .column.submitbox
+{
+	text-align: right;
+}
+
+#input_submit
+{
+	display: block;
+	font-family: "Lucida Grande", "Lucida Sans Unicode", Tahoma, Verdana, sans-serif;
+	padding: .5em .8em;
+	border: none;
+	margin-left: 0;
+	-moz-border-radius: 2px;
+	-khtml-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+	color: #246;
+	background: #e5e5e5;
+	cursor: pointer;
+}
+
+#input_submit:hover
+{
+	color: #d54e21;
+}

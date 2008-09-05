@@ -1,0 +1,113 @@
+body
+{
+	font-size: 12px;
+}
+
+/* --------------------------------------------------------------
+	vertical rhythm = 18px
+	base font size = 12px
+
+	fontsize (em) 		= fontsize / base fontsize
+	line-height (em)	= vertical rhythm / fontsize
+-------------------------------------------------------------- */
+
+p	/* 12px */
+{
+	font-size: 1em;			/* 12px */
+	line-height: 1.5em;		/* 18px ÷ 12px */
+	margin: 0 0 1.5em 0;
+}
+
+h1	/* 18px */
+{
+	font-size: 1.5em;		/* 18px ÷ 12px */
+	line-height: 1em;		/* 18px ÷ 18px */
+	margin: 0 0 1em 0;
+}
+
+h2	/* 16px */
+{
+	font-size: 1.333333em;
+	line-height: 1.125em;
+	margin: 1.6875em 0 0.5625em 0;	/* 1.5 lines top, 0.5 lines bottom */
+}
+
+h3 	/* 14px */
+{
+	font-size: 1.166667em;
+	line-height: 1.285714em;
+	margin: 1.928571em 0 0.642857em 0;	/* 1.5 lines top, 0.5 lines bottom */
+}
+
+h4	/* 12px */
+{
+	font-size: 1em;
+	line-height: 1.5em;
+	margin: 2.25em 0 0.75em 0;	/* 1.5 lines top, 0.5 lines bottom */
+}
+
+h5	/* 12px */
+{
+	font-size: 1em;
+	line-height: 1.5em;
+	margin: 2.25em 0 0.75em 0;	/* 1.5 lines top, 0.5 lines bottom */
+}
+
+h6	/* 12px */
+{
+	font-size: 1em;
+	line-height: 1.5em;
+	margin: 2.25em 0 0.75em 0;	/* 1.5 lines top, 0.5 lines bottom */
+}
+
+pre,
+div.shell
+{
+	font-size: 1em; /* 12px */
+	line-height: 1.5em; /* 18px */
+	margin: -.75em 0 1.5em 0;
+	margin: .75em 0 1.5em 0;
+	padding: .75em 1.5em .75em 1.5em;
+}
+
+a
+{
+	color: #2583ad;
+	text-decoration: none;
+}
+
+a:hover
+{
+	color: #d54e21;
+
+}
+
+a.image
+{
+	border: none;
+}
+
+p img {
+	padding: 10px;
+	border: 1px solid #dedede;
+}
+
+p a:hover img {
+	background: #dedede;
+}
+
+img.wp-smiley
+{
+	padding: 0;
+	border: none;
+	background: transparent;
+}
+
+.sidenote
+{
+	font-size: 0.8333em;	/* 0.8333em = 10px / 12px */
+	line-height: 1.8em;		/* 1.8em = 18px / 10px */
+}
+
+#header { margin: 0 0 1em 0; padding: 0 0 1em 0; border-bottom: 1px solid #ccc; }
+#footer { text-align: right; margin: 1em 0 0 0; padding: .5em 0 0 0; border-top: 1px solid #ccc; }

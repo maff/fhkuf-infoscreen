@@ -1,0 +1,74 @@
+#infoTable {
+	font-family:arial;
+	background-color: #CDCDCD;
+	width: 100%;
+	text-align: left;
+	border: 1px solid #ccc;
+	border-collapse: collapse;
+}
+
+#infoTable td
+{
+	border: 1px solid #ccc;
+}
+
+#infoTable tr td.info
+{
+	font-weight: bold;
+	color: #ff0000;
+}
+
+#infoTable tbody tr td a
+{
+	text-decoration: none;
+	border-bottom: 1px dotted #333;
+}
+
+#infoTable thead tr th,
+#infoTable tfoot tr th
+{
+	background-color: #e6EEEE;
+	padding: 4px;
+}
+
+#infoTable thead tr .header
+{
+	background-image: url(../img/tables/bg.gif);
+	background-repeat: no-repeat;
+	background-position: center right;
+	cursor: pointer;
+}
+
+#infoTable tbody td
+{
+	color: #3D3D3D;
+	padding: 4px;
+	background-color: #FFF;
+	vertical-align: top;
+}
+
+#infoTable tbody tr.odd td
+{
+	background-color: #F0F0F6;
+}
+
+#infoTable tbody tr:hover td
+{
+	background: #ffffbb;
+}
+
+#infoTable thead tr .headerSortUp
+{
+	background-image: url(../img/tables/asc.gif);
+}
+
+#infoTable thead tr .headerSortDown
+{
+	background-image: url(../img/tables/desc.gif);
+}
+
+#infoTable thead tr .headerSortDown,
+#infoTable thead tr .headerSortUp
+{
+	background-color: #8dbdd8;
+}
