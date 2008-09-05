@@ -40,7 +40,7 @@ class IndexController extends Zend_Controller_Action
             {
                 $urlstring = '/';
                 if(isset($params['date']) && !empty($params['date']))
-                    $urlstring = '/date/' . $params['date'] . '/';
+                    $urlstring = '/filter/date/' . $params['date'] . '/';
             }
             else
             {            
@@ -53,7 +53,10 @@ class IndexController extends Zend_Controller_Action
                    }
                 }
                 
-                $urlstring = implode('/', $url) . '/';
+                if(count($url) > 0)
+                    $urlstring = '/filter/' . implode('/', $url) . '/';
+                else
+                    $urlstring = '/';
             }       
            
             $this->_redirector->gotoUrl($urlstring);

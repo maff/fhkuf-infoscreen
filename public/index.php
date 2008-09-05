@@ -1,6 +1,7 @@
 <?php
 // some general settings
 error_reporting(E_ALL|E_STRICT);
+//error_reporting(0);
 ini_set('display_errors', 1);
 date_default_timezone_set('Europe/Vienna');
 
@@ -40,10 +41,16 @@ $documentType->doctype('XHTML1_STRICT');
 $router = $frontController->getRouter();
 $router->addRoute(
     'filter',
-    new Zend_Controller_Router_Route('*',
+    new Zend_Controller_Router_Route('/filter/*',
                                      array('controller' => 'index',
                                            'action' => 'index'))
 );
+
+//$router->addRoute('service', new Zend_Controller_Router_Route('/service/*', array('controller' => 'service', 'action' => 'index')));
+//$router->addRoute('service', new Zend_Controller_Router_Route('/service/:action/', array('controller' => 'service')));
+
+//$router->addRoute('consumer', new Zend_Controller_Router_Route('/consumer/*', array('controller' => 'consumer', 'action' => 'index')));
+//$router->addRoute('consumer', new Zend_Controller_Router_Route('/consumer/:action/', array('controller' => 'consumer')));
 
 // run!
 $frontController->dispatch();

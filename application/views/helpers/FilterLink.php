@@ -27,7 +27,7 @@ class Zend_View_Helper_FilterLink
     	else
     	{
     		$date = Zend_Registry::getInstance()->get('parser_date');
-    		$filterUrl = '/date/' . $date . '/' . $filter . '/' . urlencode($value) . '/';
+    		$filterUrl = '/filter/date/' . $date . '/' . $filter . '/' . urlencode($value) . '/';
     		
     		return '<a href="' . $filterUrl . '" title="nach \'' . $value . '\' filtern">' . $value . '</a>';
     	}

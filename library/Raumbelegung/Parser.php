@@ -9,7 +9,7 @@ class Raumbelegung_Parser
     protected $_url;
     protected $_lists;
     
-    public function __construct($date)
+    public function __construct($date = '')
     {
         $this->_setDate($date);
         $this->_setUrl();
@@ -42,7 +42,15 @@ class Raumbelegung_Parser
     
     public function setFilters($filters)
     {
-        $this->_filters = $filters;   
+		if(is_array($filterd) && count($filters) > 0)
+		{
+			foreach($filter as $item)
+			{
+				$key = $item['key'];
+				$value = $item['value'];
+				$this->_filters[$key] = $value;
+			}
+		}
     }
     
     protected function _setDate($date)
