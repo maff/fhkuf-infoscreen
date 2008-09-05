@@ -11,23 +11,25 @@ class Zend_View_Helper_FilterLink
      */
     function filterLink($filter, $value)
     {
-        echo $value;
-        return;
-        
-    	global $fDate;
-    	
-    	if( strpos($value, ',') !== false ||
-    		strpos($value, '/') !== false ||
-    		strpos($value, 'NN') !== false)
+       	if( strpos($value, ',') !== false )
+       	{
+       	    $links = array();
+       	    $values = explode(',', $value);
+       	    foreach($values as $val)
+       	        $links[] = $this->filterLink($filter, trim($val));
+       	        
+       	    return implode(', ', $links);
+       	}
+       	else if ( strpos($value, '/') !== false || strpos($value, 'NN') !== false)
     	{
     		echo $value;
     	}    	
     	else
     	{
-    		$filterUrl = BASE_URL;
-    		$filterUrl .= 'date/' . $fDate . '/' . $filter . '/' . urlencode($value) . '/';
+    		$date = Zend_Registry::getInstance()->get('parser_date');
+    		$filterUrl = '/date/' . $date . '/' . $filter . '/' . urlencode($value) . '/';
     		
-    		echo '<a href="' . $filterUrl . '" title="nach \'' . $value . '\' filtern">' . $value . '</a>';
+    		return '<a href="' . $filterUrl . '" title="nach \'' . $value . '\' filtern">' . $value . '</a>';
     	}
     }    
 }

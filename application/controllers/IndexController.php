@@ -15,15 +15,15 @@ class IndexController extends Zend_Controller_Action
 	{
 	    $filters = $this->_getFilters();
 	    if(count($filters) > 0)
-	        $this->_parser->addFilters($filters);
+	        $this->_parser->setFilters($filters);
 		
 	    $data = $this->_parser->getData();
 		if(count($data) > 0)
-		    $this->view->title = 'Ergebnisse fuer ' . $this->_getDate();
-				else
+		    $this->view->title = 'Ergebnisse fuer ' . $this->_parser->getDate();
+		else
 		    $this->view->title = 'Keine Ergebnisse'; 
 		
-		$this->view->date = $this->_getDate();
+		$this->view->date = $this->_parser->getDate();
 		$this->view->lectors = $this->_parser->getList('lector');
 		$this->view->classes = $this->_parser->getList('class');
 		$this->view->rooms = $this->_parser->getList('room');
@@ -36,16 +36,27 @@ class IndexController extends Zend_Controller_Action
         {
             $url = array();
             $params = $this->getRequest()->getParams();
-            foreach(array('date', 'class', 'lector', 'room') as $key)
+            if(isset($params['reset']))
             {
-               if(isset($params[$key]) && !empty($params[$key]))
-               {
-                   $url[] = $key;
-                   $url[] = $params[$key];
-               }
-            }           
+                $urlstring = '/';
+                if(isset($params['date']) && !empty($params['date']))
+                    $urlstring = '/date/' . $params['date'] . '/';
+            }
+            else
+            {            
+                foreach(array('date', 'class', 'lector', 'room') as $key)
+                {
+                   if(isset($params[$key]) && !empty($params[$key]))
+                   {
+                       $url[] = $key;
+                       $url[] = urlencode($params[$key]);
+                   }
+                }
+                
+                $urlstring = implode('/', $url) . '/';
+            }       
            
-            $this->_redirector->gotoUrl(implode('/', $url));
+            $this->_redirector->gotoUrl($urlstring);
         }
         
         return;
@@ -57,13 +68,8 @@ class IndexController extends Zend_Controller_Action
 	    $request = $this->getRequest()->getParams();
 	    if(isset($request['date']))
 	        $date = $request['date'];
-	    
-	    if(empty($date))
-            $date = strftime('%d.%m.%Y', time());
-        else
-            $date = strftime('%d.%m.%Y', strtotime($date));
-        
-        return $date;
+	        
+	    return $date;
 	}
 	
 	protected function _getFilters()
@@ -83,10 +89,5 @@ class IndexController extends Zend_Controller_Action
 	    }
 	    
 	    return $params;
-	}
-	
-	protected function _assignData()
-	{
-	    $this->view->appointments = $this->_parser->getData();
 	}
 }

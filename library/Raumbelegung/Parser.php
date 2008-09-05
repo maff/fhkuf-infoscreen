@@ -11,15 +11,19 @@ class Raumbelegung_Parser
     
     public function __construct($date)
     {
-;
-            
-        $this->_url = $this->_getUrl();
+        $this->_setDate($date);
+        $this->_setUrl();
         $this->_loadLists();
     }
     
     public function __destruct()
     {
         $this->_saveLists();
+    }
+    
+    public function getDate()
+    {
+        return $this->_date;
     }
     
     public function getData()
@@ -36,14 +40,24 @@ class Raumbelegung_Parser
             return $this->_lists[$key];
     }
     
-    public function addFilters($filters)
+    public function setFilters($filters)
     {
         $this->_filters = $filters;   
     }
     
-    protected function _getUrl()
+    protected function _setDate($date)
     {
-        return Raumbelegung_Config::get('infoscreen_url') . '?STGID=7&DATUM=' . $this->_date;
+        if(empty($date))
+            $this->_date = strftime('%d.%m.%Y', time());
+        else
+            $this->_date = strftime('%d.%m.%Y', strtotime($date));
+            
+        Zend_Registry::getInstance()->set('parser_date', $this->_date);
+    }
+    
+    protected function _setUrl()
+    {
+        $this->_url = Raumbelegung_Config::get('infoscreen_url') . '?STGID=7&DATUM=' . $this->_date;
     }
     
     /**
@@ -97,7 +111,7 @@ class Raumbelegung_Parser
 				foreach($item as $key => $value)
 				{					
 					if(isset($this->_filters[$key]) && !empty($this->_filters[$key])
-						&& (strpos(self::cleanCheck($item[$key]), self::cleanCheck($this->_filters[$key])) === false))
+						&& (strpos(self::_cleanCheck($item[$key]), self::_cleanCheck($this->_filters[$key])) === false))
 							$ins = false;					
 				}
 				
@@ -106,24 +120,6 @@ class Raumbelegung_Parser
 			$this->_data = $tmpdata;
 		}
     }
-    
-	private static function cleanCheck($value)
-	{
-		$value = trim(strtolower($value));
-	
-		if($value == 'wi07') $value = 'wi07-vz';
-		if($value == 'wi06') $value = 'wi06-vz';
-	
-		return $value;
-	}
-
-	private function _checkData()
-	{
-		if(is_array($this->_data) && count($this->_data) > 0) return true;
-		return false;
-	}
-	
-    
     
     /**
      * _parseURL
@@ -138,13 +134,13 @@ class Raumbelegung_Parser
 		foreach($dom->find('div.appointment') as $element)
 		{			
 			$info = array();
-			$info['startTime'] = $element->find('td.appointmentDate', 0)->plaintext;
-			$info['endTime'] = $element->find('td.appointmentDate', 1)->plaintext;
-			$info['class'] = $element->find('td.appointmentDate', 2)->plaintext;
-			$info['description'] = $element->find('span.appointmentText', 0)->plaintext;
-			$info['lector'] = $element->find('span.appointmentLektor', 0)->plaintext;
-			$info['room'] = $element->find('td.appointmentRaum > div', 0)->plaintext;
-			$info['info'] = $element->find('div.appointmentInfo span', 0)->plaintext;
+			$info['startTime'] = @$element->find('td.appointmentDate', 0)->plaintext;
+			$info['endTime'] = @$element->find('td.appointmentDate', 1)->plaintext;
+			$info['class'] = @$element->find('td.appointmentDate', 2)->plaintext;
+			$info['description'] = @$element->find('span.appointmentText', 0)->plaintext;
+			$info['lector'] = @$element->find('span.appointmentLektor', 0)->plaintext;
+			$info['room'] = @$element->find('td.appointmentRaum > div', 0)->plaintext;
+			$info['info'] = @$element->find('div.appointmentInfo span', 0)->plaintext;
 			
 			$data[] = $info;
 		}
@@ -210,6 +206,22 @@ class Raumbelegung_Parser
         }
     }
     
+	private function _checkData()
+	{
+		if(is_array($this->_data) && count($this->_data) > 0) return true;
+		return false;
+	}
+	
+	private static function _cleanCheck($value)
+	{
+		$value = trim(strtolower($value));
+	
+		if($value == 'wi07') $value = 'wi07-vz';
+		if($value == 'wi06') $value = 'wi06-vz';
+	
+		return $value;
+	}
+	
     /**
      * Checks if item should be cached (excludes lists, NN, etc.)
      *
@@ -233,7 +245,5 @@ class Raumbelegung_Parser
 		    $cache = false;		
 	
 		return $cache;
-	}
-    
-    
+	}    
 }

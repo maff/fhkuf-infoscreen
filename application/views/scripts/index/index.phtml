@@ -19,10 +19,10 @@
 					<?php foreach($this->appointments as $a): ?>
 
 					<tr>
-						<td class="class"><?php $this->filterLink('class', $a['class']) ?></td>
+						<td class="class"><?php echo $this->filterLink('class', $a['class']) ?></td>
 						<td class="description"><?php echo $a['description'] ?></td>
-						<td class="lector"><?php $this->filterLink('lector', $a['lector']) ?></td>
-						<td class="room"><?php $this->filterLink('room', $a['room']) ?></td>
+						<td class="lector"><?php echo $this->filterLink('lector', $a['lector']) ?></td>
+						<td class="room"><?php echo $this->filterLink('room', $a['room']) ?></td>
 						<td class="startTime time"><?php echo $a['startTime'] ?></td>
 						<td class="endTime time"><?php echo $a['endTime'] ?></td>
 						<td class="info"><?php echo $a['info'] ?></td>
