@@ -17,8 +17,10 @@ Zend_Layout::startMvc(array('layoutPath' => 'application/layouts'));
 
 // load configuration
 $config = new Zend_Config_Ini('application/config/config.ini', 'settings');
+
 $registry = Zend_Registry::getInstance();
 $registry->set('config', $config);
+$registry->set('base_path', dirname(__FILE__));
 
 // setup controller
 $frontController = Zend_Controller_Front::getInstance();

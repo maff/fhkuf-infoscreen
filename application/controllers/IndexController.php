@@ -34,35 +34,24 @@ class IndexController extends Zend_Controller_Action
 	{
 	    if ($this->getRequest()->isPost())
         {
+            $urlstring = '/';
             $url = array();
             $params = $this->getRequest()->getParams();
-            if(isset($params['reset']))
+
+            foreach(array('date', 'class', 'lector', 'room') as $key)
             {
-                $urlstring = '/';
-                if(isset($params['date']) && !empty($params['date']))
-                    $urlstring = '/filter/date/' . $params['date'] . '/';
+               if(isset($params[$key]) && !empty($params[$key]))
+               {
+                   $url[] = $key;
+                   $url[] = urlencode($params[$key]);
+               }
             }
-            else
-            {            
-                foreach(array('date', 'class', 'lector', 'room') as $key)
-                {
-                   if(isset($params[$key]) && !empty($params[$key]))
-                   {
-                       $url[] = $key;
-                       $url[] = urlencode($params[$key]);
-                   }
-                }
+            
+            if(count($url) > 0)
+                $urlstring = '/filter/' . implode('/', $url) . '/';
                 
-                if(count($url) > 0)
-                    $urlstring = '/filter/' . implode('/', $url) . '/';
-                else
-                    $urlstring = '/';
-            }       
-           
             $this->_redirector->gotoUrl($urlstring);
-        }
-        
-        return;
+        }       
 	}
 	
 	protected function _getDate()

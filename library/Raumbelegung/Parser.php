@@ -100,7 +100,7 @@ class Raumbelegung_Parser
         );
         
         $backendOptions = array(
-            'cache_dir' => Raumbelegung_Config::get('cache_dir')
+            'cache_dir' => self::_getCacheDir()
         );
         
         $cache = Zend_Cache::factory('Core', 'File', $frontendOptions, $backendOptions);
@@ -185,7 +185,12 @@ class Raumbelegung_Parser
     
     private function _getCacheFile($key)
     {
-        return Raumbelegung_Config::get('cache_dir') . '/' . $key;
+        return self::_getCacheDir() . '/' . $key;
+    }
+    
+    private static function _getCacheDir()
+    {
+        return Zend_Registry::getInstance()->get('base_path') . '/' . Raumbelegung_Config::get('cache_dir');
     }
     
     private function _loadLists()

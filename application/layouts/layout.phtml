@@ -2,7 +2,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="de-DE">
 <head profile="http://gmpg.org/xfn/11">
-	<title>FH Kufstein Raumbelegung-Webservice</title>
+	<title><?php echo $this->title ?> &raquo; FH Kufstein Raumbelegung-Webservice</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	
 	<script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/_res/js/jquery-1.2.6.min.js"></script> 
@@ -16,7 +16,7 @@
 	<div class="container">
 	
 		<div id="header" class="span-24">
-			<form method="post" action="<?php echo $this->baseUrl(); ?>" id="filterform">
+			<form method="post" action="<?php echo $this->baseUrl(); ?>/" id="filterform">
 				<div class="column span-4">
 					<label for="sel_date">Datum</label>
 					<input id="sel_date" name="date" value="<?php echo $this->date ?>" />
@@ -50,9 +50,13 @@
 				</div>
 				
 				<div class="submitbox column prepend-1 span-4">
-					<a href="/filter/date/<?php echo $this->date ?>/">Filter zurücksetzen</a>
+					<a href="<?php echo $this->baseUrl(); ?>/">Filter zurücksetzen</a>
 				</div>	
 				
+				<!-- <div class="submitbox column prepend-1 span-4">
+					<a href="<?php echo $this->baseUrl(); ?>/filter/date/<?php echo $this->date ?>/">Filter zurücksetzen</a>
+				</div>	-->
+                
 				<div class="submitbox column span-4 last">
 					<input id="input_submit" type="submit" name="submit" value="Raumbelegung laden" />
 				</div>			
