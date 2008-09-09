@@ -5,18 +5,18 @@
 	<title>FH Kufstein Raumbelegung-Webservice</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	
-	<script type="text/javascript" src="/js/jquery-1.2.6.min.js"></script> 
-	<script type="text/javascript" src="/js/jquery.datepicker.js"></script>
-	<script type="text/javascript" src="/js/jquery.tablesorter.min.js"></script>
-	<script type="text/javascript" src="/js/global.js"></script>
+	<script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/_res/js/jquery-1.2.6.min.js"></script> 
+	<script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/_res/js/jquery.datepicker.js"></script>
+	<script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/_res/js/jquery.tablesorter.min.js"></script>
+	<script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/_res/js/global.js"></script>
 	
-	<link rel="stylesheet" type="text/css" href="/css/style.css" />
+	<link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl(); ?>/_res/css/style.css" />
 </head>
 <body>
 	<div class="container">
 	
 		<div id="header" class="span-24">
-			<form method="post" action="/" id="filterform">
+			<form method="post" action="<?php echo $this->baseUrl(); ?>" id="filterform">
 				<div class="column span-4">
 					<label for="sel_date">Datum</label>
 					<input id="sel_date" name="date" value="<?php echo $this->date ?>" />
