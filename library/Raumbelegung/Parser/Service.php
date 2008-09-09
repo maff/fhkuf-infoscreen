@@ -1,5 +1,8 @@
 <?php
-class Raumbelegung_Parser_Service_Abstract
+/**
+ * Wrapper class for the Raumbelegung Webservice
+ */
+class Raumbelegung_Parser_Service
 {
     /**
      * Get appointment list based on date and filters.
@@ -8,9 +11,10 @@ class Raumbelegung_Parser_Service_Abstract
      * @param array $filters
      * @return array
      */
-    public function getResults($date ='', $filters = array())
+    public function getResults($date = '', $filters = array())
     {
         $parser = new Raumbelegung_Parser($date);
+        
         if(count($filters) > 0)
             $parser->setFilters($filters);
             
@@ -19,13 +23,14 @@ class Raumbelegung_Parser_Service_Abstract
     
     /**
      * Get lists based on key.
-     *
+     * 
      * @param string $key
+     * @param bool $selectfriendly
      * @return array
      */
-    public function getList($key)
+    public function getList($key, $selectfriendly = true)
     {
         $parser = new Raumbelegung_Parser();
-        return $parser->getList($key);
+        return $parser->getList($key, $selectfriendly);
     }    
 }

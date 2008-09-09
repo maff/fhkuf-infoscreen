@@ -19,13 +19,13 @@ class IndexController extends Zend_Controller_Action
 		
 	    $data = $this->_parser->getData();
 		if(count($data) > 0)
-		    $this->view->title = 'Ergebnisse fuer ' . $this->_parser->getDate();
+		    $this->view->title = 'Ergebnisse für ' . $this->_parser->getDate();
 		else
 		    $this->view->title = 'Keine Ergebnisse'; 
 		
 		$this->view->date = $this->_parser->getDate();
-		$this->view->lectors = $this->_parser->getList('lector');
 		$this->view->classes = $this->_parser->getList('class');
+		$this->view->lectors = $this->_parser->getList('lector');
 		$this->view->rooms = $this->_parser->getList('room');
 	    $this->view->appointments = $data;
 	}
@@ -78,19 +78,19 @@ class IndexController extends Zend_Controller_Action
 	protected function _getFilters()
 	{
 	    $request = $this->getRequest()->getParams();
-	    $params = array();
-	    $allowed_params = array('lector', 'class', 'room');
+	    $filters = array();
+	    $allowed_params = array('class', 'lector', 'room');
 	    if(is_array($request) && count($request) > 0)
 	    {
 	        foreach($request as $key => $value)
 	        {
 	            if(in_array($key, $allowed_params) && !empty($value))
 	            {
-                    $params[$key] = $value;
+                    $filters[] = new Raumbelegung_Filter($key, $value);
 	            }
 	        }
 	    }
 	    
-	    return $params;
+	    return $filters;
 	}
 }

@@ -29,6 +29,7 @@ $registry->set('config', $config);
 $frontController = Zend_Controller_Front::getInstance();
 $frontController->throwExceptions(true);
 $frontController->setControllerDirectory('../application/controllers');
+$frontController->registerPlugin(new Zend_Controller_Plugin_ErrorHandler());
 
 // set doctype
 $documentType = new Zend_View_Helper_Doctype();

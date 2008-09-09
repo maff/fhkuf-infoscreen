@@ -34,21 +34,26 @@ class Raumbelegung_Parser
         return $this->_data;        
     }
     
-    public function getList($key)
+    public function getList($key, $selectfriendly = true)
     {
         if(isset($this->_lists[$key]))
-            return $this->_lists[$key];
+        {
+            if(!$selectfriendly)
+                return array_slice($this->_lists[$key], 1);
+            else
+                return $this->_lists[$key];
+        }
+        
+        return false;
     }
     
     public function setFilters($filters)
     {
-		if(is_array($filterd) && count($filters) > 0)
+		if(is_array($filters) && count($filters) > 0)
 		{
-			foreach($filter as $item)
+			foreach($filters as $filter)
 			{
-				$key = $item['key'];
-				$value = $item['value'];
-				$this->_filters[$key] = $value;
+				$this->_filters[$filter->key] = $filter->value;
 			}
 		}
     }
