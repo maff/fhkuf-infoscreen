@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://zftest/service/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://zftest/service/">
+<definitions xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://stud.ailoo.net/raumbelegung/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://stud.ailoo.net/raumbelegung/">
 <types>
-<xsd:schema targetNamespace="http://zftest/service/">
+<xsd:schema targetNamespace="http://stud.ailoo.net/raumbelegung/">
  <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
  <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/" />
  <xsd:complexType name="Appointment">
@@ -67,19 +67,19 @@
 <binding name="raumbelegungBinding" type="tns:raumbelegungPortType">
   <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
   <operation name="getResults">
-    <soap:operation soapAction="http://zftest/service/getresults" style="rpc"/>
-    <input><soap:body use="encoded" namespace="http://zftest/service/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
-    <output><soap:body use="encoded" namespace="http://zftest/service/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+    <soap:operation soapAction="http://stud.ailoo.net/raumbelegung/service/getresults" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://stud.ailoo.net/raumbelegung/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://stud.ailoo.net/raumbelegung/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
   </operation>
   <operation name="getList">
-    <soap:operation soapAction="http://zftest/service/getlist" style="rpc"/>
-    <input><soap:body use="encoded" namespace="http://zftest/service/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
-    <output><soap:body use="encoded" namespace="http://zftest/service/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+    <soap:operation soapAction="http://stud.ailoo.net/raumbelegung/service/getlist" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://stud.ailoo.net/raumbelegung/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://stud.ailoo.net/raumbelegung/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
   </operation>
 </binding>
 <service name="raumbelegung">
   <port name="raumbelegungPort" binding="tns:raumbelegungBinding">
-    <soap:address location="http://zftest/service/"/>
+    <soap:address location="http://stud.ailoo.net/raumbelegung/service/"/>
   </port>
 </service>
 </definitions>

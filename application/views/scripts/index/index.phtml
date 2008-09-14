@@ -1,6 +1,6 @@
-			<h2>Ergebnisse für <?php echo $this->date ?></h2>
+			<h2 id="pagetitle"><?php echo $this->title ?></h2>
 
-			<?php if(count($this->appointments) > 0): ?>
+			<?php if($this->results): ?>
 
 			<table cellpadding='0' cellspacing='0' id="infoTable">
 				<thead>
@@ -32,6 +32,10 @@
 				</tbody>
 				
 			</table>
-			<?php else: ?>
-			<p>Keine Ergebnisse.</p>
+            
+            <p id="error" style="display: none;"></p>
 			<?php endif; ?>
+            
+            <p id="error"><?php echo $this->error; ?></p>
+            
+			

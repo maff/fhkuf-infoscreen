@@ -27,7 +27,10 @@ class Zend_View_Helper_FilterLink
     	else
     	{
     		$date = Zend_Registry::getInstance()->get('parser_date');
-    		$filterUrl = '/filter/date/' . $date . '/' . $filter . '/' . urlencode($value) . '/';
+            if($date == strftime('%d.%m.%Y', time()))
+                $filterUrl = Zend_Controller_Front::getInstance()->getBaseUrl() . '/filter/' . $filter . '/' . urlencode($value) . '/';
+            else
+                $filterUrl = Zend_Controller_Front::getInstance()->getBaseUrl() . '/filter/date/' . $date . '/' . $filter . '/' . urlencode($value) . '/';
     		
     		return '<a href="' . $filterUrl . '" title="nach \'' . $value . '\' filtern">' . $value . '</a>';
     	}

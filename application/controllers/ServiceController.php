@@ -9,18 +9,19 @@ class ServiceController extends Zend_Controller_Action
     
     public function indexAction()
     {
-//        if(!$this->getRequest()->isPost())
-//        {
-//            $this->_redirector->gotoUrl('/');
-//            return;
-//        }
-//        else
-//        {       
+        if(!$this->getRequest()->isPost())
+        {
+            echo 'Hi. I\'m a <abbr title="Simple Object Access Protocol">SOAP</abbr> web service and I never learned how to deal with GET requests, so please feed me with correct data. For more information take a look at the ';
+            echo '<a href="' . Zend_Controller_Front::getInstance()->getBaseUrl() . '/service/wsdl/"><abbr title="Web Service Description Language">WSDL</abbr></a> or visit the ';
+            echo '<a href="http://maff.ailoo.net/projects/fh-kufstein-raumbelegung-webservice/">project page</a>.';
+        }
+        else
+        {       
             $server = new Zend_Soap_Server('', array());
             $server->setClass('Raumbelegung_Parser_Service');
             $server->setWsdl(self::_getWSDLPath());
             $server->handle();
-//        }
+        }
     }
     
     public function wsdlAction()

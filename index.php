@@ -47,4 +47,13 @@ $router->addRoute(
 //$router->addRoute('consumer', new Zend_Controller_Router_Route('/consumer/:action/', array('controller' => 'consumer')));
 
 // run!
-$frontController->dispatch();
+//try
+//{
+    $frontController->dispatch();
+//}
+// catch(Exception $e)
+// {
+    // header("HTTP/1.0 404 Not Found");
+    // echo 'Error 404: Not found. <a href="' . $config->base_url . '">Front page</a>.';
+    // die();
+// }
