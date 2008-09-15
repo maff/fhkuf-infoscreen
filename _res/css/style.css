@@ -8,7 +8,7 @@ html  { border-top: 20px solid #444; margin: 0; padding: 0; }
 body { margin: 0; padding: 3em 0 0 0; }
 
 /* base font-size: 14px, vertical rhythm: 21px */
-body  { font-size: 12px; font-family: "Lucida Grande", "Lucida Sans Unicode", Tahoma, Verdana, sans-serif; color: #111; }
+body  { font-size: 13px; font-family: "Lucida Grande", "Lucida Sans Unicode", Tahoma, Verdana, sans-serif; color: #111; }
 
 p, ul, ol, dl, blockquote, pre, address, table { font-size: 1em; line-height: 1.5em; margin: 0 0 1.5em 0; }
 
@@ -56,6 +56,8 @@ caption { background: #eee; }*/
 #infoTable thead tr .headerSortUp { background-image: url(../img/tables/asc.gif); }
 #infoTable thead tr .headerSortDown { background-image: url(../img/tables/desc.gif); }
 #infoTable thead tr .headerSortDown, #infoTable thead tr .headerSortUp { background-color: #8dbdd8; }
+
+#loading { display: none; position: absolute; top: 10px; right: 10px; width: 31px; height: 31px; background: transparent url(../img/loading.gif) no-repeat top right; /*width: auto; padding: 5px 10px; background: #222; color: #fff;*/ }
 
 .alignleft { text-align: left; }
 .alignright { text-align: right; }

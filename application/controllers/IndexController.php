@@ -3,7 +3,7 @@ class IndexController extends Zend_Controller_Action
 {
     protected $_parser;
     protected $_redirector = null;
-    protected $_json = false;
+    protected $_ajax = false;
     
     public function preDispatch ()
     {
@@ -32,29 +32,17 @@ class IndexController extends Zend_Controller_Action
             $error = 'Für die angegebenen Filterkriterien gibt es keine Ergebnisse.';
         }
             
-        if($this->_json)
-        {
+        if($this->_ajax)
             $this->_helper->layout()->disableLayout(); 
-            //Zend_Controller_Front::getInstance()->setParam('noViewRenderer', true);
-        
-            /*$json['title'] = $title;
-            $json['results'] = $results;
-            $json['data'] = $data;
-            $json['error'] = $error;
-            
-            echo Zend_Json::encode($json);
-        }
-        else
-        {*/
-            $this->view->title = $title;
-            $this->view->results = $results;
-            $this->view->error = $error;
-    		$this->view->date = $this->_parser->getDate();
-    		$this->view->classes = $this->_parser->getList('class');
-    		$this->view->lectors = $this->_parser->getList('lector');
-    		$this->view->rooms = $this->_parser->getList('room');
-    	    $this->view->appointments = $data;
-        }       
+
+        $this->view->title = $title;
+        $this->view->results = $results;
+        $this->view->error = $error;
+        $this->view->date = $this->_parser->getDate();
+        $this->view->classes = $this->_parser->getList('class');
+        $this->view->lectors = $this->_parser->getList('lector');
+        $this->view->rooms = $this->_parser->getList('room');
+        $this->view->appointments = $data;               
 	}
 	
 	private function _handlePost()
@@ -100,8 +88,8 @@ class IndexController extends Zend_Controller_Action
 	{
 	    $request = $this->getRequest()->getParams();
         
-        if(isset($request['json']) && (bool) $request['json'] == true)
-            $this->_json = true;
+        if(isset($request['ajax']) && (bool) $request['ajax'] == true)
+            $this->_ajax = true;
         
 	    $filters = array();
 	    $allowed_params = array('class', 'lector', 'room');

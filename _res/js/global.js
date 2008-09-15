@@ -1,16 +1,14 @@
 $(document).ready(function()
 {	
-    tableSort();
-
-    function tableSort()
-    {    
-        $("#infoTable").tablesorter({
-            sortList: [[4,0],[0,0]],
-            widgets: ['zebra']
-        });
-    }
+    var dateval = "";
+    var classval = "";
+    var lectorval = "";
+    var roomval = "";
     
-    $('#sel_date').DatePicker({
+    tableSort();
+    initLinks();
+
+   $('#sel_date').DatePicker({
         format:'d.m.Y',
         date: $('#sel_date').val(),
         current: $('#sel_date').val(),
@@ -31,75 +29,90 @@ $(document).ready(function()
             weekMin: 'KW'
         }            
     });
+    
+    
+    $('#input_submit').click(function()
+    {
+        callResults();
+        return false;
+    });
+    
+    $('#input_reset').click(function()
+    {
+        if(window.location.href == base_url)
+        {
+            resetBoxes();
+            callResults();
+            return false;
+        }
+    });
+    
+    function tableSort()
+    {    
+        $("#infoTable").tablesorter({
+            sortList: [[4,0],[0,0]],
+            widgets: ['zebra']
+        });
+    }
 
-    $('#input_submit').click(function() {
+    function initLinks()
+    {            
+        $('#infoTable tbody td a.filterlink').click(function()
+        {
+            resetBoxes();        
+            $('#sel_' + $(this).attr('rel')).val($(this).text());
+            callResults();
+            return false;        
+        });
+    }
+    
+    function resetBoxes()
+    {
+        $('#sel_class').val("");
+        $('#sel_room').val("");
+        $('#sel_lector').val("");
+    }
+    
+    function fetchBoxes()
+    {
         dateval = $('#sel_date').val();
         classval = $('#sel_class').val();
         lectorval = $('#sel_lector').val();
         roomval = $('#sel_room').val();
-        
-        url = base_url + '/filter/';
-        
+    }
+    
+    function getUrl()
+    {
+        url = "";
         if(dateval) url = url + 'date/' + dateval + '/';
         if(classval) url = url + 'class/' + classval + '/';
         if(lectorval) url = url + 'lector/' + lectorval + '/';
         if(roomval) url = url + 'room/' + roomval + '/';
         
-        url = url + 'json/true/';
+        if(url) url = base_url + 'filter/' + url;
+        else url = base_url;
         
-        $.getJSON(url, '', function(json)
-        {
-            document.title = json.title;
-            $('#pagetitle').text(json.title);
-            $('#error').text(json.error);
-            
-            if(json.results == true)
-            {
-                $('#infoTable tbody tr').remove();
-                
-                html = "";
-                $.each(json.data,function(i,appointment) {
-                    html += "<tr>";
-                    
-                    $.each(["class","description","lector","room","startTime","endTime","info"],function(j,key)
-                    {
-                        value = "";
-                        htmlclass = key;
-                        
-                        if(key == "startTime" || key == "endTime")
-                            htmlclass += " time";
-                        
-                        if(appointment[key] != "" && appointment[key] != null && appointment[key] != undefined)
-                            value = appointment[key];
-                    
-                        html += "<td class=\"" + key + "\">" + value + "</td>";
-                    });
-
-                    html += "</tr>";
-                });
-                
-                $('#infoTable tbody').html(html);
-                
-                $('#error').hide();
-                $('#infoTable').show();
-                
-                $("#infoTable").tablesorter({
-                    sortList: [[4,0],[0,0]],
-                    widgets: ['zebra']
-                });
-            }
-            else
-            {
-                $('#error').show();
-                $('#infoTable').hide();
-            }
-        });
-        return false;
-    });
-    
+        return url;
+    }
+   
     function callResults()
     {
-
+        $('#loading').fadeIn('fast');
+        fetchBoxes();
+        $.get(getUrl() + 'ajax/true/', '', function(html){
+            $('#main').html(html);
+            document.title = $('#pagetitle').text() + " - FH Kufstein Raumbelegungs-Webservice";
+            tableSort();
+            setupPermalink();
+            initLinks();
+            $('#loading').fadeOut('fast');
+        });
     }
     
+    function setupPermalink()
+    {
+        url = getUrl();
+        if(url != base_url)
+            $('#pagetitle').wrapInner(' (<a title="Permanentlink auf diese Filterkriterien" href="' + url + '"></a>)');
+    }
 });

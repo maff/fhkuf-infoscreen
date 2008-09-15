@@ -1,18 +1,19 @@
-#Order deny,allow
-#Deny from all
-#Allow from 80.109.133.197
+# Order deny,allow
+# Deny from all
+# Allow from 80.109.133.197
+# Allow from 213.47.183.189
 
 <Files ~ "^\.">
     Order allow,deny
     Deny from all
 </Files>
 
+# Security: Don't allow browsing of directories
+Options -Indexes
+
 # Rewrite rules for Zend Framework
 RewriteEngine on
 RewriteBase /raumbelegung
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule .* index.php
-
-# Security: Don't allow browsing of directories
-Options -Indexes
+RewriteRule .* index.php [L,QSA]

@@ -2,10 +2,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="de-DE">
 <head profile="http://gmpg.org/xfn/11">
-	<title><?php echo $this->title ?> &raquo; FH Kufstein Raumbelegung-Webservice</title>
+	<title><?php echo $this->title ?> - FH Kufstein Raumbelegungs-Webservice</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	
-    <script type="text/javascript">var base_url = "<?php echo $this->baseUrl(); ?>"</script>
+    <script type="text/javascript">var base_url = "http://stud.ailoo.net<?php echo $this->baseUrl(); ?>/"</script>
 	<script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/_res/js/jquery-1.2.6.min.js"></script> 
 	<script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/_res/js/jquery.datepicker.js"></script>
 	<script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/_res/js/jquery.tablesorter.min.js"></script>
@@ -51,12 +51,8 @@
 				</div>
 				
 				<div class="submitbox column prepend-1 span-4">
-					<a href="<?php echo $this->baseUrl(); ?>/">Filter zurücksetzen</a>
-				</div>	
-				
-				<!-- <div class="submitbox column prepend-1 span-4">
-					<a href="<?php echo $this->baseUrl(); ?>/filter/date/<?php echo $this->date ?>/">Filter zurücksetzen</a>
-				</div>	-->
+					<a id="input_reset" href="<?php echo $this->baseUrl(); ?>/">Filter zurücksetzen</a>
+				</div>
                 
 				<div class="submitbox column span-4 last">
 					<input id="input_submit" type="submit" name="submit" value="Raumbelegung laden" />
@@ -75,6 +71,8 @@
 			<p>&copy; 2008 <a href="http://ailoo.net/">Mathias Geat</a> &mdash; <a href="http://maff.ailoo.net/projects/fh-kufstein-raumbelegung-webservice/">Info</a></p>
 		</div>
 	</div>
+    
+    <div id="loading"></div>
 
 </body>
 </html>

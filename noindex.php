@@ -1,6 +1,4 @@
 <?php
-header('Location: http://stud.ailoo.net/raumbelegung/down.php');
-
 // some general settings
 error_reporting(E_ALL|E_STRICT);
 //error_reporting(0);

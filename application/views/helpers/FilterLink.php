@@ -32,7 +32,7 @@ class Zend_View_Helper_FilterLink
             else
                 $filterUrl = Zend_Controller_Front::getInstance()->getBaseUrl() . '/filter/date/' . $date . '/' . $filter . '/' . urlencode($value) . '/';
     		
-    		return '<a href="' . $filterUrl . '" title="nach \'' . $value . '\' filtern">' . $value . '</a>';
+    		return '<a class="filterlink" rel="' . $filter . '" href="' . $filterUrl . '" title="nach \'' . $value . '\' filtern">' . $value . '</a>';
     	}
     }    
 }
