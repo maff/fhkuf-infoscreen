@@ -11,7 +11,11 @@ class Zend_View_Helper_FilterLink
      */
     function filterLink($filter, $value)
     {
-       	if( strpos($value, ',') !== false )
+       	if (!Raumbelegung_Parser::checkFilterLink($value))
+    	{
+    		echo $value;
+    	}
+        else if( strpos($value, ',') !== false )
        	{
        	    $links = array();
        	    $values = explode(',', $value);
@@ -20,10 +24,6 @@ class Zend_View_Helper_FilterLink
        	        
        	    return implode(', ', $links);
        	}
-       	else if ( strpos($value, '/') !== false || strpos($value, 'NN') !== false)
-    	{
-    		echo $value;
-    	}    	
     	else
     	{
     		$date = Zend_Registry::getInstance()->get('parser_date');

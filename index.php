@@ -1,9 +1,18 @@
 <?php
-header('Location: http://stud.ailoo.net/raumbelegung/down.php');
+require_once 'Bootstrap.php';
+Bootstrap::run();
+exit(0);
+
+
+
+
+
+
+//header('Location: http://stud.ailoo.net/raumbelegung/down.php');
 
 // some general settings
-error_reporting(E_ALL|E_STRICT);
-//error_reporting(0);
+// error_reporting(E_ALL|E_STRICT);
+error_reporting(0);
 ini_set('display_errors', 1);
 date_default_timezone_set('Europe/Vienna');
 

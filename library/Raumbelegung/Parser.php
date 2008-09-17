@@ -115,7 +115,7 @@ class Raumbelegung_Parser
     
     private function _filter()
     { 
-        if($this->_checkData() && is_array($this->_filters) && count($this->_filters) > 0)
+        if($this->_checkData() && $this->_checkFilters())
 		{
 		    $tmpdata = array();
 			foreach($this->_data as &$item)
@@ -180,7 +180,7 @@ class Raumbelegung_Parser
     
     private function _addListItem($key, $value)
     {
-        if(!in_array($value, $this->_lists[$key]) && self::_checkCacheItem($value)) $this->_lists[$key][] = $value;
+        if(!in_array($value, $this->_lists[$key]) && self::checkCacheItem($value)) $this->_lists[$key][] = $value;
     }
     
     private function _getCacheFile($key)
@@ -229,6 +229,12 @@ class Raumbelegung_Parser
 		if(is_array($this->_data) && count($this->_data) > 0) return true;
 		return false;
 	}
+    
+    private function _checkFilters()
+    {
+        if(is_array($this->_filters) && count($this->_filters) > 0) return true;
+        return false;
+    }
 	
 	private static function _cleanCheck($value)
 	{
@@ -246,22 +252,35 @@ class Raumbelegung_Parser
      * @param string $value
      * @return bool
      */
-    private static function _checkCacheItem($value)
+    public static function checkCacheItem($value)
 	{
-		$cache = true;
+		$cache = self::checkFilterLink($value);
 		
-		if(empty($value))
-			$cache = false;
-			
+        // don't cache on multiple values
 		if(strpos($value, ',') !== false)
 			$cache = false;
-			
+	
+		return $cache;
+	}
+
+    public static function checkFilterLink($value)
+    {
+        $cache = true;
+        
+        if(empty($value))
+			$cache = false;
+    
 		if(strpos($value, '/') !== false)
 			$cache = false;
 		
+        // don't cache on NN value (undefined)
 		if(strpos($value, 'NN') !== false)
-		    $cache = false;		
-	
-		return $cache;
-	}    
+		    $cache = false;
+        
+        // don't cache without having any letters or numbers
+        if(!preg_match('/[a-zA-Z0-9]+/i', $value))
+            $cache = false;
+            
+        return $cache;
+    }
 }

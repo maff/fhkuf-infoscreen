@@ -4,8 +4,8 @@
 @import url('grid.css');
 @import url('datepicker.css');
 
-html  { border-top: 20px solid #444; margin: 0; padding: 0; }
-body { margin: 0; padding: 3em 0 0 0; }
+html  { margin: 0; padding: 0; }
+body { background: #fff url(../img/bar.jpg) repeat-x top left; padding: 3em 0 0 0; }
 
 /* base font-size: 14px, vertical rhythm: 21px */
 body  { font-size: 13px; font-family: "Lucida Grande", "Lucida Sans Unicode", Tahoma, Verdana, sans-serif; color: #111; }
@@ -35,13 +35,6 @@ p a:hover img, dl a:hover img { background: #dedede; }
 p img.left { float: left; margin: 0 1.5em 1.5em 0; padding: 0; }
 p img.right { float: right; margin: 0 0 1.5em 1.5em; }
 
-/*table { width:100%; border-collapse: collapse; border: 1px solid #dedede; }
-th { font-weight: bold; background: #e6eeee; }
-th, td { padding: 4px 10px 4px 5px; border: 1px solid #dedede; }
-tr.even td { background: #e5ecf9; }
-tfoot { font-style: italic; }
-caption { background: #eee; }*/
-
 #infoTable { font-family:arial; background-color: #CDCDCD; width: 100%; text-align: left; border: 1px solid #ccc; border-collapse: collapse; }
 #infoTable td { border: 1px solid #ccc; }
 #infoTable tr td.info { font-weight: bold; color: #ff0000; }
@@ -57,7 +50,7 @@ caption { background: #eee; }*/
 #infoTable thead tr .headerSortDown { background-image: url(../img/tables/desc.gif); }
 #infoTable thead tr .headerSortDown, #infoTable thead tr .headerSortUp { background-color: #8dbdd8; }
 
-#loading { display: none; position: absolute; top: 10px; right: 10px; width: 31px; height: 31px; background: transparent url(../img/loading.gif) no-repeat top right; /*width: auto; padding: 5px 10px; background: #222; color: #fff;*/ }
+#loading { display: none; position: absolute; top: 30px; right: 10px; width: 31px; height: 31px; background: transparent url(../img/loading.gif) no-repeat top right; /*width: auto; padding: 5px 10px; background: #222; color: #fff;*/ }
 
 .alignleft { text-align: left; }
 .alignright { text-align: right; }
@@ -78,7 +71,11 @@ code, kbd { display: inline; background: #f1f1f3; }
 #input_submit {  }
 
 #header { margin: 0 0 3em 0; padding: 0 0 1.5em 0; border-bottom: 1px solid #ccc; }
-#footer { text-align: right; margin: 1.5em 0 0 0; padding: 1.5em 0 0 0; border-top: 1px solid #ccc; }
+
+#footer { border-top: 1px solid #ccc; padding-top: 1.5em; margin-top: 1.5em; }
+.footermessage { text-align: left; color: #ED3F3F; font-size: .85em; }
+.footermessage a { text-decoration: underline;}
+.footertext { text-align: right; }
 
 .note {background: #dfd; padding: 1em; border-top: 1px #bdb dotted; border-bottom: 1px #bdb dotted;}
 .important {background: #ffd; padding: 1em; border-top: 1px #ddb dotted; border-bottom: 1px #ddb dotted;}
