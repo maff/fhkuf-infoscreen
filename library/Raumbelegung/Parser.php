@@ -70,7 +70,9 @@ class Raumbelegung_Parser
     
     protected function _setUrl()
     {
-        $this->_url = Raumbelegung_Config::get('infoscreen_url') . '?STGID=7&DATUM=' . $this->_date;
+        $this->_url = Raumbelegung_Config::get('infoscreen_url');
+        $this->_url .= '?STGID=' . Raumbelegung_Config::get('infoscreen_stgid');
+        $this->_url .= '&DATUM=' . $this->_date;
     }
     
     /**
