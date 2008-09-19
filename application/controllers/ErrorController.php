@@ -3,39 +3,47 @@ class ErrorController extends Zend_Controller_Action
 {
     public function preDispatch()
     {
-        $this->_helper->layout()->disableLayout(); 
-        Zend_Controller_Front::getInstance()->setParam('noViewRenderer', true);
+        // $this->_helper->layout()->disableLayout(); 
+        // Zend_Controller_Front::getInstance()->setParam('noViewRenderer', true);
     }
 
     public function errorAction()
     {
-        $errors = $this->_getParam('error_handler');
+        $error = $this->_getParam('error_handler');
+        if(!$error instanceof ArrayObject)
+        {
+            $error = new ArrayObject(array(), ArrayObject::ARRAY_AS_PROPS);
+            
+            $params = $this->getRequest()->getParams();
+            if($params['controller'] == 'error' && $params['action'] == 'error')
+                $error->type = Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER;
+            else
+                $error->type = Zend_Controller_Plugin_ErrorHandler::EXCEPTION_OTHER;
+        }
 
-        switch ($errors->type) {
+        switch ($error->type) {
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
-                // 404 Fehler -- Kontroller oder Aktion nicht gefunden
-                $this->getResponse()->setRawHeader('HTTP/1.1 404 Not Found');
 
-                $content =<<<EOH
-<h3>Error!</h3>
-<p>Die angefragte Seite konnte nicht gefunden werden.</p>
-EOH;
+                $this->getResponse()->setRawHeader('HTTP/1.1 404 Not Found');
+                
+                $this->view->title = '404 Not found';
+                $this->view->content = 'The page you requested could not be found.';
+
                 break;
+                
+            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_OTHER:
+            case Raumbelegung_Error_Handler::EXCEPTION_CATCHED_EXCEPTION:
             default:
-                // Anwendungsfehler
-                $content =<<<EOH
-<h1>Fehler!</h1>
-<p>Ein unerwarteter Fehler trat auf. Bitte versuchen Sie es etwas später nocheinmal.</p>
-EOH;
+            
+                $this->getResponse()->setRawHeader('HTTP/1.1 500 Internal Server Error');
+                
+                $this->view->title = '500 Internal Error';
+                $this->view->content = 'An internal error ocurred. Please try again later.';
+                
                 break;
         }
 
-        // Vorherige Inhalte löschen
         $this->getResponse()->clearBody();
-
-        $this->view->content = $content;
-        
-        echo $content;
     }
 }

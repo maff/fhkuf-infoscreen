@@ -16,64 +16,11 @@
 <body>
 	<div class="container">
 	
-		<div id="header" class="span-24">
-			<form method="post" action="<?php echo $this->baseUrl(); ?>/" id="filterform">
-				<div class="column span-4">
-					<label for="sel_date">Datum</label>
-					<input id="sel_date" name="date" value="<?php echo $this->date ?>" />
-				</div>
-			
-				<div class="column span-4">
-					<label for="sel_class">Studiengang</label>
-					<select id="sel_class" name="class">
-						<?php foreach($this->classes as $class):?>
-						<option<?php $this->checkSelected($class, 'class') ?>><?php echo $class ?></option>
-						<?php endforeach; ?>
-					</select>
-				</div>
-				
-				<div class="column span-5">
-				<label for="sel_lector">Lektor</label>
-				<select id="sel_lector" name="lector">
-					<?php foreach($this->lectors as $lector):?>
-					<option<?php $this->checkSelected($lector, 'lector') ?>><?php echo $lector ?></option>
-					<?php endforeach; ?>
-				</select>
-				</div>
-				
-				<div class="column span-2">
-				<label for="sel_room">Raum</label>
-				<select id="sel_room" name="room">
-					<?php foreach($this->rooms as $room):?>
-					<option<?php $this->checkSelected($room, 'room') ?>><?php echo $room ?></option>
-					<?php endforeach; ?>
-				</select>
-				</div>
-				
-				<div class="submitbox column prepend-1 span-4">
-					<a id="input_reset" href="<?php echo $this->baseUrl(); ?>/">Filter zurücksetzen</a>
-				</div>
-                
-				<div class="submitbox column span-4 last">
-					<input id="input_submit" type="submit" name="submit" value="Raumbelegung laden" />
-				</div>			
-			</form>
-		</div>
-		
-		<div id="main" class="span-24">
-		
-<?= $this->layout()->content; ?>
-		
-		</div>
-	
-		
-		<div id="footer" class="span-24">
-            <div class="footermessage span-18">&nbsp;</div>
-			<div class="footertext span-5 prepend-1 last">&copy; 2008 <a href="http://ailoo.net/">Mathias Geat</a> &mdash; <a href="http://maff.ailoo.net/projects/fh-kufstein-raumbelegung-webservice/">Info</a></div>
-		</div>
+<?php echo $this->layout()->content; ?>
+    
 	</div>
     
     <div id="loading"></div>
-    <script src="http://fhkufraumbelegung.uservoice.com/pages/general/widgets/tab.js?alignment=left&amp;color=00BCBA" type="text/javascript"></script>
+    
 </body>
 </html>

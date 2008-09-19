@@ -11,7 +11,7 @@ class Bootstrap
         self::setupRegistry();
         self::setupMVC();
         self::setupErrorHandling();
-        self::$frontController->dispatch();
+        self::dispatch();
     }
 
     public static function setupEnvironment()
@@ -86,13 +86,9 @@ class Bootstrap
     {
         Zend_Loader::registerAutoload();
         self::$frontController = Zend_Controller_Front::getInstance();
-        self::$frontController->throwExceptions(false);
         self::$frontController->setControllerDirectory('application/controllers');
-        self::$frontController->registerPlugin(new Zend_Controller_Plugin_ErrorHandler(array(
-            'module'     => 'default',
-            'controller' => 'error',
-            'action'     => 'error'
-        )));
+        self::$frontController->throwExceptions(false);
+        self::$frontController->returnResponse(false);        
     }
     
     public static function setupRoutes()
@@ -109,7 +105,46 @@ class Bootstrap
     
     public static function setupErrorHandling()
     {
+        self::$frontController->registerPlugin(new Zend_Controller_Plugin_ErrorHandler(array(
+            'module'     => 'default',
+            'controller' => 'error',
+            'action'     => 'error'
+        )));   
+    }
+    
+    public static function dispatch()
+    {   
+        /*$response = self::$frontController->dispatch();
+        if ($response->isException()) {
+            $exceptions = $response->getException();
+            Zend_Debug::dump($exceptions);
+        } else {
+            $response->sendHeaders();
+            $response->outputBody();
+        }*/        
+    
+        try
+        {
+            self::$frontController->dispatch();
+        }
+        catch (Exception $e)
+        {
+            //self::$frontController->getRequest()->_forward('error', 'error');
+            //echo 'catched';
+            // catch any errors, log them and redirect to the 500 Internal Server Error page        
+            /*$error = new ArrayObject(array(), ArrayObject::ARRAY_AS_PROPS);
+            $error->type = Raumbelegung_Error_Handler::EXCEPTION_CATCHED_EXCEPTION;
         
+            self::$frontController->getRequest()->setParam('error_handler', $error)
+                    ->setModuleName('default')
+                    ->setControllerName('error')
+                    ->setActionName('error')
+                    ->setDispatched(false);*/
+                    
+            //self::$frontController->sendResponse();
+                    
+            //self::$frontController->dispatch();
+        }
     }
 
     /*

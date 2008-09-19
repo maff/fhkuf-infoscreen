@@ -33,7 +33,10 @@ class IndexController extends Zend_Controller_Action
         }
             
         if($this->_ajax)
-            $this->_helper->layout()->disableLayout(); 
+        {
+            $this->_helper->layout()->disableLayout();
+            $this->view->ajax = true;
+        }
 
         $this->view->title = $title;
         $this->view->results = $results;
