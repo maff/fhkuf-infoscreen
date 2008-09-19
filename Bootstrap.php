@@ -10,6 +10,7 @@ class Bootstrap
         self::setupEnvironment();
         self::setupRegistry();
         self::setupMVC();
+        self::setupErrorHandling();
         self::$frontController->dispatch();
     }
 
@@ -85,9 +86,13 @@ class Bootstrap
     {
         Zend_Loader::registerAutoload();
         self::$frontController = Zend_Controller_Front::getInstance();
-        self::$frontController->throwExceptions(true);
+        self::$frontController->throwExceptions(false);
         self::$frontController->setControllerDirectory('application/controllers');
-        self::$frontController->registerPlugin(new Zend_Controller_Plugin_ErrorHandler());
+        self::$frontController->registerPlugin(new Zend_Controller_Plugin_ErrorHandler(array(
+            'module'     => 'default',
+            'controller' => 'error',
+            'action'     => 'error'
+        )));
     }
     
     public static function setupRoutes()
@@ -100,6 +105,11 @@ class Bootstrap
                                                     'controller' => 'index',
                                                     'action' => 'index'
                                                 )));
+    }
+    
+    public static function setupErrorHandling()
+    {
+        
     }
 
     /*
