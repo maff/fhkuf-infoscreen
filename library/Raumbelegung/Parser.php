@@ -91,7 +91,7 @@ class Raumbelegung_Parser
     /**
      * _fetchData
      * 
-     * Fetches Data and caches it using Zend_Cache
+     * Fetches Data and cachecaches it using Zend_Cache
      *
      */
     private function _fetchData()
@@ -102,10 +102,11 @@ class Raumbelegung_Parser
         );
         
         $backendOptions = array(
-            'cache_dir' => self::_getCacheDir()
+        //    'cache_dir' => self::_getCacheDir()
         );
         
-        $cache = Zend_Cache::factory('Core', 'File', $frontendOptions, $backendOptions);
+        $cache = Zend_Cache::factory('Core', 'Memcached', $frontendOptions, $backendOptions);
+        //$cache = Zend_Cache::factory('Core', 'File', $frontendOptions, $backendOptions);
         if(!$data = $cache->load($this->_getUrlHash()))
         {
             $data = $this->_parseURL();
