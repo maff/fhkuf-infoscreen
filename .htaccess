@@ -13,7 +13,7 @@ Options -Indexes
 
 # Rewrite rules for Zend Framework
 RewriteEngine on
-RewriteBase /raumbelegung
+RewriteBase /
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule .* index.php [L,QSA]
