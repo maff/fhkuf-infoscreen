@@ -49,6 +49,8 @@ p img.right { float: right; margin: 0 0 1.5em 1.5em; }
 #infoTable thead tr .headerSortUp { background-image: url(../img/tables/asc.gif); }
 #infoTable thead tr .headerSortDown { background-image: url(../img/tables/desc.gif); }
 #infoTable thead tr .headerSortDown, #infoTable thead tr .headerSortUp { background-color: #8dbdd8; }
+#infoTable .class { min-width: 95px; }
+#infoTable .lector, #infoTable .room, #infoTable .time, #infoTable .info { min-width: 70px; }
 
 #loading { display: none; position: absolute; top: 30px; right: 10px; width: 31px; height: 31px; background: transparent url(../img/loading.gif) no-repeat top right; /*width: auto; padding: 5px 10px; background: #222; color: #fff;*/ }
 
