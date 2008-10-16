@@ -101,6 +101,14 @@ class Bootstrap
                                                     'controller' => 'index',
                                                     'action' => 'index'
                                                 )));
+
+        /*$router->addRoute(
+            'week',
+            new Zend_Controller_Router_Route('/week/*',
+                                                array(
+                                                    'controller' => 'index',
+                                                    'action' => 'week'
+                                                )));      */                                          
     }
     
     public static function setupErrorHandling()
