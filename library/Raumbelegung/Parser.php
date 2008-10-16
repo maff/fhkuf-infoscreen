@@ -146,7 +146,10 @@ class Raumbelegung_Parser
     private function _parseURL()
     {
         $data = array();
-        $dom = file_get_dom($this->_url);
+        $dom = @file_get_dom($this->_url);
+        /*if(!$dom = @file_get_dom($this->_url))
+            throw new Raumbelegung_Parser_Exception('Could not fetch data from source server');*/
+            
 		foreach($dom->find('div.appointment') as $element)
 		{			
 			$info = array();
