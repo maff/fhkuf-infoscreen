@@ -55,6 +55,7 @@
 					<tr>
 						<th>Studiengang</th>
 						<th>Fach</th>
+						<th>Gr.</th>
 						<th>Lektor</th>
 						<th>Raum</th>
 						<th>Beginn</th>
@@ -69,6 +70,7 @@
 					<tr>
 						<td class="class"><?php echo $this->filterLink('class', $a['class']) ?></td>
 						<td class="description"><?php echo $a['description'] ?></td>
+						<td class="group"><?php echo $a['group'] ?></td>
 						<td class="lector"><?php echo $this->filterLink('lector', $a['lector']) ?></td>
 						<td class="room"><?php echo $this->filterLink('room', $a['room']) ?></td>
 						<td class="startTime time"><?php echo $a['startTime'] ?></td>

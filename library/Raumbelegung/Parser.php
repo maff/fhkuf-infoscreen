@@ -156,6 +156,7 @@ class Raumbelegung_Parser
 			$info['startTime'] = @$element->find('td.appointmentDate', 0)->plaintext;
 			$info['endTime'] = @$element->find('td.appointmentDate', 1)->plaintext;
 			$info['class'] = @$element->find('td.appointmentDate', 2)->plaintext;
+			$info['group'] = @$element->find('td.appointmentDate', 3)->plaintext;
 			$info['description'] = @$element->find('span.appointmentText', 0)->plaintext;
 			$info['lector'] = @$element->find('span.appointmentLektor', 0)->plaintext;
 			$info['room'] = @$element->find('td.appointmentRaum > div', 0)->plaintext;
