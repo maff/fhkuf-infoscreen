@@ -51,6 +51,7 @@ class Bootstrap
     
     public static function setupLocale()
     {
+        setlocale (LC_ALL, 'de_DE');
         date_default_timezone_set('Europe/Vienna');  
     }
     

@@ -5,7 +5,7 @@ foreach($this->week as $key => $appointments)
     $dayClass = ($i++ % 2 == 0) ? 'even' : 'odd';
 ?>
             <div class="weekday <?php echo $dayClass ?>">
-                <h3><?php echo $key; ?></h3>
+                <h3><?php echo strftime('%A, %d.%m.%Y', strtotime($key)); ?></h3>
 <?php
     if(is_array($appointments) && count($appointments) > 0)
     {
@@ -30,6 +30,12 @@ foreach($this->week as $key => $appointments)
         }
 ?>
                 </table>
+<?php
+    }
+    else
+    {
+?>
+                <p>Keine Einträge.</p>
 <?php
     }
 ?>

@@ -8,6 +8,7 @@ class Raumbelegung_Parser
     protected $_filters;
     protected $_url;
     protected $_lists;
+    protected $_cacheMode = 'single';
     
     public function __construct($date = '')
     {
@@ -58,6 +59,11 @@ class Raumbelegung_Parser
 		}
     }
     
+    public function setCacheMode($cacheMode)
+    {
+        $this->_cacheMode = $cacheMode;
+    }
+    
     protected function _setDate($date)
     {
         if(empty($date))
@@ -84,7 +90,7 @@ class Raumbelegung_Parser
      */
     protected function _getUrlHash()
     {
-        return md5($this->_url);
+        return md5($this->_url . $this->_cacheMode);
     }
     
     
@@ -97,7 +103,7 @@ class Raumbelegung_Parser
     private function _fetchData()
     {
         $frontendOptions = array(
-           'lifetime' => Raumbelegung_Config::get('data_cache_lifetime'),
+           'lifetime' => Raumbelegung_Config::get('data_cache_lifetime_' . $this->_cacheMode),
            'automatic_serialization' => true
         );
         

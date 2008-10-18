@@ -39,6 +39,7 @@ class Raumbelegung_Parser_Week
         {
             $date = strftime('%d.%m.%Y', $timestamp);
             $parser = new Raumbelegung_Parser($date);
+            $parser->setCacheMode('week');
             $parser->setFilters($this->_filters);
             $this->_data[$date] = $parser->getData();
             
