@@ -1,0 +1,38 @@
+<?php
+$i = 0;
+foreach($this->week as $key => $appointments)
+{
+    $dayClass = ($i++ % 2 == 0) ? 'even' : 'odd';
+?>
+            <div class="weekday <?php echo $dayClass ?>">
+                <h3><?php echo $key; ?></h3>
+<?php
+    if(is_array($appointments) && count($appointments) > 0)
+    {
+?>
+                <table class="appointmentTable">
+<?php
+        $j = 0;
+        foreach($appointments as $appointment)
+        {
+            $appClass = ($j++ % 2 == 0) ? 'even' : 'odd';
+?>
+                    <tr class="<?php echo $appClass ?>">
+                        <td class="startTime"><?php echo $appointment['startTime']; ?></td>
+                        <td class="endTime"><?php echo $appointment['endTime']; ?></td>
+                        <td class="class"><?php echo $appointment['class']; ?></td>
+                        <td class="group"><?php echo $appointment['group']; ?></td>
+                        <td class="description"><?php echo $appointment['description']; ?></td>
+                        <td class="room"><?php echo $appointment['room']; ?></td>
+                        <td class="info"><?php echo $appointment['info']; ?></td>
+                    </tr>
+<?php
+        }
+?>
+                </table>
+<?php
+    }
+?>
+            </div>
+<?php
+}

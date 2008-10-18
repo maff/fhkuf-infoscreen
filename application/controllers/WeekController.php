@@ -8,13 +8,14 @@ class WeekController extends Zend_Controller_Action
     public function preDispatch ()
     {
         $this->_redirector = $this->_helper->getHelper('Redirector');
-        $this->_handlePost();
+        //$this->_handlePost();
     }
     
 	public function indexAction ()
 	{
-        $startDate = $this->_getStartDate();
-             
+        $week = new Raumbelegung_Parser_Week();
+        $week->setFilter(new Raumbelegung_Filter('class', 'wi07-vz'));        
+        $this->view->week = $week->getData();
 	}
     
 
@@ -40,36 +41,4 @@ class WeekController extends Zend_Controller_Action
         
         
     }
-
-	protected function _getDate()
-	{
-	    $request = $this->getRequest()->getParams();
-	    if(isset($request['date']))
-	        return $request['date'];
-	        
-	    return false;
-	}
-	
-	protected function _getFilters()
-	{
-	    $request = $this->getRequest()->getParams();
-        
-        if(isset($request['ajax']) && (bool) $request['ajax'] == true)
-            $this->_ajax = true;
-        
-	    $filters = array();
-	    $allowed_params = array('class', 'lector', 'room');
-	    if(is_array($request) && count($request) > 0)
-	    {
-	        foreach($request as $key => $value)
-	        {
-	            if(in_array($key, $allowed_params) && !empty($value))
-	            {
-                    $filters[] = new Raumbelegung_Filter($key, $value);
-	            }
-	        }
-	    }
-	    
-	    return $filters;
-	}
 }

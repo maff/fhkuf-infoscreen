@@ -280,11 +280,11 @@ class Raumbelegung_Parser
 		if(strpos($value, '/') !== false)
 			$cache = false;
 		
-        // don't cache on NN value (undefined)
+        // don't link on NN value (undefined)
 		if(strpos($value, 'NN') !== false)
 		    $cache = false;
         
-        // don't cache without having any letters or numbers
+        // don't link without having any letters or numbers
         if(!preg_match('/[a-zA-Z0-9]+/i', $value))
             $cache = false;
             
