@@ -66,7 +66,7 @@ class IndexController extends Zend_Controller_Action
                if(isset($params[$key]) && !empty($params[$key]))
                {
                    $url[] = $key;
-                   $url[] = urlencode($params[$key]);
+                   $url[] = urlencode(strtolower($params[$key]));
                }
             }
             

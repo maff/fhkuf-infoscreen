@@ -13,6 +13,7 @@ $(document).ready(function()
         date: $('#sel_date').val(),
         current: $('#sel_date').val(),
         starts: 1,
+        //mode: 'range',
         position: 'r',
         onBeforeShow: function(){
             $('#sel_date').DatePickerSetDate($('#sel_date').val(), true);

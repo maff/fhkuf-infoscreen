@@ -21,7 +21,7 @@ class ErrorController extends Zend_Controller_Action
                 $error->type = Zend_Controller_Plugin_ErrorHandler::EXCEPTION_OTHER;
         }
         
-        //Zend_Debug::dump($error);
+        Zend_Debug::dump($error);
 
         switch ($error->type) {
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:

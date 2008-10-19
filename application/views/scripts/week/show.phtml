@@ -1,0 +1,81 @@
+        <div id="header" class="span-24">
+            <form method="post" action="<?php echo $this->baseUrl(); ?>/week/show" id="filterform">
+				<div class="column span-4">
+					<label for="sel_date">Datum</label>
+					<input id="sel_date" name="date" value="<?php echo $this->date ?>" />
+				</div>
+            
+                <div class="column span-4">
+                    <label for="sel_class">Studiengang</label>
+                    <select id="sel_class" name="class">
+                        <?php foreach($this->classes as $class):?>
+                        <option<?php $this->checkSelected($class, 'class') ?>><?php echo $class ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                
+				<div class="submitbox column prepend-12 span-4 last">
+					<input id="input_submit_overview" type="submit" name="submit" value="Übersicht laden" />
+				</div>	
+            </form>
+        </div>
+        
+		<div id="main" class="span-24">
+<?php
+if($this->valid === false)
+{
+?>
+            <p>Bitte Studiengang auswählen.</p>
+<?php
+}
+else
+{
+    $i = 0;
+    foreach($this->week as $key => $appointments)
+    {
+        $dayClass = ($i++ % 2 == 0) ? 'even' : 'odd';
+?>
+            <div class="weekday <?php echo $dayClass ?>">
+                <h3><a href="/filter/date/<?php echo $key; ?>"><?php echo strftime('%A, %d.%m.%Y', strtotime($key)); ?></a></h3>
+<?php
+        if(is_array($appointments) && count($appointments) > 0)
+        {
+?>
+                <table class="appointmentTable">
+<?php
+            $j = 0;
+            foreach($appointments as $appointment)
+            {
+                $appClass = ($j++ % 2 == 0) ? 'even' : 'odd';
+?>
+                    <tr class="<?php echo $appClass ?>">
+                        <td class="startTime time"><?php echo $appointment['startTime']; ?></td>
+                        <td class="endTime time"><?php echo $appointment['endTime']; ?></td>
+                        <td class="class"><?php echo $appointment['class']; ?></td>
+                        <td class="group"><?php echo $appointment['group']; ?></td>
+                        <td class="description">
+                            <strong><?php echo $appointment['description']; ?></strong><br />
+                            <?php echo $appointment['lector']; ?>
+                        </td>
+                        <td class="room"><?php echo $appointment['room']; ?></td>
+                        <td class="info"><?php echo $appointment['info']; ?></td>
+                    </tr>
+<?php
+            }
+?>
+                </table>
+<?php
+        }
+        else
+        {
+?>
+                <p>Keine Einträge.</p>
+<?php
+        }
+?>
+            </div>
+<?php
+    }
+}
+?>
+        </div>

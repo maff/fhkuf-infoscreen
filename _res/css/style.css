@@ -4,8 +4,8 @@
 @import url('grid.css');
 @import url('datepicker.css');
 
-html  { margin: 0; padding: 0; }
-body { background: #fff url(../img/bar.jpg) repeat-x top left; padding: 3em 0 0 0; }
+html  { margin: 0; padding: 0; min-height: 101%; }
+body { /*background: #fff url(../img/bar.jpg) repeat-x top left;*/ padding: 0; margin: 0; }
 
 /* base font-size: 14px, vertical rhythm: 21px */
 body  { font-size: 13px; font-family: "Lucida Grande", "Lucida Sans Unicode", Tahoma, Verdana, sans-serif; color: #111; }
@@ -35,6 +35,13 @@ p a:hover img, dl a:hover img { background: #dedede; }
 p img.left { float: left; margin: 0 1.5em 1.5em 0; padding: 0; }
 p img.right { float: right; margin: 0 0 1.5em 1.5em; }
 
+#menu { margin: 0 0 4em 0; padding: 5px 0; background: #404040;}
+#menu ul { margin: 0; padding: 0; list-style: none; }
+#menu ul li { display: inline; }
+#menu ul li a { display: inline; color: #77bfff; }
+#menu ul li a:hover { color: #fff; }
+
+
 #infoTable { font-family:arial; background-color: #CDCDCD; width: 100%; text-align: left; border: 1px solid #ccc; border-collapse: collapse; }
 #infoTable td { border: 1px solid #ccc; }
 #infoTable tr td.info { font-weight: bold; color: #ff0000; }
@@ -42,8 +49,8 @@ p img.right { float: right; margin: 0 0 1.5em 1.5em; }
 #infoTable tbody tr td a:hover { color: #ff0000; }
 #infoTable thead tr th, #infoTable tfoot tr th { background-color: #e6EEEE; padding: 4px; }
 #infoTable thead tr .header { background-image: url(../img/tables/bg.gif); background-repeat: no-repeat; background-position: center right; cursor: pointer; }
-#infoTable tbody td { color: #3D3D3D; padding: 4px; background-color: #FFF; vertical-align: top; }
-#infoTable tbody tr.odd td { background-color: #F0F0F6; }
+#infoTable tbody td { color: #3D3D3D; padding: 4px; background-color: #fff; vertical-align: top; }
+#infoTable tbody tr.odd td { background-color: #f0f0f6; }
 #infoTable tbody tr:hover td { 	background: #ffffbb; }
 #infoTable thead tr th { font-weight: bold; color: #555; }
 #infoTable thead tr .headerSortUp { background-image: url(../img/tables/asc.gif); }
@@ -52,6 +59,16 @@ p img.right { float: right; margin: 0 0 1.5em 1.5em; }
 #infoTable .class { min-width: 95px; }
 #infoTable .lector, #infoTable .room, #infoTable .time, #infoTable .info { min-width: 70px; }
 #infoTable .group { min-width: 30px; }
+
+.appointmentTable { width: 100%; text-align: left; border-collapse: collapse; }
+.appointmentTable tr { margin: 0 0 10px 0; }
+.appointmentTable td { padding: 10px; background: #f0f0f6; }
+.appointmentTable tr.odd td { background: #fff; }
+.appointmentTable .time { width: 50px; }
+.appointmentTable .class { width: 50px; }
+.appointmentTable .group { width: 20px; }
+.appointmentTable .room { width: 40px; }
+.appointmentTable .info { width: 80px; font-weight: bold; color: #ff0000; }
 
 #loading { display: none; position: absolute; top: 30px; right: 10px; width: 31px; height: 31px; background: transparent url(../img/loading.gif) no-repeat top right; /*width: auto; padding: 5px 10px; background: #222; color: #fff;*/ }
 
