@@ -88,8 +88,8 @@ $(document).ready(function()
     function fetchBoxes()
     {
         dateval = $('#sel_date').val();
-        classval = $('#sel_class').val();
-        lectorval = $('#sel_lector').val();
+        classval = $('#sel_class').val().toLowerCase();
+        lectorval = $('#sel_lector').val().toLowerCase();
         roomval = $('#sel_room').val();
     }
     
@@ -116,6 +116,7 @@ $(document).ready(function()
             document.title = $('#pagetitle').text() + " - FH Kufstein Raumbelegungs-Webservice";
             tableSort();
             setupPermalink();
+            setupMenu();
             initLinks();
             $('#loading').fadeOut('fast');
         });
@@ -126,5 +127,20 @@ $(document).ready(function()
         url = getUrl();
         if(url != base_url)
             $('#pagetitle').wrapInner(' (<a title="Permanentlink auf diese Filterkriterien" href="' + url + '"></a>)');
+    }
+    
+    function setupMenu()
+    {
+        filters = '';
+        if(dateval) filters = filters + 'date/' + dateval + '/';
+        if(classval) filters = filters + 'class/' + classval + '/';
+        
+        if(filters == '')
+            $('#menuWeek a').attr('href', '/week');
+        else
+            $('#menuWeek a').attr('href', '/week/show/' + filters)
+            
+        //alert(filters);
+        
     }
 });

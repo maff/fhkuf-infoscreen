@@ -70,7 +70,7 @@ p img.right { float: right; margin: 0 0 1.5em 1.5em; }
 .appointmentTable .room { width: 40px; }
 .appointmentTable .info { width: 80px; font-weight: bold; color: #ff0000; }
 
-#loading { display: none; position: absolute; top: 30px; right: 10px; width: 31px; height: 31px; background: transparent url(../img/loading.gif) no-repeat top right; /*width: auto; padding: 5px 10px; background: #222; color: #fff;*/ }
+#loading { display: none; position: absolute; top: 45px; right: 10px; width: 31px; height: 31px; background: transparent url(../img/loading.gif) no-repeat top right; /*width: auto; padding: 5px 10px; background: #222; color: #fff;*/ }
 
 .alignleft { text-align: left; }
 .alignright { text-align: right; }
