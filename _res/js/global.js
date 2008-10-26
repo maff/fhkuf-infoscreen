@@ -6,7 +6,8 @@ $(document).ready(function()
     var roomval = "";
     
     tableSort();
-    initLinks();
+    initTableFilterLinks();
+    initDayPagerLinks();
     
    $('#sel_date').DatePicker({
         format:'d.m.Y',
@@ -64,7 +65,7 @@ $(document).ready(function()
         });
     }
 
-    function initLinks()
+    function initTableFilterLinks()
     {         
         if(!$.browser.msie)
         {
@@ -72,6 +73,19 @@ $(document).ready(function()
             {
                 resetBoxes();        
                 $('#sel_' + $(this).attr('rel')).val($(this).text());
+                callResults();
+                return false;        
+            });
+        }
+    }
+    
+    function initDayPagerLinks()
+    {         
+        if(!$.browser.msie)
+        {
+            $('#dayPager a').click(function()
+            {
+                $('#sel_date').val($(this).attr('rel'));
                 callResults();
                 return false;        
             });
@@ -117,7 +131,8 @@ $(document).ready(function()
             tableSort();
             setupPermalink();
             setupMenu();
-            initLinks();
+            initTableFilterLinks();
+            initDayPagerLinks();
             $('#loading').fadeOut('fast');
         });
     }

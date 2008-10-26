@@ -90,7 +90,8 @@ code, kbd { display: inline; background: #f1f1f3; }
 #filterform .column.submitbox input:hover, #filterform .column.submitbox a:hover { color: #d54e21; }
 #input_submit {  }
 
-#header { margin: 0 0 3em 0; padding: 0 0 1.5em 0; border-bottom: 1px solid #ccc; }
+#header { margin: 0 0 .75em 0; padding: 0 0 1.5em 0; border-bottom: 1px solid #ccc; }
+#dayPager { margin: 0 0 3em 0; }
 
 #footer { border-top: 1px solid #ccc; padding-top: 1.5em; margin-top: 1.5em; }
 .footermessage { text-align: left; color: #ED3F3F; font-size: .85em; }
@@ -117,3 +118,6 @@ code, kbd { display: inline; background: #f1f1f3; }
 .last { margin-right:0; padding-right:0; }
 .top { margin-top:0; padding-top:0; }
 .bottom { margin-bottom:0; padding-bottom:0; }
+
+.aleft { text-align: left; }
+.aright { text-align: right; }

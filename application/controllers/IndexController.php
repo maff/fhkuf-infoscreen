@@ -18,17 +18,17 @@ class IndexController extends Zend_Controller_Action
 	    if(count($filters) > 0)
 	        $this->_parser->setFilters($filters);
 		
+	    $title = strftime('%A, %d.%m.%Y', strtotime($this->_parser->getDate()));
 	    $data = $this->_parser->getData();
-		if(count($data) > 0)
+		
+        if(count($data) > 0)
         {
             $results = true;
-		    $title = 'Ergebnisse für ' . $this->_parser->getDate();
             $error = '';
         }
 		else
         {
             $results = false;
-		    $title = 'Keine Ergebnisse';
             $error = 'Für die angegebenen Filterkriterien gibt es keine Ergebnisse.';
         }
             
@@ -45,7 +45,8 @@ class IndexController extends Zend_Controller_Action
         $this->view->classes = $this->_parser->getList('class');
         $this->view->lectors = $this->_parser->getList('lector');
         $this->view->rooms = $this->_parser->getList('room');
-        $this->view->appointments = $data;               
+        $this->view->appointments = $data;
+        $this->view->filterUrl = $this->_getFilterUrl($filters);
 	}
 	
 	private function _handlePost()
@@ -109,4 +110,22 @@ class IndexController extends Zend_Controller_Action
 	    
 	    return $filters;
 	}
+    
+    protected function _getFilterUrl($filters)
+    {
+        $url = '';
+        if(is_array($filters) && count($filters) > 0)
+        {
+            $parts = array();
+            foreach($filters as $filter)
+            {
+                $parts[] = $filter->key;
+                $parts[] = $filter->value;
+            }
+            
+            $url = implode('/', $parts);
+        }
+        
+        return $url;
+    }
 }

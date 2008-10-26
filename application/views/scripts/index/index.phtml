@@ -45,6 +45,18 @@
 		
 		<div id="main" class="span-24">
 <?php endif; ?>
+            <div id="dayPager">
+                <div class="aleft span-12">
+                    <?php $datePrev = $this->dayPager($this->date, 'prev'); ?>
+                    <a title="vorheriger Tag" rel="<?php echo $datePrev ?>" href="<?php echo $this->baseUrl(); ?>/filter/date/<?php echo $datePrev ?>/<?php echo $this->filterUrl ?>">&laquo; zurück</a>
+                </div>
+                <div class="aright span-12 last">
+                    <?php $dateNext = $this->dayPager($this->date, 'next'); ?>
+                    <a title="nächster Tag" rel="<?php echo $dateNext ?>" href="<?php echo $this->baseUrl(); ?>/filter/date/<?php echo $dateNext ?>/<?php echo $this->filterUrl ?>">weiter &raquo;</a>
+                </div>                
+            </div>
+
+
 		
 			<h2 id="pagetitle" class="<?php if($this->results) echo "results"; else echo "noresults"; ?>"><?php echo $this->title ?></h2>
 
