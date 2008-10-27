@@ -60,7 +60,7 @@ $(document).ready(function()
     function tableSort()
     {    
         $("#infoTable").tablesorter({
-            sortList: [[4,0],[0,0]],
+            sortList: [[5,0],[0,0]],
             widgets: ['zebra']
         });
     }
