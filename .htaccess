@@ -1,7 +1,5 @@
 #Order deny,allow
 #Deny from all
-#Allow from 80.109.133.197
-#Allow from 213.47.183.189
 
 <Files ~ "^\.">
     Order allow,deny
