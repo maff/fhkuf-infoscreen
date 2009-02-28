@@ -2,4 +2,5 @@
 .project
 .settings
 tmp/*
+log/*
 library/Zend
