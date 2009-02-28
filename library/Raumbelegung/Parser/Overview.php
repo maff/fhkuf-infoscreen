@@ -1,6 +1,9 @@
 <?php
 class Raumbelegung_Parser_Overview
 {
+    // wheter to return an array organized by date or not
+    public $categorizeResults = true;
+
 	protected $_data = array();
     protected $_filters = array();
 	protected $_startDate;
@@ -43,7 +46,12 @@ class Raumbelegung_Parser_Overview
             $parser = new Raumbelegung_Parser($date);
             $parser->setCacheMode('week');
             $parser->setFilters($this->_filters);
-            $this->_data[$date] = $parser->getData();
+            
+            if($this->categorizeResults)
+                $this->_data[$date] = $parser->getData();
+            else {
+                $this->_data = array_merge($this->_data, $parser->getData());
+            }
             
             $timestamp += 86400;
         }

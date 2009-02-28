@@ -125,7 +125,7 @@ $(document).ready(function()
     {
         $('#loading').fadeIn('fast');
         fetchBoxes();
-        $.get(getUrl() + 'ajax/true/', '', function(html){
+        $.get(getUrl(), '', function(html){
             $('#main').html(html);
             document.title = $('#pagetitle').text() + " - FH Kufstein Raumbelegungs-Webservice";
             tableSort();

@@ -159,6 +159,7 @@ class Raumbelegung_Parser
 		foreach($dom->find('div.appointment') as $element)
 		{			
 			$info = array();
+			$info['date'] = $this->_date;
 			$info['startTime'] = @$element->find('td.appointmentDate', 0)->plaintext;
 			$info['endTime'] = @$element->find('td.appointmentDate', 1)->plaintext;
 			$info['class'] = @$element->find('td.appointmentDate', 2)->plaintext;

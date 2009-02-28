@@ -43,17 +43,96 @@ class WeekController extends Zend_Controller_Action
             $date = strftime('%d.%m.%Y', time());
         }
         
-        $this->view->date = $date;
-        $this->view->title = 'Wochenübersicht KW ' . strftime('%V', strtotime($date));
- 
-        $parser = new Raumbelegung_Parser();
-        $this->view->classes = $parser->getList('class');
-        
         if($this->view->valid === true)
         {
-            $week = Raumbelegung_Parser_Week::init($date);
-            $week->setFilter(new Raumbelegung_Filter('class', $params['class']));                
-            $this->view->week = $week->getData();
+            if(isset($params['format']))
+            {
+                $this->_helper->layout()->disableLayout();
+                $this->_helper->viewRenderer->setNoRender(true);
+            
+                if($params['format'] == 'outlookCsv')
+                {
+                    $week = Raumbelegung_Parser_Week::init($date);
+                    $week->setFilter(new Raumbelegung_Filter('class', $params['class']));
+                    $week->categorizeResults = false;
+                    $weekData = $week->getData();
+                    
+                    $csv = new Raumbelegung_Csv();
+                    
+                    $headers = new Raumbelegung_Csv_Row();
+                    $headers->addColumn("Betreff")
+                            ->addColumn("Beginnt am")
+                            ->addColumn("Beginnt um")
+                            ->addColumn("Endet am")
+                            ->addColumn("Endet um")
+                            ->addColumn("Ganztägiges Ereignis")
+                            ->addColumn("Erinnerung Ein/Aus")
+                            ->addColumn("Erinnerung am")
+                            ->addColumn("Erinnerung um")
+                            ->addColumn("Besprechungsplanung")
+                            ->addColumn("Erforderliche Teilnehmer")
+                            ->addColumn("Optionale Teilnehmer")
+                            ->addColumn("Besprechungsressourcen")
+                            ->addColumn("Abrechnungsinformationen")
+                            ->addColumn("Beschreibung")
+                            ->addColumn("Kategorien")
+                            ->addColumn("Ort")
+                            ->addColumn("Priorität")
+                            ->addColumn("Privat")
+                            ->addColumn("Reisekilometer")
+                            ->addColumn("Vertraulichkeit")
+                            ->addColumn("Zeitspanne zeigen als");
+                    
+                    $csv->addRow($headers);
+                    
+                    if(count($weekData > 0)) {
+                        foreach($weekData as $entry) {
+                            $row = new Raumbelegung_Csv_Row();
+                            $row->addColumn($entry['description'])
+                                ->addColumn($entry['date'])
+                                ->addColumn($entry['startTime'] . ':00')
+                                ->addColumn($entry['date'])
+                                ->addColumn($entry['endTime'] . ':00')
+                                ->addColumn(false)
+                                ->addColumn("Aus")
+                                ->addColumn(false)
+                                ->addColumn(false)
+                                ->addColumn(false)
+                                ->addColumn(false)
+                                ->addColumn(false)
+                                ->addColumn(false)
+                                ->addColumn(false)
+                                ->addColumn($entry['description'] . ' Gruppe ' . $entry['group'] . ' bei ' . $entry['lector'])
+                                ->addColumn(false)
+                                ->addColumn($entry['room'])
+                                ->addColumn(false)
+                                ->addColumn(false)
+                                ->addColumn(false)
+                                ->addColumn(false)
+                                ->addColumn(false);
+                                
+                            $csv->addRow($row);
+                        }
+                    }
+                    
+                    $this->getResponse()
+                        ->setHeader('Content-Type', 'text/plain')
+                        ->appendBody($csv->toString());                  
+                }        
+            }
+            else
+            {
+                $parser = new Raumbelegung_Parser();
+          
+                $week = Raumbelegung_Parser_Week::init($date);
+                $week->setFilter(new Raumbelegung_Filter('class', $params['class']));             
+                $weekData = $week->getData();
+            
+                $this->view->week = $weekData;
+                $this->view->classes = $parser->getList('class');
+                $this->view->date = $date;
+                $this->view->title = 'Wochenübersicht KW ' . strftime('%V', strtotime($date));             
+            }
         }
 	}
     

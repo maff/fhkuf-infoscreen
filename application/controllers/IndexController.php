@@ -1,9 +1,8 @@
 <?php
-class IndexController extends Zend_Controller_Action
+class IndexController extends Raumbelegung_Controller_Action
 {
     protected $_parser;
     protected $_redirector = null;
-    protected $_ajax = false;
     
     public function preDispatch ()
     {
@@ -91,10 +90,7 @@ class IndexController extends Zend_Controller_Action
 	protected function _getFilters()
 	{
 	    $request = $this->getRequest()->getParams();
-        
-        if(isset($request['ajax']) && (bool) $request['ajax'] == true)
-            $this->_ajax = true;
-        
+      
 	    $filters = array();
 	    $allowed_params = array('class', 'lector', 'room');
 	    if(is_array($request) && count($request) > 0)

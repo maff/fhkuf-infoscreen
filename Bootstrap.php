@@ -1,5 +1,5 @@
 <?php
-require_once 'Zend/Loader.php';
+require_once 'library/Zend/Loader.php';
 
 class Bootstrap
 {
