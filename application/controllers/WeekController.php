@@ -43,14 +43,68 @@ class WeekController extends Zend_Controller_Action
         {
             $this->_helper->layout()->disableLayout();
             $this->_helper->viewRenderer->setNoRender(true);
-        
-            if($params['format'] == 'outlookCsv')
-            {
-                $week = Raumbelegung_Parser_Week::init($date);
+            
+            $week = Raumbelegung_Parser_Week::init($date);
+            
+            if(isset($params['class']) && !empty($params['class'])) {
                 $week->setFilter(new Raumbelegung_Filter('class', $params['class']));
-                $week->categorizeResults = false;
-                $weekData = $week->getData();
-                
+            }
+            
+            $week->categorizeResults = false;
+            $weekData = $week->getData();
+        
+            if($params['format'] == 'ical') {
+                if(count($weekData) > 0) {
+                    require_once 'iCalcreator.class.php';
+                    
+                    $v = new vcalendar();
+                    $v->setConfig('unique_id', 'ailoo.net raumbelegung');
+                    $v->setProperty('method', 'PUBLISH');
+                    $v->setProperty('x-wr-calname', 'ailoo.net Raumbelegung iCal Interface');
+                    $v->setProperty('X-WR-CALDESC', 'ailoo.net Raumbelegung iCal Interface');
+                    $v->setProperty('X-WR-TIMEZONE', 'Europe/Vienna');
+
+                    foreach($weekData as $entry) {
+                        $date = explode('.', $entry['date']);
+                        $time[0] = explode(':', $entry['startTime']);
+                        $time[1] = explode(':', $entry['endTime']);
+                    
+                        $startEvent = array('year' => $date[2],
+                                            'month' => $date[1],
+                                            'day' => $date[0],
+                                            'hour' => $time[0][0],
+                                            'min' => $time[0][1],
+                                            'sec' => 0);
+                                            
+                        $endEvent = array('year' => $date[2],
+                                          'month' => $date[1],
+                                          'day' => $date[0],
+                                          'hour' => $time[1][0],
+                                          'min' => $time[1][1],
+                                          'sec' => 0);                                            
+                    
+                    
+                        $vevent = new vevent();
+                        
+                        $vevent->setProperty('dtstart', $startEvent);
+                        $vevent->setProperty('dtend', $endEvent);
+
+                        $vevent->setProperty('LOCATION', $entry['room']);
+
+                        $vevent->setProperty('summary', $entry['description']);
+                        $vevent->setProperty('description', $entry['class'] . ' - ' . $entry['description'] . ' (' . $entry['group'] . ')');
+                        
+                        if($entry['info'] != null) {
+                            $vevent->setProperty('comment', $entry['info']);
+                        }
+                        
+                        $vevent->setProperty('attendee', $entry['lector']);
+                        $v->setComponent ($vevent);                        
+                    }
+
+                    echo $v->createCalendar();                    
+                }
+            } elseif($params['format'] == 'outlookCsv') {                
                 $csv = new Raumbelegung_Csv();
                 
                 $headers = new Raumbelegung_Csv_Row();
