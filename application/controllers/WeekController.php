@@ -181,7 +181,8 @@ class WeekController extends Zend_Controller_Action
                 $week->setFilter(new Raumbelegung_Filter('class', $params['class']));             
                 
                 $weekData = $week->getData(); 
-                $this->view->week = $weekData;                
+                $this->view->week = $weekData;
+                $this->view->selectedClass = $params['class'];
             }
 
             $this->view->classes = $parser->getList('class');

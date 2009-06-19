@@ -90,6 +90,8 @@ code, kbd { display: inline; background: #f1f1f3; }
 #filterform .column.submitbox input:hover, #filterform .column.submitbox a:hover { color: #d54e21; }
 #input_submit {  }
 
+p.iCalLinks { text-align: right; margin: 2.5em 0 -1em 0; }
+
 #header { margin: 0 0 .75em 0; padding: 0 0 1.5em 0; border-bottom: 1px solid #ccc; }
 #dayPager { margin: 0 0 3em 0; }
 

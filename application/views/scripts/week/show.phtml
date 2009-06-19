@@ -64,6 +64,7 @@ else
             }
 ?>
                 </table>
+                
 <?php
         }
         else
@@ -76,6 +77,14 @@ else
             </div>
 <?php
     }
+?>
+
+            <p class="iCalLinks">
+                <a href="/week/show/date/<?php echo $this->date ?>/class/<?php echo $this->selectedClass ?>/format/ical">iCal (Ergebnis)</a>.
+                <a href="/week/show/class/<?php echo $this->selectedClass ?>/format/ical">iCal (aktuelle Woche)</a>
+            </p>
+
+<?php
 }
 ?>
         </div>
