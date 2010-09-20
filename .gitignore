@@ -1,5 +1,5 @@
 .htaccess
-application/config/config.ini
+application/config/application.ini
 .cache
 .project
 .settings
