@@ -41,5 +41,4 @@ class ServiceController extends Zend_Controller_Action
     {
         return Zend_Registry::getInstance()->get('base_path') . '/application/config/service.wsdl';
     }
- 
 }
