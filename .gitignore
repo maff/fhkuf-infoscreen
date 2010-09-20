@@ -1,8 +1,5 @@
-.htaccess
-application/config/application.ini
-.cache
-.project
-.settings
+public/.htaccess
+application/configs/application.ini
+library/Zend
 tmp/*
 log/*
-library/Zend
