@@ -1,5 +1,8 @@
 <?php
-class IndexController extends Raumbelegung_Controller_Action
+class IndexController extends Zend_Controller_Action
+{}
+
+/*class IndexController extends Raumbelegung_Controller_Action
 {
     protected $_parser;
     protected $_redirector = null;
@@ -125,3 +128,4 @@ class IndexController extends Raumbelegung_Controller_Action
         return $url;
     }
 }
+*/
