@@ -1,0 +1,18 @@
+# Set environment
+SetEnv APPLICATION_ENV development
+
+# Disable directory indexes
+Options -Indexes
+
+# Rewrite requests to front controller
+RewriteEngine On
+RewriteBase /
+
+# 503 Rewrite for maintainance
+# RewriteRule .* down.php [NC,L,QSA]
+
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^.*$ - [NC,L]
+RewriteRule ^.*$ index.php [NC,L,QSA]
