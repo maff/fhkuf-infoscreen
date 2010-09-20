@@ -5,9 +5,4 @@ class Raumbelegung_Config
     {
         return Zend_Registry::getInstance()->get('config');
     }
-
-    public static function get($key)
-    {
-        return self::getInstance()->$key;
-    }
 }
