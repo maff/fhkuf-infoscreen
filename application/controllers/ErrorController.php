@@ -21,10 +21,6 @@ class ErrorController extends Zend_Controller_Action
                 $error->type = Zend_Controller_Plugin_ErrorHandler::EXCEPTION_OTHER;
         }
         
-        echo '<!--';
-        Zend_Debug::dump($error);
-        echo '-->';
-
         switch ($error->type) {
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
@@ -46,6 +42,10 @@ class ErrorController extends Zend_Controller_Action
                 $this->view->content = 'An internal error ocurred. Please try again later.';
                 
                 break;
+        }
+
+        if(APPLICATION_ENV == 'development') {
+            $this->view->content .= Zend_Debug::dump($error, null, false);
         }
 
         $this->getResponse()->clearBody();
