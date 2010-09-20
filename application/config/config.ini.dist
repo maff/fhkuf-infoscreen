@@ -6,3 +6,17 @@ infoscreen_stgid = 0
 data_cache_lifetime_single = 300
 data_cache_lifetime_week = 3600
 list_cache_lifetime = 3600
+
+# Google Analytics
+services.analytics.enabled = 0
+services.analytics.account = UA-123456
+
+# Piwik
+services.piwik.enabled = 0
+services.piwik.baseurl = stats.example.org
+services.piwik.siteid = 2
+
+# Uservoice
+services.uservoice.enabled = 0
+services.uservoice.key = uservoicekey
+services.uservoice.host = hostname.uservoice.com
