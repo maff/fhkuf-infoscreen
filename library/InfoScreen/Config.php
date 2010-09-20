@@ -1,5 +1,5 @@
 <?php
-class Raumbelegung_Config
+class InfoScreen_Config
 {
     public static function getInstance()
     {

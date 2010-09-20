@@ -6,7 +6,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         /**
          * @var Zend_Config
          */
-        $config = Raumbelegung_Config::getInstance()->cache;
+        $config = InfpScreen_Config::getInstance()->cache;
 
         $backendOptions = array();
         if(isset($config->data->backend->options)) {
@@ -34,7 +34,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         /**
          * @var Zend_Config
          */
-        $config = Raumbelegung_Config::getInstance()->cache;
+        $config = InfoScreen_Config::getInstance()->cache;
 
         $backendOptions = array();
         if(isset($config->list->backend->options)) {

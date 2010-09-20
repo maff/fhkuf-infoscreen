@@ -1,5 +1,5 @@
 <?php
-class Raumbelegung_Parser_Overview
+class InfoScreen_Parser_Overview
 {
     // wheter to return an array organized by date or not
     public $categorizeResults = true;
@@ -27,7 +27,7 @@ class Raumbelegung_Parser_Overview
         $this->_filters = $filters;
     }
     
-    public function setFilter(Raumbelegung_Filter $filter)
+    public function setFilter(InfoScreen_Filter $filter)
     {
         if(!is_null($filter))
             $this->_filters[] = $filter;
@@ -38,12 +38,12 @@ class Raumbelegung_Parser_Overview
         $timestamp = strtotime($this->_curDate);
         
         $filters = array();
-        $filters[] = new Raumbelegung_Filter('class', 'wi07-vz');
+        $filters[] = new InfoScreen_Filter('class', 'wi07-vz');
     
 		for($i = 0; $i < $this->_days; $i++)
         {
             $date = strftime('%d.%m.%Y', $timestamp);
-            $parser = new Raumbelegung_Parser($date);
+            $parser = new InfoScreen_Parser($date);
             $parser->setCacheMode('week');
             $parser->setFilters($this->_filters);
             

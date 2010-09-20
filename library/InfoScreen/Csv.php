@@ -1,5 +1,5 @@
 <?php
-class Raumbelegung_Csv
+class InfoScreen_Csv
 {
     protected $_rows = array();
     

@@ -1,5 +1,5 @@
 <?php
-class Raumbelegung_Filter
+class InfoScreen_Filter
 {
     public $key;
     public $value;

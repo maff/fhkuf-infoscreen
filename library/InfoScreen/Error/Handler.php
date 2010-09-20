@@ -1,5 +1,5 @@
 <?php
-class Raumbelegung_Error_Handler
+class InfoScreen_Error_Handler
 {
     /**
      * Const - undefined exception

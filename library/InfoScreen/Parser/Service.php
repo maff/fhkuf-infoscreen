@@ -1,8 +1,8 @@
 <?php
 /**
- * Wrapper class for the Raumbelegung Webservice
+ * Wrapper class for the InfoScreen Webservice
  */
-class Raumbelegung_Parser_Service
+class InfoScreen_Parser_Service
 {
     /**
      * Get appointment list based on date and filters.
@@ -13,7 +13,7 @@ class Raumbelegung_Parser_Service
      */
     public function getResults($date = '', $filters = array())
     {
-        $parser = new Raumbelegung_Parser($date);
+        $parser = new InfoScreen_Parser($date);
         
         if(count($filters) > 0)
             $parser->setFilters($filters);
@@ -30,7 +30,7 @@ class Raumbelegung_Parser_Service
      */
     public function getList($key, $selectfriendly = true)
     {
-        $parser = new Raumbelegung_Parser();
+        $parser = new InfoScreen_Parser();
         return $parser->getList($key, $selectfriendly);
     }    
 }

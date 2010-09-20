@@ -1,9 +1,9 @@
 <?php
-class Raumbelegung_Parser_Week
+class InfoScreen_Parser_Week
 {
     public static function init($date)
     {
-        return new Raumbelegung_Parser_Overview(self::_getStartDate($date), 6);
+        return new InfoScreen_Parser_Overview(self::_getStartDate($date), 6);
     }
     
     protected static function _getStartDate($date)

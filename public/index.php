@@ -15,16 +15,13 @@ set_include_path(implode(PATH_SEPARATOR, array(
 
 /** Zend_Application */
 require_once 'Zend/Application.php';
-require_once 'Raumbelegung/Application.php';
+require_once 'InfoScreen/Application.php';
 
 // Create application, bootstrap, and run
-$application = new Raumbelegung_Application(
+$application = new InfoScreen_Application(
     APPLICATION_ENV,
     APPLICATION_PATH . '/configs/application.ini'
 );
 
 $application->bootstrap()
             ->run();
-
-
-    Zend_Debug::dump(Raumbelegung_Cache::get('data.day'));

@@ -1,5 +1,5 @@
 <?php
-class Raumbelegung_Cache
+class InfoScreen_Cache
 {
     public static function get($key)
     {

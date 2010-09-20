@@ -1,5 +1,5 @@
 <?php
-class Raumbelegung_Application extends Zend_Application
+class InfoScreen_Application extends Zend_Application
 {
     /**
      * Load configuration file of options

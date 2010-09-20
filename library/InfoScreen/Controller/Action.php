@@ -1,5 +1,5 @@
 <?php
-class Raumbelegung_Controller_Action extends Zend_Controller_Action
+class InfoScreen_Controller_Action extends Zend_Controller_Action
 {
     protected $_ajax = false;   
  
@@ -11,7 +11,7 @@ class Raumbelegung_Controller_Action extends Zend_Controller_Action
     
     public function getConfig()
     {
-        return Raumbelegung_Config::getInstance();
+        return InfoScreen_Config::getInstance();
     }
     
     protected function _checkAjax()

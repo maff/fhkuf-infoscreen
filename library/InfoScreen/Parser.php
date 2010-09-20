@@ -1,7 +1,7 @@
 <?php
 require_once('simple_html_dom.php');
 
-class Raumbelegung_Parser
+class InfoScreen_Parser
 {
     protected $_date;
     protected $_data;
@@ -76,8 +76,8 @@ class Raumbelegung_Parser
     
     protected function _setUrl()
     {
-        $this->_url = Raumbelegung_Config::get('infoscreen_url');
-        $this->_url .= '?STGID=' . Raumbelegung_Config::get('infoscreen_stgid');
+        $this->_url = InfoScreen_Config::get('infoscreen_url');
+        $this->_url .= '?STGID=' . InfoScreen_Config::get('infoscreen_stgid');
         $this->_url .= '&DATUM=' . $this->_date;
     }
     
@@ -103,7 +103,7 @@ class Raumbelegung_Parser
     private function _fetchData()
     {
         $frontendOptions = array(
-           'lifetime' => Raumbelegung_Config::get('data_cache_lifetime_' . $this->_cacheMode),
+           'lifetime' => InfoScreen_Config::get('data_cache_lifetime_' . $this->_cacheMode),
            'automatic_serialization' => true
         );
         
@@ -154,7 +154,7 @@ class Raumbelegung_Parser
         $data = array();
         $dom = @file_get_dom($this->_url);
         /*if(!$dom = @file_get_dom($this->_url))
-            throw new Raumbelegung_Parser_Exception('Could not fetch data from source server');*/
+            throw new InfoScreen_Parser_Exception('Could not fetch data from source server');*/
             
 		foreach($dom->find('div.appointment') as $element)
 		{			
@@ -204,7 +204,7 @@ class Raumbelegung_Parser
     
     private static function _getCacheDir()
     {
-        return Zend_Registry::getInstance()->get('base_path') . '/' . Raumbelegung_Config::get('cache_dir');
+        return Zend_Registry::getInstance()->get('base_path') . '/' . InfoScreen_Config::get('cache_dir');
     }
     
     private function _loadLists()
