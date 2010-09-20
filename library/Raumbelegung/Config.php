@@ -1,8 +1,13 @@
 <?php
 class Raumbelegung_Config
-{   
-    static public function get($key)
+{
+    public static function getInstance()
     {
-        return Zend_Registry::getInstance()->get('config')->$key;
+        return Zend_Registry::getInstance()->get('config');
+    }
+
+    public static function get($key)
+    {
+        return self::getInstance()->$key;
     }
 }
