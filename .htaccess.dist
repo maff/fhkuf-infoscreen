@@ -6,12 +6,20 @@
     Deny from all
 </Files>
 
-# Security: Don't allow browsing of directories
+<Files ~ "^uncache\.php$">
+    Order allow,deny
+    Deny from all
+</Files>
+
 Options -Indexes
 
 # Rewrite rules for Zend Framework
 RewriteEngine on
 RewriteBase /
+
+# 503 Rewrite for maintainance
+# RewriteRule .* down.php [L,QSA]
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule .* index.php [L,QSA]
