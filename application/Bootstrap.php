@@ -1,12 +1,17 @@
 <?php
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
+    protected function _initDomParser()
+    {
+        require_once('simple_html_dom.php');
+    }
+
     protected function _initDataCache()
     {
         /**
          * @var Zend_Config
          */
-        $config = InfpScreen_Config::getInstance()->cache;
+        $config = InfoScreen_Config::getInstance()->cache;
 
         $backendOptions = array();
         if(isset($config->data->backend->options)) {
