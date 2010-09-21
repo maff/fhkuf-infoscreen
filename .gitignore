@@ -3,3 +3,4 @@ application/configs/application.ini
 library/Zend
 tmp/*
 log/*
+var/*
