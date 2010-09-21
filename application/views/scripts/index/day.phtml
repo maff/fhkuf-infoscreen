@@ -1,104 +1,105 @@
+<?php
+/* @var $model InfoScreen_Model_Day */
+$model = $this->model;
+?>
+
 <?php if(!$this->ajax): ?>
-		<div id="header" class="span-24">
-			<form method="post" action="<?php echo $this->baseUrl(); ?>/" id="filterform">
-				<div class="column span-4">
-					<label for="sel_date">Datum</label>
-					<input id="sel_date" name="date" value="<?php echo $this->date ?>" />
-				</div>
-			
-				<div class="column span-4">
-					<label for="sel_class">Studiengang</label>
-					<select id="sel_class" name="class">
-						<?php foreach($this->classes as $class):?>
-						<option<?php $this->checkSelected($class, 'class') ?>><?php echo $class ?></option>
-						<?php endforeach; ?>
-					</select>
-				</div>
-				
-				<div class="column span-5">
-				<label for="sel_lector">Lektor</label>
-				<select id="sel_lector" name="lector">
-					<?php foreach($this->lectors as $lector):?>
-					<option<?php $this->checkSelected($lector, 'lector') ?>><?php echo $lector ?></option>
-					<?php endforeach; ?>
-				</select>
-				</div>
-				
-				<div class="column span-2">
-				<label for="sel_room">Raum</label>
-				<select id="sel_room" name="room">
-					<?php foreach($this->rooms as $room):?>
-					<option<?php $this->checkSelected($room, 'room') ?>><?php echo $room ?></option>
-					<?php endforeach; ?>
-				</select>
-				</div>
-				
-				<div class="submitbox column prepend-1 span-4">
-					<a id="input_reset" href="<?php echo $this->baseUrl(); ?>/">Filter zurücksetzen</a>
-				</div>
-                
-				<div class="submitbox column span-4 last">
-					<input id="input_submit" type="submit" name="submit" value="Raumbelegung laden" />
-				</div>			
-			</form>
-		</div>
-		
-		<div id="main" class="span-24">
+<div id="header" class="span-24">
+    <form method="post" action="<?php echo $this->baseUrl(); ?>/day" id="filterform">
+        <div class="column span-4">
+            <label for="sel_date">Datum</label>
+            <input id="sel_date" name="date" value="<?php echo $model->getDate() ?>" />
+        </div>
+
+        <div class="column span-4">
+            <label for="sel_class">Studiengang</label>
+            <select id="sel_class" name="class">
+                    <?php foreach(InfoScreen_Model_List::getInstance('class')->getSelectData() as $class):?>
+                    <option<?php $this->checkSelected($class, 'class') ?>><?php echo $class ?></option>
+                    <?php endforeach; ?>
+            </select>
+        </div>
+
+        <div class="column span-5">
+            <label for="sel_lector">Lektor</label>
+            <select id="sel_lector" name="lector">
+                <?php foreach(InfoScreen_Model_List::getInstance('lector')->getSelectData() as $lector):?>
+                <option<?php $this->checkSelected($lector, 'lector') ?>><?php echo $lector ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+
+        <div class="column span-2">
+            <label for="sel_room">Raum</label>
+            <select id="sel_room" name="room">
+                <?php foreach(InfoScreen_Model_List::getInstance('room')->getSelectData() as $room):?>
+                <option<?php $this->checkSelected($room, 'room') ?>><?php echo $room ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+
+        <div class="submitbox column prepend-1 span-4">
+            <a id="input_reset" href="<?php echo $this->baseUrl(); ?>/day">Filter zurücksetzen</a>
+        </div>
+
+        <div class="submitbox column span-4 last">
+            <input id="input_submit" type="submit" name="submit" value="Raumbelegung laden" />
+        </div>
+    </form>
+</div>
+
+<div id="main" class="span-24">
 <?php endif; ?>
-            <div id="dayPager">
-                <div class="aleft span-12">
-                    <?php $datePrev = $this->dayPager($this->date, 'prev'); ?>
-                    <a title="vorheriger Tag" rel="<?php echo $datePrev ?>" href="<?php echo $this->baseUrl(); ?>/filter/date/<?php echo $datePrev ?>/<?php echo $this->filterUrl ?>">&laquo; zurück</a>
-                </div>
-                <div class="aright span-12 last">
-                    <?php $dateNext = $this->dayPager($this->date, 'next'); ?>
-                    <a title="nächster Tag" rel="<?php echo $dateNext ?>" href="<?php echo $this->baseUrl(); ?>/filter/date/<?php echo $dateNext ?>/<?php echo $this->filterUrl ?>">weiter &raquo;</a>
-                </div>                
-            </div>
 
-
+    <div id="dayPager">
+        <?php $filterUrl = InfoScreen_Controller_Request::getFilterUrl(false); ?>
+        <div class="aleft span-12">
+            <?php $datePrev = $this->dayPager($model->getDate(), 'prev'); ?>
+            <a title="vorheriger Tag" rel="<?php echo $datePrev ?>" href="<?php echo $this->baseUrl(); ?>/day/date/<?php echo $datePrev ?>/<?php echo $filterUrl ?>">&laquo; zurück</a>
+        </div>
+        <div class="aright span-12 last">
+            <?php $dateNext = $this->dayPager($model->getDate(), 'next'); ?>
+            <a title="nächster Tag" rel="<?php echo $dateNext ?>" href="<?php echo $this->baseUrl(); ?>/day/date/<?php echo $dateNext ?>/<?php echo $filterUrl ?>">weiter &raquo;</a>
+        </div>
+    </div>
 		
-			<h2 id="pagetitle" class="<?php if($this->results) echo "results"; else echo "noresults"; ?>"><?php echo $this->title ?></h2>
+    <h2 id="pagetitle" class="<?php if($this->results) echo "results"; else echo "noresults"; ?>">
+         <?php echo strftime('%A, %d.%m.%Y', strtotime($model->getDate())); ?>
+    </h2>
 
-			<?php if($this->results): ?>
-
-			<table cellpadding='0' cellspacing='0' id="infoTable">
-				<thead>
-					<tr>
-						<th>Studiengang</th>
-						<th>Fach</th>
-						<th>Gr.</th>
-						<th>Lektor</th>
-						<th>Raum</th>
-						<th>Beginn</th>
-						<th>Ende</th>
-						<th>Info</th>			
-					</tr>
-				</thead>
-				
-				<tbody>
-					<?php foreach($this->appointments as $a): ?>
-
-					<tr>
-						<td class="class"><?php echo $this->filterLink('class', $a['class']) ?></td>
-						<td class="description"><?php echo $a['description'] ?></td>
-						<td class="group"><?php echo $a['group'] ?></td>
-						<td class="lector"><?php echo $this->filterLink('lector', $a['lector']) ?></td>
-						<td class="room"><?php echo $this->filterLink('room', $a['room']) ?></td>
-						<td class="startTime time"><?php echo $a['startTime'] ?></td>
-						<td class="endTime time"><?php echo $a['endTime'] ?></td>
-						<td class="info"><?php echo $a['info'] ?></td>
-					</tr>
-
-					<?php endforeach; ?>
-				</tbody>
-				
-			</table>
-
-			<?php endif; ?>
-            
-            <p id="error"><?php echo $this->error; ?></p>
+    <?php if($model->hasData()): ?>
+    <table cellpadding='0' cellspacing='0' id="infoTable">
+        <thead>
+            <tr>
+                <th>Studiengang</th>
+                <th>Fach</th>
+                <th>Gr.</th>
+                <th>Lektor</th>
+                <th>Raum</th>
+                <th>Beginn</th>
+                <th>Ende</th>
+                <th>Info</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach($model->getFilteredData() as $lecture): ?>
+            <tr>
+                <td class="class"><?php echo $this->filterLink('class', $lecture->__get('class')) ?></td>
+                <td class="description"><?php echo $lecture->description ?></td>
+                <td class="group"><?php echo $lecture->group ?></td>
+                <td class="lector"><?php echo $this->filterLink('lector', $lecture->lector) ?></td>
+                <td class="room"><?php echo $this->filterLink('room', $lecture->room) ?></td>
+                <td class="startTime time"><?php echo $lecture->startTime ?></td>
+                <td class="endTime time"><?php echo $lecture->endTime ?></td>
+                <td class="info"><?php echo $lecture->info ?></td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+    <?php else: ?>
+    <p id="error">Für die angegebenen Filterkriterien gibt es keine Ergebnisse.</p>
+    <?php endif; ?>
 
 <?php if(!$this->ajax): ?>		
-		</div>
+</div>
 <?php endif; ?>

@@ -1,90 +1,111 @@
-        <div id="header" class="span-24">
-            <form method="post" action="<?php echo $this->baseUrl(); ?>/week/show" id="filterform">
-				<div class="column span-4">
-					<label for="sel_date">Datum</label>
-					<input id="sel_date" name="date" value="<?php echo $this->date ?>" />
-				</div>
-            
-                <div class="column span-4">
-                    <label for="sel_class">Studiengang</label>
-                    <select id="sel_class" name="class">
-                        <?php foreach($this->classes as $class):?>
-                        <option<?php $this->checkSelected($class, 'class') ?>><?php echo $class ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-                
-				<div class="submitbox column prepend-12 span-4 last">
-					<input id="input_submit_overview" type="submit" name="submit" value="Übersicht laden" />
-				</div>	
-            </form>
+<?php
+/* @var $model InfoScreen_Model_Week */
+$model = $this->model;
+?>
+
+<?php if(!$this->ajax): ?>
+<div id="header" class="span-24">
+    <form method="post" action="<?php echo $this->baseUrl(); ?>/week" id="filterform">
+        <div class="column span-4">
+            <label for="sel_date">Datum</label>
+            <input id="sel_date" name="date" value="<?php echo $model->getStartDate() ?>" />
         </div>
-        
-		<div id="main" class="span-24">
+
+        <div class="column span-4">
+            <label for="sel_class">Studiengang</label>
+            <select id="sel_class" name="class">
+                    <?php foreach(InfoScreen_Model_List::getInstance('class')->getSelectData() as $class):?>
+                    <option<?php $this->checkSelected($class, 'class') ?>><?php echo $class ?></option>
+                    <?php endforeach; ?>
+            </select>
+        </div>
+
+        <div class="column span-5">
+            <label for="sel_lector">Lektor</label>
+            <select id="sel_lector" name="lector">
+                <?php foreach(InfoScreen_Model_List::getInstance('lector')->getSelectData() as $lector):?>
+                <option<?php $this->checkSelected($lector, 'lector') ?>><?php echo $lector ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+
+        <div class="column span-2">
+            <label for="sel_room">Raum</label>
+            <select id="sel_room" name="room">
+                <?php foreach(InfoScreen_Model_List::getInstance('room')->getSelectData() as $room):?>
+                <option<?php $this->checkSelected($room, 'room') ?>><?php echo $room ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+
+        <div class="submitbox column prepend-1 span-4">
+            <a id="input_reset" href="<?php echo $this->baseUrl(); ?>/week">Filter zurücksetzen</a>
+        </div>
+
+        <div class="submitbox column span-4 last">
+            <input id="input_submit" type="submit" name="submit" value="Übersicht laden" />
+        </div>
+    </form>
+</div>
+
+<div id="main" class="span-24">
+<?php endif; ?>
+
+    <div id="dayPager">
+        <?php $filterUrl = InfoScreen_Controller_Request::getFilterUrl(false); ?>
+        <div class="aleft span-12">
+            <?php $datePrev = $this->weekPager($model->getStartDate(), 'prev'); ?>
+            <a title="vorherige Woche" rel="<?php echo $datePrev ?>" href="<?php echo $this->baseUrl(); ?>/week/date/<?php echo $datePrev ?>/<?php echo $filterUrl ?>">&laquo; zurück</a>
+        </div>
+        <div class="aright span-12 last">
+            <?php $dateNext = $this->weekPager($model->getStartDate(), 'next'); ?>
+            <a title="nächste Woche" rel="<?php echo $dateNext ?>" href="<?php echo $this->baseUrl(); ?>/week/date/<?php echo $dateNext ?>/<?php echo $filterUrl ?>">weiter &raquo;</a>
+        </div>
+    </div>
+
 <?php
-if($this->valid === false)
-{
+$i = 0;
+
+/* @var $day InfoScreen_Model_Day */
+foreach($model->getDays() as $day):
 ?>
-            <p>Bitte Studiengang auswählen.</p>
-<?php
-}
-else
-{
-    $i = 0;
-    foreach($this->week as $key => $appointments)
-    {
-        $dayClass = ($i++ % 2 == 0) ? 'even' : 'odd';
-?>
-            <div class="weekday <?php echo $dayClass ?>">
-                <h3><a href="/filter/date/<?php echo $key; ?>"><?php echo strftime('%A, %d.%m.%Y', strtotime($key)); ?></a></h3>
-<?php
-        if(is_array($appointments) && count($appointments) > 0)
-        {
-?>
-                <table class="appointmentTable">
-<?php
+    <?php $dayClass = ($i++ % 2 == 0) ? 'even' : 'odd'; ?>
+
+    <div class="weekday <?php echo $dayClass ?>">
+        <h3><a href="/day/date/<?php echo $day->getDate(); ?>"><?php echo strftime('%A, %d.%m.%Y', strtotime($day->getDate())); ?></a></h3>
+        <?php if($day->hasData()): ?>
+
+        <table class="appointmentTable">
+            <?php
             $j = 0;
-            foreach($appointments as $appointment)
-            {
-                $appClass = ($j++ % 2 == 0) ? 'even' : 'odd';
-?>
-                    <tr class="<?php echo $appClass ?>">
-                        <td class="startTime time"><?php echo $appointment['startTime']; ?></td>
-                        <td class="endTime time"><?php echo $appointment['endTime']; ?></td>
-                        <td class="class"><?php echo $appointment['class']; ?></td>
-                        <td class="group"><?php echo $appointment['group']; ?></td>
-                        <td class="description">
-                            <strong><?php echo $appointment['description']; ?></strong><br />
-                            <?php echo $appointment['lector']; ?>
-                        </td>
-                        <td class="room"><?php echo $appointment['room']; ?></td>
-                        <td class="info"><?php echo $appointment['info']; ?></td>
-                    </tr>
-<?php
-            }
-?>
-                </table>
-                
-<?php
-        }
-        else
-        {
-?>
-                <p>Keine Einträge.</p>
-<?php
-        }
-?>
-            </div>
-<?php
-    }
-?>
 
-            <p class="iCalLinks">
-                <a href="/week/show/date/<?php echo $this->date ?>/class/<?php echo $this->selectedClass ?>/format/ical">iCal (Ergebnis)</a>.
-                <a href="/week/show/class/<?php echo $this->selectedClass ?>/format/ical">iCal (aktuelle Woche)</a>
-            </p>
+            /* @var $lecture InfoScreen_Model_Lecture */
+            foreach($day->getFilteredData() as $lecture):
+            ?>
+                <?php $lectureClass = ($j++ % 2 == 0) ? 'even' : 'odd'; ?>
 
-<?php
-}
-?>
-        </div>
+                <tr class="<?php echo $lectureClass ?>">
+                    <td class="startTime time"><?php echo $lecture->startTime; ?></td>
+                    <td class="endTime time"><?php echo $lecture->endTime; ?></td>
+                    <td class="class"><?php echo $lecture->__get('class'); ?></td>
+                    <td class="group"><?php echo $lecture->group; ?></td>
+                    <td class="description">
+                        <strong><?php echo $lecture->description; ?></strong><br />
+                        <?php echo $lecture->lector; ?>
+                    </td>
+                    <td class="room"><?php echo $lecture->room; ?></td>
+                    <td class="info"><?php echo $lecture->info; ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+
+        <?php else: ?>
+        <p>Keine Einträge.</p>
+        <?php endif; ?>
+    </div>
+
+<?php endforeach; ?>
+
+<?php if(!$this->ajax): ?>
+</div>
+<?php endif; ?>
