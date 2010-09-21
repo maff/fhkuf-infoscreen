@@ -33,7 +33,7 @@ class ErrorController extends Zend_Controller_Action
                 break;
                 
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_OTHER:
-            case Raumbelegung_Error_Handler::EXCEPTION_CATCHED_EXCEPTION:
+            case InfoScreen_Error_Handler::EXCEPTION_CATCHED_EXCEPTION:
             default:
             
                 $this->getResponse()->setRawHeader('HTTP/1.1 500 Internal Server Error');
