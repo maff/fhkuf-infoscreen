@@ -1,23 +1,19 @@
 <?php
-class Zend_View_Helper_DayPager
+class Zend_View_Helper_WeekPager
 {
-    public function dayPager($date, $mode)
+    public function weekPager($date, $mode)
     {
         switch($mode)
         {
             case 'prev':
-                $relative = '-1day';
+                $relative = '-1week';
                 break;
             case 'next':
-                $relative = '+1day';
+                $relative = '+1week';
                 break;                            
         }
         
         $resTime = strtotime($relative, strtotime($date));
-        if(strftime('%u', $resTime) == 7) {
-            $resTime = strtotime($relative, $resTime);
-        }
-
         return strftime('%d.%m.%Y', $resTime);
     }
 }

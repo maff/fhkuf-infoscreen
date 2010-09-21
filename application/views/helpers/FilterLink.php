@@ -7,32 +7,32 @@
 class Zend_View_Helper_FilterLink
 {
     /**
-     * helper function for outputting filter links
+     * Helper function for outputting filter links
      */
-    function filterLink($filter, $value)
+    function filterLink($key, $value, $base = '/day')
     {
-       	if (!Raumbelegung_Parser::checkFilterLink($value))
-    	{
-    		echo $value;
-    	}
-        else if( strpos($value, ',') !== false )
-       	{
-       	    $links = array();
+       	if(!InfoScreen_Model_List::getInstance($key)->validate($value, false)) {
+            return $value;
+    	} elseif(strpos($value, ',') !== false) {
+            $links = array();
        	    $values = explode(',', $value);
-       	    foreach($values as $val)
-       	        $links[] = $this->filterLink($filter, trim($val));
+
+       	    foreach($values as $val) {
+       	        $links[] = $this->filterLink($key, trim($val));
+            }
        	        
        	    return implode(', ', $links);
-       	}
-    	else
-    	{
-    		$date = Zend_Registry::getInstance()->get('parser_date');
-            if($date == strftime('%d.%m.%Y', time()))
-                $filterUrl = Zend_Controller_Front::getInstance()->getBaseUrl() . '/filter/' . $filter . '/' . urlencode($value) . '/';
-            else
-                $filterUrl = Zend_Controller_Front::getInstance()->getBaseUrl() . '/filter/date/' . $date . '/' . $filter . '/' . urlencode($value) . '/';
-    		
-    		return '<a class="filterlink" rel="' . $filter . '" href="' . $filterUrl . '" title="nach \'' . $value . '\' filtern">' . $value . '</a>';
-    	}
-    }    
+       	} else {
+            $filterUrl = Zend_Controller_Front::getInstance()->getBaseUrl() . $base;
+            $date = InfoScreen_Controller_Request::getDate();
+
+            // If date not set or same day: omit parameter
+            if(!($date === null ||  strftime('%d.%m.%Y', strtotime($date)) == strftime('%d.%m.%Y', time()))) {
+                $filterUrl .= '/date/' . strftime('%d.%m.%Y', strtotime($date));
+            }
+
+            $filterUrl .= '/' . $key . '/' . urlencode($value);    		
+            return '<a class="filterlink" rel="' . $key . '" href="' . $filterUrl . '" title="nach \'' . $value . '\' filtern">' . $value . '</a>';
+        }
+    }
 }

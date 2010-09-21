@@ -1,6 +1,6 @@
 <?php
 /**
- * BaseUrl helper
+ * Checkselected helper
  *
  * @uses helper Zend_View_Helper
  */
