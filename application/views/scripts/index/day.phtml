@@ -62,9 +62,10 @@ $model = $this->model;
             <a title="nächster Tag" rel="<?php echo $dateNext ?>" href="<?php echo $this->baseUrl(); ?>/day/date/<?php echo $dateNext ?>/<?php echo $filterUrl ?>">weiter &raquo;</a>
         </div>
     </div>
-		
-    <h2 id="pagetitle" class="<?php if($this->results) echo "results"; else echo "noresults"; ?>">
-         <?php echo strftime('%A, %d.%m.%Y', strtotime($model->getDate())); ?>
+
+    <?php $this->title = strftime('%A, %d.%m.%Y', strtotime($model->getDate())) ?>
+    <h2 id="pagetitle" class="<?php if($model->hasData()) echo "results"; else echo "noresults"; ?>">
+         <?php echo $this->title; ?>
     </h2>
 
     <?php if($model->hasData()): ?>

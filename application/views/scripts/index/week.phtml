@@ -63,6 +63,8 @@ $model = $this->model;
         </div>
     </div>
 
+    <?php $this->title = 'Woche ab ' . strftime('%A, %d.%m.%Y', strtotime($model->getStartDate())); ?>
+
 <?php
 $i = 0;
 
