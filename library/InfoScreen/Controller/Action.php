@@ -1,12 +1,14 @@
 <?php
 class InfoScreen_Controller_Action extends Zend_Controller_Action
 {
-    protected $_ajax = false;   
- 
     public function init()
     {
-        $this->_checkAjax();
         $this->view->config = $this->getConfig();
+        $this->view->ajax = $this->isAjax();
+
+        if($this->isAjax()) {
+            $this->_helper->layout()->disableLayout();
+        }
     }
     
     public function getConfig()
@@ -14,11 +16,8 @@ class InfoScreen_Controller_Action extends Zend_Controller_Action
         return InfoScreen_Config::getInstance();
     }
     
-    protected function _checkAjax()
+    public function isAjax()
     {
-        if($this->getRequest()->isXmlHttpRequest())
-        {
-            $this->_ajax = true;
-        }
+        return $this->getRequest()->isXmlHttpRequest();
     }
 }
