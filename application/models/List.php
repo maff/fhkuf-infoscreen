@@ -145,6 +145,11 @@ class InfoScreen_Model_List implements Countable
         return $this->_data;
     }
 
+    public function getSelectData()
+    {
+        return array_merge(array(''), $this->getData());
+    }
+
     public function addFilter(Zend_Filter_Interface $filter)
     {
         $this->_filters[] = $filter;
@@ -168,9 +173,14 @@ class InfoScreen_Model_List implements Countable
         return $this;
     }
 
-    public function validate($value)
+    public function validate($value, $checkMultiple = true)
     {
         $valid = true;
+
+        if($checkMultiple && strpos($value, ',') !== false) {
+            return false;
+        }
+
         if(count($this->_validators) > 0) {
             foreach($this->_validators as $validator) {
                 if(!$validator->isValid($value)) {

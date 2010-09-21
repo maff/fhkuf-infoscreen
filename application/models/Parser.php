@@ -50,7 +50,7 @@ class InfoScreen_Model_Parser
             $appointment['room'] = @$element->find('td.appointmentRaum > div', 0)->plaintext;
             $appointment['info'] = @$element->find('div.appointmentInfo span', 0)->plaintext;
 
-            $this->_data[] = new InfoScreen_Model_Lecture($appointment);
+            $this->_data[] = $appointment;
         }
     }
 }

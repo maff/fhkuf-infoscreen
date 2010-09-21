@@ -34,7 +34,7 @@ class InfoScreen_Model_Filter
     {
         $sanitize = new Zend_Filter();
         $sanitize->addFilter(new Zend_Filter_StringTrim());
-        $sanitize->addFilter(new Zend_Filter_StringToLower());
+        $sanitize->addFilter(new Zend_Filter_StringToLower(array('encoding' => 'UTF-8')));
 
         $filterValue = $sanitize->filter($this->_value);
         $dataValue = $sanitize->filter($value);

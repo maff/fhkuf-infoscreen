@@ -124,12 +124,19 @@ class InfoScreen_Model_Day
      */
     public function load()
     {
-        if(!$this->_data = $this->getCache()->load($this->getCacheKey()))
+        if(!$data = $this->getCache()->load($this->getCacheKey()))
         {
             $parser = new InfoScreen_Model_Parser($this->_date);
-            $this->_data = $parser->getData();
+            $data = $parser->getData();
 
-            $this->getCache()->save($this->_data, $this->getCacheKey());
+            $this->getCache()->save($data, $this->getCacheKey());
+        }
+
+        $this->_data = array();
+        if(count($data) > 0) {
+            foreach ($data as $lectureData) {
+                $this->_data[] = new InfoScreen_Model_Lecture($lectureData);
+            }
         }
 
         $this->_isLoaded = true;

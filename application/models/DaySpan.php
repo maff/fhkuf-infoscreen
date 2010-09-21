@@ -19,6 +19,11 @@ class InfoScreen_Model_DaySpan
         return $this;
     }
 
+    public function getStartDate()
+    {
+        return $this->_startDate;
+    }
+
     public function setDays($days)
     {
         $this->_days = (int) $days;
@@ -61,7 +66,7 @@ class InfoScreen_Model_DaySpan
         return $this;
     }
 
-    public function fetch()
+    public function load()
     {
         $timestamp = strtotime($this->_startDate);
         $this->_data = array();
@@ -81,7 +86,7 @@ class InfoScreen_Model_DaySpan
     public function getDays()
     {
         if($this->_data === null) {
-            $this->fetch();
+            $this->load();
         }
 
         return $this->_data;
