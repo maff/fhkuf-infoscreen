@@ -2,43 +2,37 @@
 <html>
 <head>
     <meta name="language" content="de" />
-    <meta charset="utf-8"/>
-    <title><?php echo $this->title ?> - FH Kufstein Raumbelegungs-Webservice</title>
-
-    <script type="text/javascript">var base_url = "<?php echo $this->config->base_url; ?><?php echo $this->baseUrl(); ?>/"</script>
-    <script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/js/jquery-1.2.6.min.js"></script>
-    <script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/js/jquery.datepicker.js"></script>
-    <script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/js/jquery.tablesorter.min.js"></script>
-    <script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/js/global.js"></script>
-
-    <!--[if IE]>
-    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
+    <meta charset="utf-8" />
+    <title><?php echo $this->title ?> - FH Kufstein InfoScreen Webservice</title>
     <link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl(); ?>/css/style.css" />
 </head>
 <body>
-    <div id="menu">
-        <ul>
-            <li id="menuBase"><a href="<?php echo $this->menuLink('day'); ?>">Infoscreen</a></li>
-            <li id="menuWeek"><a href="<?php echo $this->menuLink('week'); ?>">Wochenübersicht</a></li>
-        </ul>
-    </div>
+<div id="menu">
+    <ul>
+        <li id="menuBase"><a href="<?php echo $this->menuLink('day'); ?>">Infoscreen</a></li>
+        <li id="menuWeek"><a href="<?php echo $this->menuLink('week'); ?>">Wochenübersicht</a></li>
+    </ul>
+</div>
 
-    <div class="container">
-	
+<div class="container">
 <?php echo $this->layout()->content; ?>
-    
-		<div id="footer" class="span-24">
-            <div class="footermessage span-15">&nbsp;</div>
-			<div class="footertext span-8 prepend-1 last">&copy; 2008-2010 <a href="http://ailoo.net/">Mathias Geat</a> (<a href="http://maff.ailoo.net/projects/fh-kufstein-raumbelegung-webservice/">Projektinfo</a>)</div>
-		</div>
-    
+
+    <div id="footer" class="span-24">
+        <div class="footermessage span-15">&nbsp;</div>
+        <div class="footertext span-8 prepend-1 last">&copy; 2008-2010 <a href="http://ailoo.net/">Mathias Geat</a> (<a href="http://maff.ailoo.net/projects/fh-kufstein-raumbelegung-webservice/">Projektinfo</a>)</div>
     </div>
-    
-    
-    
-    <div id="loading"></div>
+</div>
+<div id="loading"></div>
+
+<script type="text/javascript">var base_url = "<?php echo $this->config->base_url; ?><?php echo $this->baseUrl(); ?>/"</script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/js/jquery.datepicker.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/js/jquery.tablesorter.min.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/js/global.js"></script>
+
+<!--[if IE]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
 
 <?php if ($this->config->services->analytics->enabled): ?>
 <script type="text/javascript">
