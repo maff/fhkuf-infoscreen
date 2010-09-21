@@ -20,7 +20,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         foreach ($config->data->type as $type => $cfg) {
             $frontendOptions = $cfg->frontend->options->toArray();
-            $frontendOptions['cache_id_prefix'] = $config->prefix . 'data_' . $type . '_';
+            $frontendOptions['cache_id_prefix'] = $config->prefix . 'data_';
             $frontendOptions['automatic_serialization'] = true;
 
             $cache = Zend_Cache::factory(
