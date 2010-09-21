@@ -115,7 +115,7 @@ $(document).ready(function()
         if(lectorval) url = url + 'lector/' + lectorval + '/';
         if(roomval) url = url + 'room/' + roomval + '/';
         
-        if(url) url = base_url + 'filter/' + url;
+        if(url) url = base_url + 'day/' + url;
         else url = base_url;
         
         return url;
