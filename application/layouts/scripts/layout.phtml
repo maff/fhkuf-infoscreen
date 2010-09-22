@@ -28,6 +28,9 @@
 <script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/js/jquery.datepicker.js"></script>
 <script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/js/jquery.tablesorter.min.js"></script>
 <script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/js/infoscreen.js"></script>
+<?php if(in_array($this->mode, array('day', 'week'))): ?>
+<script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/js/<?php echo $this->mode ?>.js"></script>
+<?php endif; ?>
 
 <!--[if IE]>
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>

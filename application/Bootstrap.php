@@ -104,11 +104,25 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                     'action' => 'wsdl'
         )));
 
-        $router->addRoute('js.infoscreen',
+        $router->addRoute('infoscreen.js',
             new Zend_Controller_Router_Route('/js/infoscreen.js',
                 array(
                     'controller' => 'js',
                     'action' => 'infoscreen'
+        )));
+
+        $router->addRoute('day.js',
+            new Zend_Controller_Router_Route('/js/day.js',
+                array(
+                    'controller' => 'js',
+                    'action' => 'day'
+        )));
+
+        $router->addRoute('week.js',
+            new Zend_Controller_Router_Route('/js/week.js',
+                array(
+                    'controller' => 'js',
+                    'action' => 'week'
         )));
     }
 

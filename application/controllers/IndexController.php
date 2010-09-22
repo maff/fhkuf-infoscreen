@@ -1,6 +1,13 @@
 <?php
 class IndexController extends InfoScreen_Controller_Action
 {
+    public function  preDispatch()
+    {
+        parent::preDispatch();
+        $this->view->mode = $this->getRequest()->getActionName();
+    }
+
+
     public function indexAction()
     {
         $this->_redirect('/day');

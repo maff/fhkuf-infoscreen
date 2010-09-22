@@ -14,4 +14,12 @@ class JsController extends InfoScreen_Controller_Action
     public function infoscreenAction()
     {
     }
+
+    public function dayAction()
+    {
+    }
+
+    public function weekAction()
+    {
+    }
 }
