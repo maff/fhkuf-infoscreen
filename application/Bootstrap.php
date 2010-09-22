@@ -38,11 +38,33 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                     'controller' => 'index',
                     'action' => 'week'
         )));
+
+        $router->addRoute('api.ical',
+            new Zend_Controller_Router_Route('/api/ical/*',
+                array(
+                    'controller' => 'api',
+                    'action' => 'ical'
+        )));
+
+        $router->addRoute('api.json',
+            new Zend_Controller_Router_Route('/api/json/*',
+                array(
+                    'controller' => 'api',
+                    'action' => 'json'
+        )));
+
+        $router->addRoute('api.xml',
+            new Zend_Controller_Router_Route('/api/xml/*',
+                array(
+                    'controller' => 'api',
+                    'action' => 'xml'
+        )));
     }
 
-    protected function _initDomParser()
+    protected function _initLibraries()
     {
-        require_once('simple_html_dom.php');
+        require_once 'simple_html_dom.php';
+        require_once 'iCalcreator.class.php';
     }
 
     protected function _initDataCache()
