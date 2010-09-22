@@ -38,4 +38,9 @@ class InfoScreen_Model_Lecture
     {
         $this->_sealed = true;
     }
+
+    public function toArray()
+    {
+        return $this->_data;
+    }
 }

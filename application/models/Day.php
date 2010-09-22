@@ -195,4 +195,16 @@ class InfoScreen_Model_Day
 
         return false;
     }
+
+    public function toArray()
+    {
+        $array = array();
+
+        /* @var $lecture InfoScreen_Model_Lecture */
+        foreach($this->getData() as $lecture) {
+            $array[] = $lecture->toArray();
+        }
+
+        return $array;
+    }
 }
