@@ -38,4 +38,13 @@ class InfoScreen_Controller_Action extends Zend_Controller_Action
     {
         return $this->getRequest()->isXmlHttpRequest();
     }
+
+    public function isDebug()
+    {
+        if($this->getRequest()->getParam('debug', false) === 'true') {
+            return true;
+        }
+
+        return false;
+    }
 }

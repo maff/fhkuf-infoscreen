@@ -82,8 +82,12 @@ class ApiController extends InfoScreen_Controller_Action
         $this->_handlePost('/api/json');
         $this->view->model = $this->_getModel();
 
-        $this->getResponse()->setHeader('Content-type', 'application/json', true);
-        $this->getResponse()->setHeader('Content-disposition', 'attachment; filename="api.json"', true);
+        if($this->isDebug()) {
+            $this->getResponse()->setHeader('Content-type', 'text/plain', true);
+        } else {
+            $this->getResponse()->setHeader('Content-type', 'application/json', true);
+            $this->getResponse()->setHeader('Content-disposition', 'attachment; filename="api.json"', true);
+        }
     }
 
     public function icalAction()
@@ -91,8 +95,12 @@ class ApiController extends InfoScreen_Controller_Action
         $this->_handlePost('/api/ical');
         $this->view->model = $this->_getModel();
 
-        $this->getResponse()->setHeader('Content-type', 'text/calendar', true);
-        $this->getResponse()->setHeader('Content-disposition', 'attachment; filename="api.ical"', true);
+        if($this->isDebug()) {
+            $this->getResponse()->setHeader('Content-type', 'text/plain', true);
+        } else {
+            $this->getResponse()->setHeader('Content-type', 'text/calendar', true);
+            $this->getResponse()->setHeader('Content-disposition', 'attachment; filename="api.ical"', true);
+        }
     }
 
     public function xmlAction()
