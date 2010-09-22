@@ -39,6 +39,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                     'action' => 'week'
         )));
 
+        $router->addRoute('api',
+            new Zend_Controller_Router_Route('/api',
+                array(
+                    'controller' => 'api',
+                    'action' => 'index'
+        )));
+
         $router->addRoute('api.ical',
             new Zend_Controller_Router_Route('/api/ical/*',
                 array(
@@ -58,6 +65,27 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                 array(
                     'controller' => 'api',
                     'action' => 'xml'
+        )));
+
+        $router->addRoute('soap',
+            new Zend_Controller_Router_Route('/api/soap',
+                array(
+                    'controller' => 'soap',
+                    'action' => 'index'
+        )));
+
+        $router->addRoute('soap.endpoint',
+            new Zend_Controller_Router_Route('/api/soap/endpoint/*',
+                array(
+                    'controller' => 'soap',
+                    'action' => 'endpoint'
+        )));
+
+        $router->addRoute('soap.wsdl',
+            new Zend_Controller_Router_Route('/api/soap/wsdl/*',
+                array(
+                    'controller' => 'soap',
+                    'action' => 'wsdl'
         )));
     }
 

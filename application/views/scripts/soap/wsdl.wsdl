@@ -1,0 +1,87 @@
+<?php
+echo '<?xml version="1.0" encoding="UTF-8"?>';
+?>
+<definitions xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://raumbelegung.stud.ailoo.net/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://raumbelegung.stud.ailoo.net/">
+<types>
+<xsd:schema targetNamespace="http://raumbelegung.stud.ailoo.net/">
+ <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+ <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/" />
+ <xsd:complexType name="Appointment">
+  <xsd:all>
+   <xsd:element name="startTime" type="xsd:string"/>
+   <xsd:element name="endTime" type="xsd:string"/>
+   <xsd:element name="class" type="xsd:string"/>
+   <xsd:element name="description" type="xsd:string"/>
+   <xsd:element name="room" type="xsd:string"/>
+   <xsd:element name="lector" type="xsd:string"/>
+   <xsd:element name="info" type="xsd:string"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="Appointments">
+  <xsd:complexContent>
+   <xsd:restriction base="SOAP-ENC:Array">
+    <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:Appointment[]"/>
+   </xsd:restriction>
+  </xsd:complexContent>
+ </xsd:complexType>
+ <xsd:complexType name="Filter">
+  <xsd:all>
+   <xsd:element name="key" type="xsd:string"/>
+   <xsd:element name="value" type="xsd:string"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="Filters">
+  <xsd:complexContent>
+   <xsd:restriction base="SOAP-ENC:Array">
+    <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:Filter[]"/>
+   </xsd:restriction>
+  </xsd:complexContent>
+ </xsd:complexType>
+ <xsd:complexType name="List">
+  <xsd:complexContent>
+   <xsd:restriction base="SOAP-ENC:Array">
+    <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="xsd:string[]"/>
+   </xsd:restriction>
+  </xsd:complexContent>
+ </xsd:complexType>
+</xsd:schema>
+</types>
+<message name="getResultsRequest">
+  <part name="date" type="xsd:string" />
+  <part name="filters" type="tns:Filters" /></message>
+<message name="getResultsResponse">
+  <part name="result" type="tns:Appointments" /></message>
+<message name="getListRequest">
+  <part name="key" type="xsd:string" />
+  <part name="selectfriendly" type="xsd:boolean" /></message>
+<message name="getListResponse">
+  <part name="result" type="tns:List" /></message>
+<portType name="raumbelegungPortType">
+  <operation name="getResults">
+    <input message="tns:getResultsRequest"/>
+    <output message="tns:getResultsResponse"/>
+  </operation>
+  <operation name="getList">
+    <input message="tns:getListRequest"/>
+    <output message="tns:getListResponse"/>
+  </operation>
+</portType>
+<binding name="raumbelegungBinding" type="tns:raumbelegungPortType">
+  <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+  <operation name="getResults">
+    <soap:operation soapAction="http://raumbelegung.stud.ailoo.net/service/getresults" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://raumbelegung.stud.ailoo.net/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://raumbelegung.stud.ailoo.net/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="getList">
+    <soap:operation soapAction="http://raumbelegung.stud.ailoo.net/service/getlist" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://raumbelegung.stud.ailoo.net/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://raumbelegung.stud.ailoo.net/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+</binding>
+<service name="raumbelegung">
+  <port name="raumbelegungPort" binding="tns:raumbelegungBinding">
+    <soap:address location="http://raumbelegung.stud.ailoo.net/service/"/>
+  </port>
+</service>
+</definitions>
