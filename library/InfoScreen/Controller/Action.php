@@ -7,7 +7,7 @@ class InfoScreen_Controller_Action extends Zend_Controller_Action
         $this->view->ajax = $this->isAjax();
 
         if($this->isAjax()) {
-            $this->disableView();
+            $this->disableLayout();
         }
     }
 
