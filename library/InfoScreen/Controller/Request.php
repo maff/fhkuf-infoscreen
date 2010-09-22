@@ -6,7 +6,7 @@ class InfoScreen_Controller_Request
         return Zend_Controller_Front::getInstance()->getRequest();
     }
 
-    public static function getFilterUrl($date = true)
+    public static function getFilterUrl($date = true, $prefix = '/')
     {
         $url = array();
 
@@ -22,17 +22,27 @@ class InfoScreen_Controller_Request
                 $url[] = $value;
             }
         }
-
+        
         if(count($url) > 0) {
-            return implode('/', $url);
+            return self::buildUrl($prefix . implode('/', $url));
         }
 
-        return '';
+        return self::buildUrl('');
     }
 
     public static function getDate()
     {
         return self::getRequest()->getParam('date', null);
+    }
+
+    public static function getDateUrl($prefix = '/')
+    {
+        $date = self::getDate();
+        if($date == null) {
+            return '';
+        }
+
+        return $prefix . 'date/' . $date;
     }
 
     public static function getRequestFilters()
@@ -55,7 +65,7 @@ class InfoScreen_Controller_Request
         $rf = self::getRequestFilters();
         if(count($rf) > 0) {
             foreach($rf as $key => $value) {
-                if($key == 'class') {
+                if($key == 'class' && !self::isStrictFiltering()) {
                     $filters[] = new InfoScreen_Model_Filter_ClassAndYear($value);
                 } else {
                     $filters[] = new InfoScreen_Model_Filter($key, $value);
@@ -64,5 +74,23 @@ class InfoScreen_Controller_Request
         }
 
         return $filters;
+    }
+
+    public static function isStrictFiltering()
+    {
+        if(self::getRequest()->getParam('strict', false) === 'true') {
+            return true;
+        }
+
+        return false;
+    }
+
+    public static function buildUrl($url)
+    {
+        if(self::isStrictFiltering() && strpos($url, 'strict') === false) {
+            $url .= '/strict/true';
+        }
+
+        return $url;
     }
 }
