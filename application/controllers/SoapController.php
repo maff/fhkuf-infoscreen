@@ -11,6 +11,14 @@ class SoapController extends InfoScreen_Controller_Action
         if($this->getRequest()->isPost()) {
             $this->disableLayout();
             $this->disableView();
+            $this->getResponse()->setHeader('Content-type', 'text/xml');
+
+            $wsdl = InfoScreen_Config::getInstance()->base_url . '/api/soap/wsdl';
+
+            $server = new Zend_Soap_Server(null, array('encoding' => 'UTF-8'));
+            $server->setClass('InfoScreen_Model_Soap');
+            $server->setWsdl($wsdl);
+            $server->handle();
         }
     }
 
