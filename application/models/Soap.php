@@ -15,9 +15,9 @@ class InfoScreen_Model_Soap
             $filterArray = array();
             $allowed_params = array('class', 'lector', 'room');
 
-            foreach($filters as $key => $value) {
-                if(in_array($key, $allowed_params)) {
-                    $filterArray[] = new InfoScreen_Model_Filter($key, $value);
+            foreach($filters as $filter) {
+                if(in_array($filter->key, $allowed_params)) {
+                    $filterArray[] = new InfoScreen_Model_Filter($filter->key, $filter->value);
                 }
             }
         }
