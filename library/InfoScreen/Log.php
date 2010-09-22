@@ -2,6 +2,7 @@
 class InfoScreen_Log
 {
     /**
+     * Get log instance
      *
      * @return Zend_Log
      */
