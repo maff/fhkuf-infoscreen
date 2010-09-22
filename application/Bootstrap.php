@@ -103,6 +103,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                     'controller' => 'soap',
                     'action' => 'wsdl'
         )));
+
+        $router->addRoute('js.infoscreen',
+            new Zend_Controller_Router_Route('/js/infoscreen.js',
+                array(
+                    'controller' => 'js',
+                    'action' => 'infoscreen'
+        )));
     }
 
     protected function _initDataCache()
