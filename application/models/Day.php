@@ -201,7 +201,7 @@ class InfoScreen_Model_Day
         $array = array();
 
         /* @var $lecture InfoScreen_Model_Lecture */
-        foreach($this->getData() as $lecture) {
+        foreach($this->getFilteredData() as $lecture) {
             $array[] = $lecture->toArray();
         }
 
