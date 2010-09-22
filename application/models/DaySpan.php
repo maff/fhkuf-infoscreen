@@ -1,11 +1,9 @@
 <?php
-class InfoScreen_Model_DaySpan
+class InfoScreen_Model_DaySpan extends InfoScreen_Model_DayCollection
 {
     protected $_startDate;
     protected $_days;
-    protected $_data;
-    protected $_cacheType;
-    protected $_filters = array();
+    protected $_cacheType = 'month';
 
     public function  __construct($startDate, $days)
     {
@@ -30,42 +28,6 @@ class InfoScreen_Model_DaySpan
         return $this;
     }
 
-    /**
-     * Set cache type
-     *
-     * @param  string $cacheType
-     * @return InfoScreen_Model_DaySpan
-     */
-    public function setCacheType($cacheType)
-    {
-        $this->_cacheType = $cacheType;
-        return $this;
-    }
-
-    /**
-     * Set the filters to use
-     *
-     * @param array $filters
-     * @return InfoScreen_Model_DaySpan
-     */
-    public function setFilters(array $filters)
-    {
-        $this->_filters = $filters;
-        return $this;
-    }
-
-    /**
-     * Add a filter
-     *
-     * @param InfoScreen_Model_Filter $filter
-     * @return InfoScreen_Model_DaySpan
-     */
-    public function addFilter(InfoScreen_Model_Filter $filter)
-    {
-        $this->_filters[] = $filter;
-        return $this;
-    }
-
     public function load()
     {
         $timestamp = strtotime($this->_startDate);
@@ -73,22 +35,8 @@ class InfoScreen_Model_DaySpan
 
         for($i = 0; $i < $this->_days; $i++) {
             $date = strftime('%d.%m.%Y', $timestamp);
-
-            $day = new InfoScreen_Model_Day($date);
-            $day->setCacheType($this->_cacheType);
-            $day->setFilters($this->_filters);
-            $this->_data[] = $day->load();
-
+            $this->_addDate($date);
             $timestamp += 86400;
         }
-    }
-
-    public function getDays()
-    {
-        if($this->_data === null) {
-            $this->load();
-        }
-
-        return $this->_data;
     }
 }
