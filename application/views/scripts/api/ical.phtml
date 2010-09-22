@@ -1,0 +1,58 @@
+<?php
+/* @var $model InfoScreen_Model_DayCollection */
+$model = $this->model;
+
+$ical = new vcalendar();
+$ical->setConfig('unique_id', 'net.ailoo.stud.infoscreen');
+$ical->setProperty('method', 'PUBLISH');
+$ical->setProperty('x-wr-calname', 'FH Kufstein InfoScreen iCal interface (ailoo.net)');
+$ical->setProperty('X-WR-CALDESC', 'FH Kufstein InfoScreen iCal interface (ailoo.net)');
+$ical->setProperty('X-WR-TIMEZONE', 'Europe/Vienna');
+
+/* @var $day InfoScreen_Model_Day */
+foreach($model->getData() as $day) {
+    if($day->hasData()) {
+        /* @var $lecture InfoScreen_Model_Lecture */
+        foreach($day->getFilteredData() as $lecture) {
+            $date = explode('.', $lecture->date);
+            
+            $time = array();
+            $time[0] = explode(':', $lecture->startTime);
+            $time[1] = explode(':', $lecture->endTime);
+
+            $startEvent = array(
+                            'year' => $date[2],
+                            'month' => $date[1],
+                            'day' => $date[0],
+                            'hour' => $time[0][0],
+                            'min' => $time[0][1],
+                            'sec' => 0
+                        );
+
+            $endEvent = array(
+                            'year' => $date[2],
+                            'month' => $date[1],
+                            'day' => $date[0],
+                            'hour' => $time[1][0],
+                            'min' => $time[1][1],
+                            'sec' => 0
+                        );
+
+            $vevent = new vevent();
+            $vevent->setProperty('dtstart', $startEvent);
+            $vevent->setProperty('dtend', $endEvent);
+            $vevent->setProperty('location', $lecture->room);
+            $vevent->setProperty('summary', $lecture->description);
+            $vevent->setProperty('description', $lecture->__get('class') . ' - ' . $lecture->description . ' (' . $lecture->group . ')' . ' (' . $lecture->lector . ')');
+            $vevent->setProperty('attendee', $lecture->lector);
+
+            if($lecture->info != null) {
+                $vevent->setProperty('comment', $lecture->info);
+            }
+
+            $ical->addComponent($vevent);
+        }
+    }
+}
+
+echo $ical->createCalendar();

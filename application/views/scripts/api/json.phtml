@@ -1,0 +1,19 @@
+<?php
+/* @var $model InfoScreen_Model_DayCollection */
+$model = $this->model;
+
+$lectures = array();
+
+/* @var $day InfoScreen_Model_Day */
+foreach($model->getData() as $day) {
+    /* @var $lecture InfoScreen_Model_Lecture */
+    foreach($day->getFilteredData() as $lecture) {
+        if($this->categorized) {
+            $lectures[$day->getDate()][] = $lecture->toArray();
+        } else {
+            $lectures[] = $lecture->toArray();
+        }
+    }
+}
+
+echo Zend_Json::encode($lectures);

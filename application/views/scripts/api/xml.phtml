@@ -1,0 +1,31 @@
+<?php
+/* @var $model InfoScreen_Model_DayCollection */
+$model = $this->model;
+
+$lectures = array();
+
+/* @var $day InfoScreen_Model_Day */
+foreach($model->getData() as $day) {
+    /* @var $lecture InfoScreen_Model_Lecture */
+    foreach($day->getFilteredData() as $lecture) {
+        $lectures[] = $lecture->toArray();
+    }
+}
+
+$serializer_options = array (
+   'addDecl'        => true,
+   'encoding'       => 'UTF-8',
+   'indent'         => '    ',
+   'rootName'       => 'data',
+   'defaultTagName' => 'lecture',
+);
+
+$serializer = new XML_Serializer($serializer_options);
+
+$status = $serializer->serialize($lectures);
+
+if(PEAR::isError($status)) {
+    die($status->getMessage());
+} else {
+    echo $serializer->getSerializedData();
+}
