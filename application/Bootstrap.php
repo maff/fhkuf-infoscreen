@@ -7,6 +7,22 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         date_default_timezone_set('Europe/Vienna');
     }
 
+    protected function _initLibraries()
+    {
+        require_once 'simple_html_dom.php';
+        require_once 'iCalcreator.class.php';
+    }
+
+    protected function _initLogging()
+    {
+        $this->bootstrap('Log');
+
+        /* @var $log Zend_Log */
+        $log = $this->getResource('Log');
+
+        Zend_Registry::getInstance()->set('log', $log);
+    }
+
     protected function _initRouting()
     {
         $this->bootstrap('FrontController');
@@ -87,12 +103,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                     'controller' => 'soap',
                     'action' => 'wsdl'
         )));
-    }
-
-    protected function _initLibraries()
-    {
-        require_once 'simple_html_dom.php';
-        require_once 'iCalcreator.class.php';
     }
 
     protected function _initDataCache()

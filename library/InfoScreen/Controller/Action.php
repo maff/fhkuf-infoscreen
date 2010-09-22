@@ -29,9 +29,20 @@ class InfoScreen_Controller_Action extends Zend_Controller_Action
         }
     }
 
+    /**
+     * @return Zend_Config
+     */
     public function getConfig()
     {
         return InfoScreen_Config::getInstance();
+    }
+
+    /**
+     * @return Zend_Log
+     */
+    public function getLog()
+    {
+        return InfoScreen_Log::getInstance();
     }
     
     public function isAjax()
