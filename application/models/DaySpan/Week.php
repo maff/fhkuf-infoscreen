@@ -1,5 +1,5 @@
 <?php
-class InfoScreen_Model_Week extends InfoScreen_Model_DaySpan
+class InfoScreen_Model_DaySpan_Week extends InfoScreen_Model_DaySpan
 {
     protected $_days = 6;
     protected $_startDate;
@@ -8,20 +8,11 @@ class InfoScreen_Model_Week extends InfoScreen_Model_DaySpan
     /**
      * Constructor
      *
-     * @param string $startDate
+     * @param string $date
      */
     public function __construct($date = null)
     {
-        $this->_setDate($date);
-    }
-
-    protected function _setDate($date = null)
-    {
-        if(null === $date || empty($date)) {
-            $date = strftime('%d.%m.%Y', time());
-        } else {
-            $date = strftime('%d.%m.%Y', strtotime($date));
-        }
+        $date = $this->_parseDate($date);
 
         $timestamp = strtotime($date);
         $weekStart = mktime(0, 0, 0, date('m', $timestamp), date('d', $timestamp) - date('w', $timestamp) + 1, date('Y', $timestamp));
