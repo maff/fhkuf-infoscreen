@@ -4,52 +4,17 @@ $model = $this->model;
 ?>
 
 <?php if(!$this->ajax): ?>
-<div id="header" class="span-24">
-    <form method="post" action="<?php echo $this->baseUrl() . '/day' ?>" id="filterform">
-        <div class="column span-4">
-            <label for="sel_date">Datum</label>
-            <input id="sel_date" name="date" value="<?php echo $model->getDate() ?>" />
-        </div>
-
-        <div class="column span-4">
-            <label for="sel_class">Studiengang</label>
-            <select id="sel_class" name="class">
-                    <?php foreach(InfoScreen_Model_List::getInstance('class')->getSelectData() as $class):?>
-                    <option<?php $this->checkSelected($class, 'class') ?>><?php echo $class ?></option>
-                    <?php endforeach; ?>
-            </select>
-        </div>
-
-        <div class="column span-5">
-            <label for="sel_lector">Lektor</label>
-            <select id="sel_lector" name="lector">
-                <?php foreach(InfoScreen_Model_List::getInstance('lector')->getSelectData() as $lector):?>
-                <option<?php $this->checkSelected($lector, 'lector') ?>><?php echo $lector ?></option>
-                <?php endforeach; ?>
-            </select>
-        </div>
-
-        <div class="column span-2">
-            <label for="sel_room">Raum</label>
-            <select id="sel_room" name="room">
-                <?php foreach(InfoScreen_Model_List::getInstance('room')->getSelectData() as $room):?>
-                <option<?php $this->checkSelected($room, 'room') ?>><?php echo $room ?></option>
-                <?php endforeach; ?>
-            </select>
-        </div>
-
-        <div class="submitbox column prepend-1 span-4">
-            <a id="input_reset" href="<?php echo $this->baseUrl(); ?>/day<?php echo InfoScreen_Controller_Request::getDateUrl(); ?>">Filter zurücksetzen</a>
-        </div>
-
-        <div class="submitbox column span-4 last">
-            <input type="hidden" name="strict" value="<?php echo InfoScreen_Controller_Request::isStrictFiltering() ? 'true' : 'false' ?>" />
-            <input id="input_submit" type="submit" name="submit" value="Raumbelegung laden" />
-        </div>
-    </form>
+<div id="header" class="daymode span-24">
+      <?php
+      echo $this->partial('index/form.phtml', array(
+          'date'       => $model->getDate(),
+          'mode'       => 'day',
+          'submitText' => 'Raumbelegung laden'
+      ));
+      ?>
 </div>
 
-<div id="main" class="span-24">
+<div id="main" class="daymode span-24">
 <?php endif; ?>
 
     <div id="dayPager">
