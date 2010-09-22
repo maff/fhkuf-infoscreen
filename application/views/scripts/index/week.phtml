@@ -5,7 +5,7 @@ $model = $this->model;
 
 <?php if(!$this->ajax): ?>
 <div id="header" class="span-24">
-    <form method="post" action="<?php echo $this->baseUrl(); ?>/week" id="filterform">
+    <form method="post" action="<?php echo $this->baseUrl() . '/week' ?>" id="filterform">
         <div class="column span-4">
             <label for="sel_date">Datum</label>
             <input id="sel_date" name="date" value="<?php echo $model->getStartDate() ?>" />
@@ -39,10 +39,11 @@ $model = $this->model;
         </div>
 
         <div class="submitbox column prepend-1 span-4">
-            <a id="input_reset" href="<?php echo $this->baseUrl(); ?>/week">Filter zurücksetzen</a>
+            <a id="input_reset" href="<?php echo $this->baseUrl(); ?>/week<?php echo InfoScreen_Controller_Request::getDateUrl(); ?>">Filter zurücksetzen</a>
         </div>
 
         <div class="submitbox column span-4 last">
+            <input type="hidden" name="strict" value="<?php echo InfoScreen_Controller_Request::isStrictFiltering() ? 'true' : 'false' ?>" />
             <input id="input_submit" type="submit" name="submit" value="Übersicht laden" />
         </div>
     </form>
@@ -69,7 +70,7 @@ $model = $this->model;
 $i = 0;
 
 /* @var $day InfoScreen_Model_Day */
-foreach($model->getDays() as $day):
+foreach($model->getData() as $day):
 ?>
     <?php $dayClass = ($i++ % 2 == 0) ? 'even' : 'odd'; ?>
 

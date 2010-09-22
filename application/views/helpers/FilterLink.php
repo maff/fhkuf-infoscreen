@@ -31,7 +31,9 @@ class Zend_View_Helper_FilterLink
                 $filterUrl .= '/date/' . strftime('%d.%m.%Y', strtotime($date));
             }
 
-            $filterUrl .= '/' . $key . '/' . urlencode($value);    		
+            $filterUrl .= '/' . $key . '/' . urlencode($value);
+            $filterUrl = InfoScreen_Controller_Request::buildUrl($filterUrl);
+
             return '<a class="filterlink" rel="' . $key . '" href="' . $filterUrl . '" title="nach \'' . $value . '\' filtern">' . $value . '</a>';
         }
     }

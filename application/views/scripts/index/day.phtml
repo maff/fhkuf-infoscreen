@@ -5,7 +5,7 @@ $model = $this->model;
 
 <?php if(!$this->ajax): ?>
 <div id="header" class="span-24">
-    <form method="post" action="<?php echo $this->baseUrl(); ?>/day" id="filterform">
+    <form method="post" action="<?php echo $this->baseUrl() . '/day' ?>" id="filterform">
         <div class="column span-4">
             <label for="sel_date">Datum</label>
             <input id="sel_date" name="date" value="<?php echo $model->getDate() ?>" />
@@ -39,10 +39,11 @@ $model = $this->model;
         </div>
 
         <div class="submitbox column prepend-1 span-4">
-            <a id="input_reset" href="<?php echo $this->baseUrl(); ?>/day">Filter zurücksetzen</a>
+            <a id="input_reset" href="<?php echo $this->baseUrl(); ?>/day<?php echo InfoScreen_Controller_Request::getDateUrl(); ?>">Filter zurücksetzen</a>
         </div>
 
         <div class="submitbox column span-4 last">
+            <input type="hidden" name="strict" value="<?php echo InfoScreen_Controller_Request::isStrictFiltering() ? 'true' : 'false' ?>" />
             <input id="input_submit" type="submit" name="submit" value="Raumbelegung laden" />
         </div>
     </form>
@@ -55,11 +56,11 @@ $model = $this->model;
         <?php $filterUrl = InfoScreen_Controller_Request::getFilterUrl(false); ?>
         <div class="aleft span-12">
             <?php $datePrev = $this->dayPager($model->getDate(), 'prev'); ?>
-            <a title="vorheriger Tag" rel="<?php echo $datePrev ?>" href="<?php echo $this->baseUrl(); ?>/day/date/<?php echo $datePrev ?>/<?php echo $filterUrl ?>">&laquo; zurück</a>
+            <a title="vorheriger Tag" rel="<?php echo $datePrev ?>" href="<?php echo $this->baseUrl(); ?>/day/date/<?php echo $datePrev ?><?php echo $filterUrl ?>">&laquo; zurück</a>
         </div>
         <div class="aright span-12 last">
             <?php $dateNext = $this->dayPager($model->getDate(), 'next'); ?>
-            <a title="nächster Tag" rel="<?php echo $dateNext ?>" href="<?php echo $this->baseUrl(); ?>/day/date/<?php echo $dateNext ?>/<?php echo $filterUrl ?>">weiter &raquo;</a>
+            <a title="nächster Tag" rel="<?php echo $dateNext ?>" href="<?php echo $this->baseUrl(); ?>/day/date/<?php echo $dateNext ?><?php echo $filterUrl ?>">weiter &raquo;</a>
         </div>
     </div>
 
@@ -83,7 +84,10 @@ $model = $this->model;
             </tr>
         </thead>
         <tbody>
-            <?php foreach($model->getFilteredData() as $lecture): ?>
+            <?php
+            /* @var $lecture InfoScreen_Model_Lecture */
+            foreach($model->getFilteredData() as $lecture):
+            ?>
             <tr>
                 <td class="class"><?php echo $this->filterLink('class', $lecture->__get('class')) ?></td>
                 <td class="description"><?php echo $lecture->description ?></td>
