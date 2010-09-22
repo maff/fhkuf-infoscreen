@@ -11,7 +11,7 @@ class SoapController extends InfoScreen_Controller_Action
         if($this->getRequest()->isPost()) {
             $this->disableLayout();
             $this->disableView();
-            $this->getResponse()->setHeader('Content-type', 'text/xml');
+            $this->getResponse()->setHeader('Content-type', 'text/xml; charset=utf-8');
 
             $wsdl = InfoScreen_Config::getInstance()->base_url . '/api/soap/wsdl';
 
@@ -25,7 +25,7 @@ class SoapController extends InfoScreen_Controller_Action
     public function wsdlAction()
     {
         $this->disableLayout();
-        $this->getResponse()->setHeader('Content-type', 'text/xml');
+        $this->getResponse()->setHeader('Content-type', 'text/xml; charset=utf-8');
         $this->_helper->viewRenderer->setViewSuffix('wsdl');
     }
 }
