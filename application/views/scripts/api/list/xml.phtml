@@ -1,0 +1,21 @@
+<?php
+/* @var $model InfoScreen_Model_List */
+$model = $this->model;
+
+$serializer_options = array (
+   'addDecl'        => true,
+   'encoding'       => 'UTF-8',
+   'indent'         => '    ',
+   'rootName'       => 'data',
+   'defaultTagName' => 'item',
+);
+
+$serializer = new XML_Serializer($serializer_options);
+
+$status = $serializer->serialize($model->getData());
+
+if(PEAR::isError($status)) {
+    die($status->getMessage());
+} else {
+    echo $serializer->getSerializedData();
+}
