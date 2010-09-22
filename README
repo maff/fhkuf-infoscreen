@@ -1,0 +1,6 @@
+Requirements
+------------
+
+* PHP >= 5.2
+* Zend Framework >= 1.10.8
+* PEAR XML_Serializer
