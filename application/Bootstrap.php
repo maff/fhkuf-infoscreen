@@ -7,6 +7,27 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         date_default_timezone_set('Europe/Vienna');
     }
 
+    protected function _initBaseUrl()
+    {
+        $protocol = 'http';
+        if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') {
+            $protocol .= 's';
+        }
+
+        $port = '';
+        if(!in_array($_SERVER['SERVER_PORT'], array(80, 443))) {
+            $port = ':' . $_SERVER['SERVER_PORT'];
+        }
+
+        $path = dirname($_SERVER['SCRIPT_NAME']);
+        $base_url = $protocol . '://' . $_SERVER['HTTP_HOST'] . $port;
+        $base_url .= (strlen($path) > 1) ? $path : '';
+
+        /* @var $config Zend_Config */
+        $config = InfoScreen_Config::getInstance();
+        $config->base_url = $base_url;
+    }
+
     protected function _initLibraries()
     {
         require_once 'simple_html_dom.php';
