@@ -7,7 +7,6 @@ class IndexController extends InfoScreen_Controller_Action
         $this->view->mode = $this->getRequest()->getActionName();
     }
 
-
     public function indexAction()
     {
         $this->_redirect('/day');
