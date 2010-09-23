@@ -104,7 +104,7 @@ class InfoScreen_Model_Day
      */
     public function getCache()
     {
-        return InfoScreen_Cache::get('data.' . $this->_cacheType);
+        return InfoScreen_Cache::get('data_' . $this->_cacheType);
     }
 
     /**
