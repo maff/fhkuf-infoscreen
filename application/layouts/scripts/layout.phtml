@@ -3,7 +3,7 @@
 <head>
     <meta name="language" content="de" />
     <meta charset="utf-8" />
-    <title><?php echo $this->title ?> - FH Kufstein InfoScreen Webservice</title>
+    <title><?php echo $this->title ?> - <?php echo $this->config->frontend->title; ?></title>
     <link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl(); ?>/css/style.css" />
 </head>
 <body>
@@ -36,11 +36,11 @@
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
 
-<?php if ($this->config->services->analytics->enabled): ?>
+<?php if ($this->config->frontend->analytics->enabled): ?>
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', '<?php echo $this->config->services->analytics->account; ?>']);
+  _gaq.push(['_setAccount', '<?php echo $this->config->frontend->analytics->account; ?>']);
   _gaq.push(['_trackPageview']);
 
   (function() {
@@ -52,28 +52,28 @@
 </script>
 <?php endif; ?>
 
-<?php if ($this->config->services->piwik->enabled): ?>
+<?php if ($this->config->frontend->piwik->enabled): ?>
 <script type="text/javascript">
-var pkBaseURL = (("https:" == document.location.protocol) ? "https://<?php echo $this->config->services->piwik->baseurl; ?>" : "http://<?php echo $this->config->services->piwik->baseurl; ?>");
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://<?php echo $this->config->frontend->piwik->baseurl; ?>" : "http://<?php echo $this->config->frontend->piwik->baseurl; ?>");
 document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
 </script><script type="text/javascript">
 try {
-var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", <?php echo $this->config->services->piwik->siteid; ?>);
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", <?php echo $this->config->frontend->piwik->siteid; ?>);
 piwikTracker.trackPageView();
 piwikTracker.enableLinkTracking();
 } catch( err ) {}
-</script><noscript><p><img src="http://<?php echo $this->config->services->piwik->baseurl; ?>/piwik.php?idsite=<?php echo $this->config->services->piwik->siteid; ?>" style="border:0" alt="" /></p></noscript>
+</script><noscript><p><img src="http://<?php echo $this->config->frontend->piwik->baseurl; ?>/piwik.php?idsite=<?php echo $this->config->frontend->piwik->siteid; ?>" style="border:0" alt="" /></p></noscript>
 <?php endif; ?>
 
-<?php if ($this->config->services->uservoice->enabled): ?>
+<?php if ($this->config->frontend->uservoice->enabled): ?>
 <script type="text/javascript">
 var uservoiceJsHost = ("https:" == document.location.protocol) ? "https://uservoice.com" : "http://cdn.uservoice.com";
 document.write(unescape("%3Cscript src='" + uservoiceJsHost + "/javascripts/widgets/tab.js' type='text/javascript'%3E%3C/script%3E"))
 </script>
 <script type="text/javascript">
 UserVoice.Tab.show({
-  key: '<?php echo $this->config->services->uservoice->key; ?>',
-  host: '<?php echo $this->config->services->uservoice->host; ?>',
+  key: '<?php echo $this->config->frontend->uservoice->key; ?>',
+  host: '<?php echo $this->config->frontend->uservoice->host; ?>',
   forum: 'general',
   alignment: 'left',
   background_color:'#3399FF',
