@@ -16,7 +16,6 @@ set_include_path(implode(PATH_SEPARATOR, array(
 /** Autoloader */
 require_once 'Zend/Loader/Autoloader.php';
 $autoloader = Zend_Loader_Autoloader::getInstance();
-$autoloader->setFallbackAutoloader(true);
 
 /** Config */
 $defaultConfigFile = APPLICATION_PATH . '/configs/application.default.ini';
@@ -31,6 +30,13 @@ $config = new Zend_Config_Ini(
 if(file_exists($appConfigFile)) {
     $appConfig = new Zend_Config_Ini($appConfigFile, APPLICATION_ENV);
     $config = $config->merge($appConfig);
+}
+
+/** Setup */
+if($config->setup->enabled == true) {
+    require_once 'InfoScreen/Setup.php';
+    $setup = new InfoScreen_Setup($config);
+    $setup->run();
 }
 
 /** Application */
