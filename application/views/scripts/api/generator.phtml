@@ -1,0 +1,44 @@
+<?php $this->title = 'InfoScreen API Generator'; ?>
+<h2><?php echo $this->title ?></h2>
+
+<div id="apiGenerator">
+    <form action="/api/generator" method="post">
+        <label for="sel_type">Type</label>
+        <select id="sel_type" name="type">
+            <option value="data" selected="selected">data (lectures)</option>
+            <option value="list">list (selectbox lists)</option>
+        </select>
+
+        <div id="formList">
+            <label for="sel_key">List Key</label>
+            <select id="sel_key" name="key">
+                <option value="course">course</option>
+                <option value="lector">lector</option>
+                <option value="room">room</option>
+            </select>
+        </div>
+        <div id ="formData">
+            <label for="sel_range">Date Range</label>
+            <select id="sel_range" name="range">
+                <option value="day">single day</option>
+                <option value="relative" selected="selected">14 days past and future</option>
+                <option value="weekend">only weekends (4 in past and future)</option>
+            </select>
+
+            <label for="sel_strict">Strict filtering</label>
+            <select id="sel_strict" name="strict">
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+            </select>
+        </div>
+
+        <label for="sel_format">Data format</label>
+        <select id="sel_format" name="format">
+            <option value="json" id="format_json">json</option>
+            <option value="xml" id="format_xml">xml</option>
+            <option value="ical" id="format_ical">ical</option>
+        </select>
+
+        <input id="gen_submit" type="submit" name="submit" value="Generate" />
+    </form>
+</div>

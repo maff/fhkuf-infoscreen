@@ -22,4 +22,8 @@ class JsController extends InfoScreen_Controller_Action
     public function weekAction()
     {
     }
+
+    public function apiAction()
+    {
+    }
 }

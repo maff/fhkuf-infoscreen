@@ -83,6 +83,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                     'action' => 'index'
         )));
 
+        $router->addRoute('api.generator',
+            new Zend_Controller_Router_Route('/api/generator',
+                array(
+                    'controller' => 'api',
+                    'action' => 'generator'
+        )));
+
         $router->addRoute('api.ical',
             new Zend_Controller_Router_Route('/api/ical/*',
                 array(
