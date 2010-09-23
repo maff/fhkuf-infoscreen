@@ -2,40 +2,19 @@
 class InfoScreen_Application extends Zend_Application
 {
     /**
-     * Load configuration file of options
+     * Constructor
      *
-     * @param  string $file
-     * @throws Zend_Application_Exception When invalid configuration file is provided
-     * @return array
+     * Initialize application. Potentially initializes include_paths, PHP
+     * settings, and bootstrap class.
+     *
+     * @param  string                   $environment
+     * @param  string|array|Zend_Config $options String path to configuration file, or array/Zend_Config of configuration options
+     * @throws Zend_Application_Exception When invalid options are provided
+     * @return void
      */
-    protected function _loadConfig($file)
+    public function __construct($environment, Zend_Config $config)
     {
-        $environment = $this->getEnvironment();
-        $suffix      = strtolower(pathinfo($file, PATHINFO_EXTENSION));
-
-        switch ($suffix) {
-            case 'ini':
-                $config = new Zend_Config_Ini($file, $environment);
-                break;
-
-            case 'xml':
-                $config = new Zend_Config_Xml($file, $environment);
-                break;
-
-            case 'php':
-            case 'inc':
-                $config = include $file;
-                if (!is_array($config)) {
-                    throw new Zend_Application_Exception('Invalid configuration file provided; PHP file does not return array value');
-                }
-                return $config;
-                break;
-
-            default:
-                throw new Zend_Application_Exception('Invalid configuration file provided; unknown config type');
-        }
-
         Zend_Registry::set('config', $config);
-        return $config->toArray();
+        parent::__construct($environment, $config);
     }
 }

@@ -13,14 +13,33 @@ set_include_path(implode(PATH_SEPARATOR, array(
     get_include_path(),
 )));
 
-/** Zend_Application */
+/** Autoloader */
+require_once 'Zend/Loader/Autoloader.php';
+$autoloader = Zend_Loader_Autoloader::getInstance();
+$autoloader->setFallbackAutoloader(true);
+
+/** Config */
+$defaultConfigFile = APPLICATION_PATH . '/configs/application.default.ini';
+$appConfigFile =     APPLICATION_PATH . '/configs/application.ini';
+
+$config = new Zend_Config_Ini(
+        $defaultConfigFile,
+        APPLICATION_ENV,
+        array('allowModifications' => true)
+);
+
+if(file_exists($appConfigFile)) {
+    $appConfig = new Zend_Config_Ini($appConfigFile, APPLICATION_ENV);
+    $config = $config->merge($appConfig);
+}
+
+/** Application */
 require_once 'Zend/Application.php';
 require_once 'InfoScreen/Application.php';
 
-// Create application, bootstrap, and run
 $application = new InfoScreen_Application(
     APPLICATION_ENV,
-    APPLICATION_PATH . '/configs/application.ini'
+    $config
 );
 
 $application->bootstrap()
