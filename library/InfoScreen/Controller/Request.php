@@ -47,7 +47,7 @@ class InfoScreen_Controller_Request
 
     public static function getRequestFilters()
     {
-        $allowed_params = array('class', 'lector', 'room');
+        $allowed_params = array('course', 'lector', 'room');
 
         $filters = array();
         foreach($allowed_params as $key) {
@@ -65,8 +65,8 @@ class InfoScreen_Controller_Request
         $rf = self::getRequestFilters();
         if(count($rf) > 0) {
             foreach($rf as $key => $value) {
-                if($key == 'class' && !self::isStrictFiltering()) {
-                    $filters[] = new InfoScreen_Model_Filter_ClassAndYear($value);
+                if($key == 'course' && !self::isStrictFiltering()) {
+                    $filters[] = new InfoScreen_Model_Filter_CourseAndYear($value);
                 } else {
                     $filters[] = new InfoScreen_Model_Filter($key, $value);
                 }

@@ -10,7 +10,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
                 <xsd:all>
                     <xsd:element name="startTime" type="xsd:string"/>
                     <xsd:element name="endTime" type="xsd:string"/>
-                    <xsd:element name="class" type="xsd:string"/>
+                    <xsd:element name="course" type="xsd:string"/>
                     <xsd:element name="description" type="xsd:string"/>
                     <xsd:element name="room" type="xsd:string"/>
                     <xsd:element name="lector" type="xsd:string"/>

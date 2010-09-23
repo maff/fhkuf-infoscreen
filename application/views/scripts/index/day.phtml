@@ -54,7 +54,7 @@ $model = $this->model;
             foreach($model->getFilteredData() as $lecture):
             ?>
             <tr>
-                <td class="class"><?php echo $this->filterLink('class', $lecture->__get('class')) ?></td>
+                <td class="course"><?php echo $this->filterLink('course', $lecture->course) ?></td>
                 <td class="description"><?php echo $lecture->description ?></td>
                 <td class="group"><?php echo $lecture->group ?></td>
                 <td class="lector"><?php echo $this->filterLink('lector', $lecture->lector) ?></td>

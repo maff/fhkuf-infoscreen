@@ -1,7 +1,7 @@
 <?php
-class InfoScreen_Model_Filter_ClassAndYear extends InfoScreen_Model_Filter
+class InfoScreen_Model_Filter_CourseAndYear extends InfoScreen_Model_Filter
 {
-    protected $_key = 'class';
+    protected $_key = 'course';
 
     public function __construct($value)
     {
@@ -15,7 +15,7 @@ class InfoScreen_Model_Filter_ClassAndYear extends InfoScreen_Model_Filter
         if($this->_validate()) {
             $result = parent::isMatch($lecture);
 
-            // Check for classes with year pattern (e.g. V2010)
+            // Check for courses with year pattern (e.g. V2010)
             if($result === false) {
                 if(preg_match('/([\d]{2})/', $this->_value, $match)) {
                     $year = 'V20' . $match[0];

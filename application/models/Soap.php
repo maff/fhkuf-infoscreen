@@ -13,7 +13,7 @@ class InfoScreen_Model_Soap
     {
         if(is_array($filters) && count($filters) > 0) {
             $filterArray = array();
-            $allowed_params = array('class', 'lector', 'room');
+            $allowed_params = array('course', 'lector', 'room');
 
             foreach($filters as $filter) {
                 if(in_array($filter->key, $allowed_params)) {
@@ -37,7 +37,7 @@ class InfoScreen_Model_Soap
      */
     public function getList($key, $selectfriendly = true)
     {
-        if(!in_array($key, array('class', 'lector', 'room'))) {
+        if(!in_array($key, array('course', 'lector', 'room'))) {
             return array();
         }
 

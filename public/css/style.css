@@ -56,7 +56,7 @@ p img.right { float: right; margin: 0 0 1.5em 1.5em; }
 #infoTable thead tr .headerSortUp { background-image: url(../img/tables/asc.gif); }
 #infoTable thead tr .headerSortDown { background-image: url(../img/tables/desc.gif); }
 #infoTable thead tr .headerSortDown, #infoTable thead tr .headerSortUp { background-color: #8dbdd8; }
-#infoTable .class { min-width: 95px; }
+#infoTable .course { min-width: 95px; }
 #infoTable .lector, #infoTable .room, #infoTable .time, #infoTable .info { min-width: 70px; }
 #infoTable .group { min-width: 30px; }
 
@@ -65,7 +65,7 @@ p img.right { float: right; margin: 0 0 1.5em 1.5em; }
 .appointmentTable td { padding: 10px; background: #f0f0f6; }
 .appointmentTable tr.odd td { background: #fff; }
 .appointmentTable .time { width: 50px; }
-.appointmentTable .class { width: 50px; }
+.appointmentTable .course { width: 50px; }
 .appointmentTable .group { width: 20px; }
 .appointmentTable .room { width: 40px; }
 .appointmentTable .info { width: 80px; font-weight: bold; color: #ff0000; }

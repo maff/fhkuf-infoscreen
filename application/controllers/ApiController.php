@@ -5,18 +5,20 @@ class ApiController extends InfoScreen_Controller_Action
     {
         parent::preDispatch();
 
-        if($this->getRequest()->getActionName() =='ical' && $this->_getType() == 'list') {
-            throw new Zend_Controller_Action_Exception('Not found.', 404);
-        }
+        if(in_array($this->getRequest()->getActionName(), array('json', 'xml', 'ical'))) {
+            if($this->getRequest()->getActionName() == 'ical' && $this->_getType() == 'list') {
+                throw new Zend_Controller_Action_Exception('Not found.', 404);
+            }
 
-        $this->disableLayout();
-        
-        if($this->getRequest()->getParam('categorized', false) === 'true') {
-            $this->view->categorized = true;
-        }
+            $this->disableLayout();
 
-        if($this->_getType() == 'list') {
-            $this->_helper->viewRenderer->setViewScriptPathSpec(':controller/list/:action.:suffix');
+            if($this->getRequest()->getParam('categorized', false) === 'true') {
+                $this->view->categorized = true;
+            }
+
+            if($this->_getType() == 'list') {
+                $this->_helper->viewRenderer->setViewScriptPathSpec(':controller/list/:action.:suffix');
+            }
         }
     }
 
@@ -58,7 +60,7 @@ class ApiController extends InfoScreen_Controller_Action
 
     protected function _getKey()
     {
-        return $this->_getRequestValue('key', array('class', 'lector', 'room'), 'class');
+        return $this->_getRequestValue('key', array('course', 'lector', 'room'), 'course');
     }
 
     protected function _getRequestValue($key, array $allowed, $default)
@@ -74,7 +76,10 @@ class ApiController extends InfoScreen_Controller_Action
 
     public function indexAction()
     {
-        $this->_redirect('/api/json');
+    }
+
+    public function generatorAction()
+    {
     }
 
     public function jsonAction()

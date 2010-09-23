@@ -55,7 +55,7 @@ foreach($model->getData() as $day):
                 <tr class="<?php echo $lectureClass ?>">
                     <td class="startTime time"><?php echo $lecture->startTime; ?></td>
                     <td class="endTime time"><?php echo $lecture->endTime; ?></td>
-                    <td class="class"><?php echo $lecture->__get('class'); ?></td>
+                    <td class="class"><?php echo $lecture->course; ?></td>
                     <td class="group"><?php echo $lecture->group; ?></td>
                     <td class="description">
                         <strong><?php echo $lecture->description; ?></strong><br />

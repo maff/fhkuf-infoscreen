@@ -43,7 +43,7 @@ foreach($model->getData() as $day) {
             $vevent->setProperty('dtend', $endEvent);
             $vevent->setProperty('location', $lecture->room);
             $vevent->setProperty('summary', $lecture->description);
-            $vevent->setProperty('description', $lecture->__get('class') . ' - ' . $lecture->description . ' (' . $lecture->group . ')' . ' (' . $lecture->lector . ')');
+            $vevent->setProperty('description', $lecture->course . ' - ' . $lecture->description . ' (' . $lecture->group . ')' . ' (' . $lecture->lector . ')');
             $vevent->setProperty('attendee', $lecture->lector);
 
             if($lecture->info != null) {

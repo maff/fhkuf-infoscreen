@@ -68,7 +68,7 @@ class InfoScreen_Model_List implements Countable
     public static function getCollection()
     {
         return array(
-            'class'  => InfoScreen_Model_List::getInstance('class'),
+            'course' => InfoScreen_Model_List::getInstance('course'),
             'lector' => InfoScreen_Model_List::getInstance('lector'),
             'room'   => InfoScreen_Model_List::getInstance('room')
         );
@@ -196,7 +196,6 @@ class InfoScreen_Model_List implements Countable
     protected function _addDefaultFilters()
     {
         $this->addFilter(new Zend_Filter_StringTrim());
-        //$this->addFilter(new Zend_Filter_StringToLower(array('encoding' => 'UTF-8')));
     }
 
     protected function _addDefaultValidators()

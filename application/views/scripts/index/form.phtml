@@ -6,10 +6,10 @@
         </div>
 
         <div class="column span-4">
-            <label for="sel_class">Studiengang</label>
-            <select id="sel_class" name="class">
-                    <?php foreach(InfoScreen_Model_List::getInstance('class')->getSelectData() as $class):?>
-                    <option<?php $this->checkSelected($class, 'class') ?>><?php echo $class ?></option>
+            <label for="sel_course">Studiengang</label>
+            <select id="sel_course" name="course">
+                    <?php foreach(InfoScreen_Model_List::getInstance('course')->getSelectData() as $course):?>
+                    <option<?php $this->checkSelected($course, 'course') ?>><?php echo $course ?></option>
                     <?php endforeach; ?>
             </select>
         </div>
