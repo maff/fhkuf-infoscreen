@@ -24,6 +24,7 @@ class ErrorController extends Zend_Controller_Action
         switch ($error->type) {
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
+            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ROUTE:
 
                 $this->getResponse()->setRawHeader('HTTP/1.1 404 Not Found');
                 
