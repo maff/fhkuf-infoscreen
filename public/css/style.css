@@ -90,6 +90,12 @@ code, kbd { display: inline; background: #f1f1f3; }
 #filterform .column.submitbox input:hover, #filterform .column.submitbox a:hover { color: #d54e21; }
 #input_submit {  }
 
+#apiGenerator { display: none; }
+#apiGeneratorForm { margin-bottom: 25px; }
+#apiGeneratorForm label { display: block; font-weight: bold; margin: 15px 0 3px 0; cursor: pointer; }
+#apiGeneratorForm select { display: block; width: 100%; }
+#apiGeneratorResult { margin-bottom: 25px; }
+
 p.iCalLinks { text-align: right; margin: 2.5em 0 -1em 0; }
 
 #header { margin: 0 0 .75em 0; padding: 0 0 1.5em 0; border-bottom: 1px solid #ccc; }

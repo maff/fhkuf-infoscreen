@@ -9,8 +9,9 @@
 <body>
 <div id="menu">
     <ul>
-        <li id="menuBase"><a href="<?php echo $this->menuLink('day'); ?>">Infoscreen</a></li>
+        <li id="menuDay"><a href="<?php echo $this->menuLink('day'); ?>">Infoscreen</a></li>
         <li id="menuWeek"><a href="<?php echo $this->menuLink('week'); ?>">Wochenübersicht</a></li>
+        <li id="menuApi"><a href="<?php echo $this->baseUrl(); ?>/api">API</a></li>
     </ul>
 </div>
 
@@ -28,7 +29,7 @@
 <script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/js/jquery.datepicker.js"></script>
 <script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/js/jquery.tablesorter.min.js"></script>
 <script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/js/infoscreen.js"></script>
-<?php if(in_array($this->mode, array('day', 'week'))): ?>
+<?php if(in_array($this->mode, array('day', 'week', 'api'))): ?>
 <script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/js/<?php echo $this->mode ?>.js"></script>
 <?php endif; ?>
 
