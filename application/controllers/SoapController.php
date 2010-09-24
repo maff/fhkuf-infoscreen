@@ -3,11 +3,6 @@ class SoapController extends InfoScreen_Controller_Action
 {
     public function indexAction()
     {
-        $this->_redirect('/api/soap/endpoint');
-    }
-
-    public function endpointAction()
-    {
         if($this->getRequest()->isPost()) {
             $this->disableLayout();
             $this->disableView();

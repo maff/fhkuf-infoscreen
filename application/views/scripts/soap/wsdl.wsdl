@@ -73,19 +73,19 @@ echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
     <binding name="infoscreenBinding" type="tns:infoscreenPortType">
         <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
         <operation name="getDay">
-            <soap:operation soapAction="<?php echo $this->config->base_url ?>/api/soap/endpoint/getday" style="rpc"/>
+            <soap:operation soapAction="<?php echo $this->config->base_url ?>/api/soap/getday" style="rpc"/>
             <input><soap:body use="encoded" namespace="<?php echo $this->config->base_url ?>/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
             <output><soap:body use="encoded" namespace="<?php echo $this->config->base_url ?>/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
         </operation>
         <operation name="getList">
-            <soap:operation soapAction="<?php echo $this->config->base_url ?>/api/soap/endpoint/getlist" style="rpc"/>
+            <soap:operation soapAction="<?php echo $this->config->base_url ?>/api/soap/getlist" style="rpc"/>
             <input><soap:body use="encoded" namespace="<?php echo $this->config->base_url ?>/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
             <output><soap:body use="encoded" namespace="<?php echo $this->config->base_url ?>/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
         </operation>
     </binding>
     <service name="infoscreen">
         <port name="infoscreenPort" binding="tns:infoscreenBinding">
-            <soap:address location="<?php echo $this->config->base_url ?>/api/soap/endpoint" />
+            <soap:address location="<?php echo $this->config->base_url ?>/api/soap" />
         </port>
     </service>
 </definitions>

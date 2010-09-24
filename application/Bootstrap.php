@@ -112,17 +112,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         )));
 
         $router->addRoute('soap',
-            new Zend_Controller_Router_Route('/api/soap',
+            new Zend_Controller_Router_Route('/api/soap/*',
                 array(
                     'controller' => 'soap',
                     'action' => 'index'
-        )));
-
-        $router->addRoute('soap.endpoint',
-            new Zend_Controller_Router_Route('/api/soap/endpoint/*',
-                array(
-                    'controller' => 'soap',
-                    'action' => 'endpoint'
         )));
 
         $router->addRoute('soap.wsdl',
