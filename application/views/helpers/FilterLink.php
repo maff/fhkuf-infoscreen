@@ -27,8 +27,8 @@ class Zend_View_Helper_FilterLink
             $date = InfoScreen_Controller_Request::getDate();
 
             // If date not set or same day: omit parameter
-            if(!($date === null ||  strftime('%d.%m.%Y', strtotime($date)) == strftime('%d.%m.%Y', time()))) {
-                $filterUrl .= '/date/' . strftime('%d.%m.%Y', strtotime($date));
+            if(!($date === null || InfoScreen_Date::parse($date) == InfoScreen_Date::fromTime(time()))) {
+                $filterUrl .= '/date/' . InfoScreen_Date::parse($date);
             }
 
             $filterUrl .= '/' . $key . '/' . urlencode($value);

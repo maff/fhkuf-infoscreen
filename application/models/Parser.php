@@ -6,7 +6,7 @@ class InfoScreen_Model_Parser
 
     public function  __construct($date)
     {
-        $this->_date = strftime('%d.%m.%Y', strtotime($date));
+        $this->_date = InfoScreen_Date::parse($date);
     }
 
     /**

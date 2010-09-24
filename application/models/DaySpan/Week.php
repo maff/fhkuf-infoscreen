@@ -17,6 +17,6 @@ class InfoScreen_Model_DaySpan_Week extends InfoScreen_Model_DaySpan
         $timestamp = strtotime($date);
         $weekStart = mktime(0, 0, 0, date('m', $timestamp), date('d', $timestamp) - date('w', $timestamp) + 1, date('Y', $timestamp));
 
-        $this->setStartDate(strftime('%d.%m.%Y', $weekStart));
+        $this->setStartDate(InfoScreen_Date::fromTime($weekStart));
     }
 }

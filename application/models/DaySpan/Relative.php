@@ -14,7 +14,7 @@ class InfoScreen_Model_DaySpan_Relative extends InfoScreen_Model_DaySpan
     {
         $date = $this->_parseDate($date);
 
-        $this->setStartDate(strftime('%d.%m.%Y', strtotime($date . '-' . $span . 'days')));
+        $this->setStartDate(InfoScreen_Date::parse($date . '-' . $span . 'days'));
         $this->setDays($span * 2 + 1);
     }
 }

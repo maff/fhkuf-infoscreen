@@ -42,9 +42,9 @@ class InfoScreen_Model_DaySpan_Weekend extends InfoScreen_Model_DayCollection
         }
         
         $calculation = $this->_date . $prefix . abs($diff) . 'days';
-        $currentStartDay = strftime('%d.%m.%Y', strtotime($calculation));
+        $currentStartDay = InfoScreen_Date::parse($calculation);
 
-        $startDay = strftime('%d.%m.%Y', strtotime($currentStartDay . '-' . $this->_amount . 'weeks'));
+        $startDay = InfoScreen_Date::parse($currentStartDay . '-' . $this->_amount . 'weeks');
 
         // amount in past and future + current week
         $weekends = $this->_amount * 2 + 1;
@@ -56,10 +56,10 @@ class InfoScreen_Model_DaySpan_Weekend extends InfoScreen_Model_DayCollection
 
             for($j = 0; $j <= $this->_offset; $j++) {
                 $dates[] = $currentDay;
-                $currentDay = strftime('%d.%m.%Y', strtotime($currentDay . '+1day'));
+                $currentDay = InfoScreen_Date::parse($currentDay . '+1day');
             }
 
-            $weekStartDay = strftime('%d.%m.%Y', strtotime($weekStartDay . '+1week'));
+            $weekStartDay = InfoScreen_Date::parse($weekStartDay . '+1week');
         }
 
         return $dates;

@@ -13,7 +13,7 @@ class InfoScreen_Model_DaySpan extends InfoScreen_Model_DayCollection
 
     public function setStartDate($startDate)
     {
-        $this->_startDate = strftime('%d.%m.%Y', strtotime($startDate));
+        $this->_startDate = InfoScreen_Date::parse($startDate);
         return $this;
     }
 
@@ -34,7 +34,7 @@ class InfoScreen_Model_DaySpan extends InfoScreen_Model_DayCollection
         $this->_data = array();
 
         for($i = 0; $i < $this->_days; $i++) {
-            $date = strftime('%d.%m.%Y', $timestamp);
+            $date = InfoScreen_Date::fromTime($timestamp);
             $this->_addDate($date);
             $timestamp += 86400;
         }

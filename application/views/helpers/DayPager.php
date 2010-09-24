@@ -18,6 +18,6 @@ class Zend_View_Helper_DayPager
             $resTime = strtotime($relative, $resTime);
         }
 
-        return strftime('%d.%m.%Y', $resTime);
+        return InfoScreen_Date::fromTime($resTime);
     }
 }

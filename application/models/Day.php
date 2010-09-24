@@ -56,11 +56,7 @@ class InfoScreen_Model_Day
      */
     public function setDate($date)
     {
-        if(null === $date || empty($date)) {
-            $this->_date = strftime('%d.%m.%Y', time());
-        } else {
-            $this->_date = strftime('%d.%m.%Y', strtotime($date));
-        }
+        $this->_date = InfoScreen_Date::parse($date);
     }
 
     /**

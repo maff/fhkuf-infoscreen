@@ -13,13 +13,7 @@ abstract class InfoScreen_Model_DayCollection
      */
     protected function _parseDate($date = null)
     {
-        if(null === $date || empty($date)) {
-            $date = strftime('%d.%m.%Y', time());
-        } else {
-            $date = strftime('%d.%m.%Y', strtotime($date));
-        }
-
-        return $date;
+        return InfoScreen_Date::parse($date);
     }
 
     /**

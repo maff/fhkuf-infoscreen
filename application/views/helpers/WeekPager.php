@@ -14,6 +14,6 @@ class Zend_View_Helper_WeekPager
         }
         
         $resTime = strtotime($relative, strtotime($date));
-        return strftime('%d.%m.%Y', $resTime);
+        return InfoScreen_Date::fromTime($resTime);
     }
 }
