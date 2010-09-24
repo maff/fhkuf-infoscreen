@@ -152,5 +152,12 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                     'controller' => 'js',
                     'action' => 'week'
         )));
+
+        $router->addRoute('api.js',
+            new Zend_Controller_Router_Route('/js/api.js',
+                array(
+                    'controller' => 'js',
+                    'action' => 'api'
+        )));
     }
 }
