@@ -51,13 +51,15 @@ $(document).ready(function(){
 
     function getUrl() {
         url = "";
-        if(dateval) url = url + 'date/' + dateval + '/';
-        if(courseval) url = url + 'course/' + courseval + '/';
-        if(lectorval) url = url + 'lector/' + lectorval + '/';
-        if(roomval) url = url + 'room/' + roomval + '/';
+        if(dateval) url = url + '/date/' + dateval;
+        if(courseval) url = url + '/course/' + courseval;
+        if(lectorval) url = url + '/lector/' + lectorval;
+        if(roomval) url = url + '/room/' + roomval;
 
-        if(url) url = base_url + 'day/' + url;
+        if(url) url = base_url + 'day' + url;
         else url = base_url;
+
+        url = url + '/ajax/true';
 
         return url;
     }
@@ -67,7 +69,7 @@ $(document).ready(function(){
         fetchBoxes();
         $.get(getUrl(), '', function(html){
             $('#main').html(html);
-            document.title = $('#pagetitle').text() + " - FH Kufstein Raumbelegungs-Webservice";
+            document.title = $('#pagetitle').text() + " - <?php echo $this->config->frontend->title; ?>";
             tableSort();
             setupPermalink();
             setupMenu();

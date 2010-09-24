@@ -47,7 +47,10 @@ class InfoScreen_Controller_Action extends Zend_Controller_Action
     
     public function isAjax()
     {
-        return $this->getRequest()->isXmlHttpRequest();
+        $xmlHttp = $this->getRequest()->isXmlHttpRequest();
+        $param = ($this->getRequest()->getParam('ajax', false) === 'true');
+
+        return ($xmlHttp || $param);
     }
 
     public function isDebug()
