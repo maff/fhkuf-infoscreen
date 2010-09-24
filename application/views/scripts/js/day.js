@@ -1,6 +1,6 @@
 $(document).ready(function(){
     var dateval = "";
-    var classval = "";
+    var courseval = "";
     var lectorval = "";
     var roomval = "";
 
@@ -52,7 +52,7 @@ $(document).ready(function(){
     function getUrl() {
         url = "";
         if(dateval) url = url + 'date/' + dateval + '/';
-        if(classval) url = url + 'class/' + classval + '/';
+        if(courseval) url = url + 'course/' + courseval + '/';
         if(lectorval) url = url + 'lector/' + lectorval + '/';
         if(roomval) url = url + 'room/' + roomval + '/';
 
@@ -86,14 +86,14 @@ $(document).ready(function(){
 
 
     function resetBoxes() {
-        $('#sel_class').val("");
+        $('#sel_course').val("");
         $('#sel_room').val("");
         $('#sel_lector').val("");
     }
 
     function fetchBoxes() {
         dateval = $('#sel_date').val();
-        classval = $('#sel_class').val().toLowerCase();
+        courseval = $('#sel_course').val().toLowerCase();
         lectorval = $('#sel_lector').val().toLowerCase();
         roomval = $('#sel_room').val();
     }
@@ -101,7 +101,7 @@ $(document).ready(function(){
     function setupMenu() {
         filters = '';
         if(dateval) filters = filters + 'date/' + dateval + '/';
-        if(classval) filters = filters + 'class/' + classval + '/';
+        if(courseval) filters = filters + 'course/' + courseval + '/';
 
         if(filters == '') {
             $('#menuWeek a').attr('href', '/week');
