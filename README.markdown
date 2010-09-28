@@ -1,3 +1,5 @@
+# FH Kufstein InfoScreen Webservice
+
 ## Requirements
 
 * PHP >= 5.2
