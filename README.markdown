@@ -1,5 +1,7 @@
 # FH Kufstein InfoScreen Webservice
 
+Live Version (running stable branch): http://infoscreen.stud.ailoo.net/
+
 ## Requirements
 
 * PHP >= 5.2
