@@ -1,0 +1,7 @@
+[production]
+
+[debug : production]
+
+[testing : debug]
+
+[development : debug]
