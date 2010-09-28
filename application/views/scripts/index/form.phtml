@@ -33,11 +33,11 @@
         </div>
 
         <div class="submitbox column prepend-1 span-4">
-            <a id="input_reset" href="<?php echo $this->baseUrl(); ?>/<?php echo $this->mode ?><?php echo InfoScreen_Controller_Request::getDateUrl(); ?>">Filter zurücksetzen</a>
+            <a id="input_reset" href="<?php echo $this->baseUrl(); ?>/<?php echo $this->mode ?><?php echo InfoScreen_Model_Request::factory()->getDateUrl(); ?>">Filter zurücksetzen</a>
         </div>
 
         <div class="submitbox column span-4 last">
-            <input id="option_strict" type="hidden" name="strict" value="<?php echo InfoScreen_Controller_Request::isStrictFiltering() ? 'true' : 'false' ?>" />
+            <input id="option_strict" type="hidden" name="strict" value="<?php echo InfoScreen_Model_Request::factory()->isStrict() ? 'true' : 'false' ?>" />
             <input id="input_submit" type="submit" name="submit" value="<?php echo $this->submitText ?>" />
         </div>
     </form>

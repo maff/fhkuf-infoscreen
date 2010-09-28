@@ -18,7 +18,7 @@ $model = $this->model;
 <?php endif; ?>
 
     <div id="dayPager">
-        <?php $filterUrl = InfoScreen_Controller_Request::getFilterUrl(false); ?>
+        <?php $filterUrl = InfoScreen_Model_Request::factory()->getFilterUrl(false); ?>
         <div class="aleft span-12">
             <?php $datePrev = $this->weekPager($model->getStartDate(), 'prev'); ?>
             <a title="vorherige Woche" rel="<?php echo $datePrev ?>" href="<?php echo $this->baseUrl(); ?>/week/date/<?php echo $datePrev ?>/<?php echo $filterUrl ?>">&laquo; zurück</a>
