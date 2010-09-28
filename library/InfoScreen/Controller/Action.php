@@ -24,7 +24,7 @@ class InfoScreen_Controller_Action extends Zend_Controller_Action
     protected function _handlePost($url)
     {
         if($this->getRequest()->isPost()) {
-            $filterUrl = InfoScreen_Controller_Request::getFilterUrl();
+            $filterUrl = InfoScreen_Model_Request::factory()->getFilterUrl();
             $this->_redirect($this->getFrontController()->getBaseUrl() . $url . $filterUrl);
         }
     }

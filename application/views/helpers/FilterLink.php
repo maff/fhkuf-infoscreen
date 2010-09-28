@@ -23,8 +23,10 @@ class Zend_View_Helper_FilterLink
        	        
        	    return implode(', ', $links);
        	} else {
+            $request = InfoScreen_Model_Request::factory();
+
             $filterUrl = Zend_Controller_Front::getInstance()->getBaseUrl() . $base;
-            $date = InfoScreen_Controller_Request::getDate();
+            $date = $request->getDate();
 
             // If date not set or same day: omit parameter
             if(!($date === null || InfoScreen_Date::parse($date) == InfoScreen_Date::fromTime(time()))) {
@@ -32,7 +34,7 @@ class Zend_View_Helper_FilterLink
             }
 
             $filterUrl .= '/' . $key . '/' . urlencode($value);
-            $filterUrl = InfoScreen_Controller_Request::buildUrl($filterUrl);
+            $filterUrl = $request->completeUrl($filterUrl);
 
             return '<a class="filterlink" rel="' . $key . '" href="' . $filterUrl . '" title="nach \'' . $value . '\' filtern">' . $value . '</a>';
         }
