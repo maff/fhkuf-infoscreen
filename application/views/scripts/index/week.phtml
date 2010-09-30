@@ -77,3 +77,10 @@ foreach($model->getData() as $day):
 <?php if(!$this->ajax): ?>
 </div>
 <?php endif; ?>
+
+<?php
+if($this->ajax && $this->config->frontend->piwik->enabled) {
+    $t = new PiwikTracker($this->config->frontend->piwik->siteid, 'http://' . $this->config->frontend->piwik->baseurl);
+    $t->doTrackPageView($this->title);
+}
+?>

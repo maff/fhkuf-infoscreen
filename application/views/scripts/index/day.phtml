@@ -70,6 +70,13 @@ $model = $this->model;
     <p id="error">Für die angegebenen Filterkriterien gibt es keine Ergebnisse.</p>
     <?php endif; ?>
 
-<?php if(!$this->ajax): ?>		
+<?php if(!$this->ajax): ?>
 </div>
 <?php endif; ?>
+
+<?php
+if($this->ajax && $this->config->frontend->piwik->enabled) {
+    $t = new PiwikTracker($this->config->frontend->piwik->siteid, 'http://' . $this->config->frontend->piwik->baseurl);
+    $t->doTrackPageView($this->title);
+}
+?>
