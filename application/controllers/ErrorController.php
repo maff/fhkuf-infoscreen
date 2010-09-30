@@ -1,12 +1,6 @@
 <?php
 class ErrorController extends Zend_Controller_Action
 {
-    public function preDispatch()
-    {
-        // $this->_helper->layout()->disableLayout(); 
-        // Zend_Controller_Front::getInstance()->setParam('noViewRenderer', true);
-    }
-
     public function errorAction()
     {
         $error = $this->_getParam('error_handler');
@@ -31,6 +25,8 @@ class ErrorController extends Zend_Controller_Action
                 $this->view->title = '404 Not found';
                 $this->view->content = 'The page you requested could not be found.';
 
+                $this->_logErrorInfo($error, 'debug');
+
                 break;
                 
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_OTHER:
@@ -40,14 +36,36 @@ class ErrorController extends Zend_Controller_Action
                 
                 $this->view->title = '500 Internal Error';
                 $this->view->content = 'An internal error ocurred. Please try again later.';
-                
+
+                $this->_logErrorInfo($error, 'err');
+
                 break;
         }
 
         if(APPLICATION_ENV == 'development') {
-            $this->view->content .= Zend_Debug::dump($error, null, false);
+            $this->view->content .= Zend_Debug::dump($this->_getErrorInfo($error), null, false);
         }
 
         $this->getResponse()->clearBody();
+    }
+
+    protected function _logErrorInfo($error, $level = 'err')
+    {
+        $log = InfoScreen_Log::getInstance();
+        foreach($this->_getErrorInfo($error) as $line) {
+            $log->$level(InfoScreen_Debug::dumpPlain($line, false));
+        }
+    }
+
+    protected function _getErrorInfo($error)
+    {
+        $exception = $error->exception;
+
+        $info = array();
+        $info[] = $exception->getMessage();
+        $info[] = $this->getRequest()->getParams();
+        $info[] = $exception->getTrace();
+
+        return $info;
     }
 }
