@@ -40,8 +40,28 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         /* @var $log Zend_Log */
         $log = $this->getResource('Log');
-
         Zend_Registry::getInstance()->set('log', $log);
+
+        /* @var $config Zend_Config */
+        $config = InfoScreen_Config::getInstance();
+
+        // log factory doesn't allow mail writers, create them manually
+        if(isset($config->loggers->email)) {
+            foreach($config->loggers->email as $cfg) {
+                $mail = new Zend_Mail();
+                $mail->setSubject($cfg->subject);
+                $mail->addTo($cfg->recipient);
+
+                $writer = new Zend_Log_Writer_Mail($mail);
+
+                if(isset($cfg->filterName)) {
+                    $filter = InfoScreen_Log::constructFilterFromConfig($cfg);
+                    $writer->addFilter($filter);
+                }
+
+                $log->addWriter($writer);
+            }
+        }
     }
 
     protected function _initRouting()
