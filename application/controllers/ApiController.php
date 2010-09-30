@@ -11,11 +11,12 @@ class ApiController extends InfoScreen_Controller_Action
         parent::preDispatch();
 
         if(in_array($this->getRequest()->getActionName(), array('json', 'xml', 'ical'))) {
-            if($this->getRequest()->getActionName() == 'ical' && $this->_getType() == 'list') {
+            $this->_requestModel = InfoScreen_Model_Request::factory();
+            
+            if($this->getRequest()->getActionName() == 'ical' && $this->_requestModel->getType() == 'list') {
                 throw new Zend_Controller_Action_Exception('Not found.', 404);
             }
-
-            $this->_requestModel = InfoScreen_Model_Request::factory();
+            
             $this->disableLayout();
 
             if($this->getRequest()->getParam('categorized', false) === 'true') {
