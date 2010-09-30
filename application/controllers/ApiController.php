@@ -56,7 +56,7 @@ class ApiController extends InfoScreen_Controller_Action
         $this->_handlePost('/api/ical');
 
         if($this->isDebug()) {
-            $this->getResponse()->setHeader('Content-type', 'text/plain', true);
+            $this->getResponse()->setHeader('Content-type', 'text/plain; charset=UTF-8', true);
         } else {
             $this->getResponse()->setHeader('Content-type', 'text/calendar; charset=UTF-8', true);
             $this->getResponse()->setHeader('Content-disposition', 'attachment; filename="api.ical"', true);
