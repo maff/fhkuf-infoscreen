@@ -42,12 +42,12 @@ foreach($model->getData() as $day) {
             $vevent->setProperty('dtstart', $startEvent);
             $vevent->setProperty('dtend', $endEvent);
             $vevent->setProperty('location', $lecture->room);
-            $vevent->setProperty('summary', $lecture->description);
-            $vevent->setProperty('description', $lecture->course . ' - ' . $lecture->description . ' (' . $lecture->group . ')' . ' (' . $lecture->lector . ')');
+            $vevent->setProperty('summary', $this->entityDecode($lecture->description));
+            $vevent->setProperty('description', $this->entityDecode($lecture->course . ' - ' . $lecture->description . ' (' . $lecture->group . ')' . ' (' . $lecture->lector . ')'));
             $vevent->setProperty('attendee', $lecture->lector);
 
             if($lecture->info != null) {
-                $vevent->setProperty('comment', $lecture->info);
+                $vevent->setProperty('comment', $this->entityDecode($lecture->info));
             }
 
             $ical->addComponent($vevent);
