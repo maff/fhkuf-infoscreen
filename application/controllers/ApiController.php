@@ -6,11 +6,11 @@ class ApiController extends InfoScreen_Controller_Action
      */
     protected $_requestModel;
 
-    public function  preDispatch()
+    public function preDispatch()
     {
         parent::preDispatch();
 
-        if(in_array($this->getRequest()->getActionName(), array('json', 'xml', 'ical'))) {
+        if($this->_isApiRequest()) {
             $this->_requestModel = InfoScreen_Model_Request::factory();
             
             if($this->getRequest()->getActionName() == 'ical' && $this->_requestModel->getType() == 'list') {
@@ -29,6 +29,19 @@ class ApiController extends InfoScreen_Controller_Action
 
             $this->view->model = $this->_requestModel->getAPIModel();
         }
+    }
+
+    public function postDispatch()
+    {
+        if($this->_isApiRequest()) {
+            $title = substr(str_replace('/', '.', $_SERVER['REQUEST_URI']), 1);
+            InfoScreen_Statistics::track($title);
+        }
+    }
+
+    protected function _isApiRequest()
+    {
+        return in_array($this->getRequest()->getActionName(), array('json', 'xml', 'ical'));
     }
 
     public function indexAction()
