@@ -43,7 +43,7 @@ foreach($model->getData() as $day) {
             $vevent->setProperty('dtend', $endEvent);
             $vevent->setProperty('location', $lecture->room);
             $vevent->setProperty('summary', $this->entityDecode($lecture->description));
-            $vevent->setProperty('description', $this->entityDecode($lecture->course . ' - ' . $lecture->description . ' (' . $lecture->group . ')' . ' (' . $lecture->lector . ')'));
+            $vevent->setProperty('description', $this->entityDecode($lecture->course . ' - ' . $lecture->description . ' (' . $lecture->group . ')' . ' (' . $lecture->lector . ')' . ' (' . $lecture->room . ')'));
             $vevent->setProperty('attendee', $lecture->lector);
 
             if($lecture->info != null) {
