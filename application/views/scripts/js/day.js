@@ -1,8 +1,8 @@
 $(document).ready(function(){
-    var dateval = "";
-    var courseval = "";
-    var lectorval = "";
-    var roomval = "";
+    var dateval = '';
+    var courseval = '';
+    var lectorval = '';
+    var roomval = '';
 
     tableSort();
     initTableFilterLinks();
@@ -22,7 +22,7 @@ $(document).ready(function(){
     });
 
     function tableSort() {
-        $("#infoTable").tablesorter({
+        $('#infoTable').tablesorter({
             sortList: [[5,0],[0,0]],
             widgets: ['zebra']
         });
@@ -50,16 +50,14 @@ $(document).ready(function(){
     }
 
     function getUrl() {
-        url = "";
+        url = '';
         if(dateval) url = url + '/date/' + dateval;
         if(courseval) url = url + '/course/' + courseval;
         if(lectorval) url = url + '/lector/' + lectorval;
         if(roomval) url = url + '/room/' + roomval;
 
-        if(url) url = base_url + 'day' + url;
+        if(url.length > 0) url = base_url + 'day' + url;
         else url = base_url;
-
-        url = url + '/ajax/true';
 
         return url;
     }
@@ -69,7 +67,7 @@ $(document).ready(function(){
         fetchBoxes();
         $.get(getUrl(), '', function(html){
             $('#main').html(html);
-            document.title = $('#pagetitle').text() + " - <?php echo $this->config->frontend->title; ?>";
+            document.title = $('#pagetitle').text() + ' - <?php echo $this->config->frontend->title; ?>';
             tableSort();
             setupPermalink();
             setupMenu();
@@ -86,11 +84,10 @@ $(document).ready(function(){
         }
     }
 
-
     function resetBoxes() {
-        $('#sel_course').val("");
-        $('#sel_room').val("");
-        $('#sel_lector').val("");
+        $('#sel_course').val('');
+        $('#sel_room').val('');
+        $('#sel_lector').val('');
     }
 
     function fetchBoxes() {
