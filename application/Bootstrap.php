@@ -83,6 +83,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                     'action' => 'index'
         )));
 
+        $router->addRoute('down',
+            new Zend_Controller_Router_Route('/down',
+                array(
+                    'controller' => 'down',
+                    'action' => 'index'
+        )));
+
         $router->addRoute('day',
             new Zend_Controller_Router_Route('/day/*',
                 array(
