@@ -4,16 +4,17 @@ $model = $this->model;
 ?>
 
 <?php if(!$this->ajax): ?>
-      <?php
-      echo $this->partial('index/form.phtml', array(
-          'date'       => $model->getDate(),
-          'mode'       => 'day',
-          'submitText' => 'Raumbelegung laden'
-      ));
-?>
+    <?php
+    echo $this->partial('index/form.phtml', array(
+        'date'       => $model->getDate(),
+        'mode'       => 'day',
+        'submitText' => 'Raumbelegung laden'
+    ));
+    ?>
+
+    <section id="results">
 <?php endif; ?>
 
-<section id="results">
     <?php $this->title = strftime('%A, %d.%m.%Y', strtotime($model->getDate())) ?>
     <h1 id="pagetitle" class="<?php if($model->hasData()) echo "results"; else echo "noresults"; ?>">
          <?php echo $this->title; ?>
@@ -30,7 +31,7 @@ $model = $this->model;
     </div>
 
     <?php if($model->hasData()): ?>
-        <table id="resultTable">
+        <table id="resultTable" class="dataTable">
             <thead>
                 <tr>
                     <th>Studiengang</th>
@@ -46,30 +47,31 @@ $model = $this->model;
             <tbody>
                 <?php
                 $i = 0;
+
                 /* @var $lecture InfoScreen_Model_Lecture */
                 foreach($model->getFilteredData() as $lecture):
-                    $class = 'odd';
-                    if(($i++%2) == 0) {
-                        $class = 'even';
-                    }
                 ?>
-                <tr class="<?php echo $class ?>">
-                    <td class="course"><?php echo $this->filterLink('course', $lecture->course) ?></td>
-                    <td class="description"><?php echo $lecture->description ?></td>
-                    <td class="group"><?php echo $lecture->group ?></td>
-                    <td class="lector"><?php echo $this->filterLink('lector', $lecture->lector) ?></td>
-                    <td class="room"><?php echo $this->filterLink('room', $lecture->room) ?></td>
-                    <td class="startTime time"><?php echo $lecture->startTime ?></td>
-                    <td class="endTime time"><?php echo $lecture->endTime ?></td>
-                    <td class="info"><?php echo $lecture->info ?></td>
-                </tr>
+                    <?php $class = ($i++ % 2 == 0) ? 'even' : 'odd'; ?>
+                    <tr class="<?php echo $class ?>">
+                        <td class="course"><?php echo $this->filterLink('course', $lecture->course) ?></td>
+                        <td class="description"><?php echo $lecture->description ?></td>
+                        <td class="group"><?php echo $lecture->group ?></td>
+                        <td class="lector"><?php echo $this->filterLink('lector', $lecture->lector) ?></td>
+                        <td class="room"><?php echo $this->filterLink('room', $lecture->room) ?></td>
+                        <td class="startTime time"><?php echo $lecture->startTime ?></td>
+                        <td class="endTime time"><?php echo $lecture->endTime ?></td>
+                        <td class="info"><?php echo $lecture->info ?></td>
+                    </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
     <?php else: ?>
         <p id="error">Für die angegebenen Filterkriterien gibt es keine Ergebnisse.</p>
     <?php endif; ?>
+
+<?php if(!$this->ajax): ?>
 </section>
+<?php endif; ?>
 
 <?php
 if($this->ajax) {
