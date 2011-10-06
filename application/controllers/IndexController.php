@@ -12,6 +12,17 @@ class IndexController extends InfoScreen_Controller_Action
         $this->_redirect('/day');
     }
 
+    public function testAction()
+    {
+        $this->disableLayout()->disableView();
+
+        $parser = new InfoScreen_Model_Parser();
+        $data = $parser->getData();
+
+        Zend_Debug::dump($data);
+        return;
+    }
+
     public function dayAction()
     {
         $this->_handlePost('/day');
