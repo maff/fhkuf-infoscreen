@@ -80,6 +80,7 @@ $(document).ready(function(){
     }
 
     function setupPermalink() {
+        return;
         url = getUrl();
         if(url != base_url) {
             $('#pagetitle').wrapInner(' (<a title="Permanentlink auf diese Filterkriterien" href="' + url + '"></a>)');
