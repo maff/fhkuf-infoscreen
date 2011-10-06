@@ -14,11 +14,13 @@ class InfoScreen_Controller_Action extends Zend_Controller_Action
     public function disableLayout()
     {
         $this->_helper->layout()->disableLayout();
+        return $this;
     }
 
     public function disableView()
     {
         $this->_helper->viewRenderer->setNoRender(true);
+        return $this;
     }
 
     protected function _handlePost($url)
@@ -44,7 +46,7 @@ class InfoScreen_Controller_Action extends Zend_Controller_Action
     {
         return InfoScreen_Log::getInstance();
     }
-    
+
     public function isAjax()
     {
         $xmlHttp = $this->getRequest()->isXmlHttpRequest();
