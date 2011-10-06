@@ -13,7 +13,8 @@
     <meta name="author" content="Mathias Geat">
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
-    <link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl(); ?>/css/style.css" />
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl(); ?>/css/style.css">
 </head>
 <body>
     <header id="header">
@@ -24,6 +25,7 @@
                 <li id="menuApi"><a href="<?php echo $this->baseUrl(); ?>/api">API</a></li>
             </ul>
         </nav>
+        <div id="loading"></div>
     </header>
     <section id="main">
 <?php echo $this->layout()->content; ?>
@@ -31,7 +33,6 @@
     <footer id="footer">
         <p class="footertext">&copy; 2008-2011 <a href="http://ailoo.net/">Mathias Geat</a> (<a href="http://maff.ailoo.net/projects/fh-kufstein-raumbelegung-webservice/">Projektinfo</a>)</p>
     </footer>
-    <div id="loading"></div>
 
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
     <script src="js/libs/modernizr-2.0.6.min.js"></script>

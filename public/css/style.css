@@ -1,5 +1,3 @@
-@import url(http://fonts.googleapis.com/css?family=Neucha);
-
 /*
  * HTML5 Boilerplate
  *
@@ -153,21 +151,21 @@ label { cursor: pointer; }
  * 3. Define consistent vertical alignment display in all browsers
  */
 
-button, input, select, textarea { font-size: 100%; margin: 0; vertical-align: baseline; *vertical-align: middle; }
+input, select, textarea { font-size: 100%; margin: 0; vertical-align: baseline; *vertical-align: middle; }
 
 /*
  * 1. Define line-height as normal to match FF3/4 (set using !important in the UA stylesheet)
  * 2. Correct inner spacing displayed oddly in IE6/7
  */
 
-button, input { line-height: normal; *overflow: visible; }
+input { line-height: normal; *overflow: visible; }
 
 /*
  * 1. Display hand cursor for clickable form elements
  * 2. Allow styling of clickable form elements in iOS
  */
 
-button, input[type="button"], input[type="reset"], input[type="submit"] { cursor: pointer; -webkit-appearance: button; }
+button, input[type="button"], input[type="reset"], input[type="submit"] { cursor: pointer; }
 
 /*
  * Consistent box sizing and appearance
@@ -181,7 +179,7 @@ input[type="search"] { -moz-box-sizing: content-box; -webkit-box-sizing: content
  * www.sitepen.com/blog/2008/05/14/the-devils-in-the-details-fixing-dojos-toolbar-buttons/
  */
 
-button::-moz-focus-inner, input::-moz-focus-inner { border: 0; padding: 0; }
+/*button::-moz-focus-inner, input::-moz-focus-inner { border: 0; padding: 0; }*/
 
 /* Remove default vertical scrollbar in IE6/7/8/9 */
 textarea { overflow: auto; vertical-align: top; }
@@ -197,7 +195,6 @@ input:invalid, textarea:invalid { background-color: #f0dddd; }
 
 table { border-collapse: collapse; border-spacing: 0; }
 
-
 /* =============================================================================
    Primary styles
    ========================================================================== */
@@ -209,7 +206,7 @@ body {
 a,
 a:link,
 a:visited {
-    color: #f36331;
+    color: #e95d37;
     border-bottom: 1px solid #888;
     text-decoration: none;
 }
@@ -226,9 +223,21 @@ a:hover {
 }
 
 #header {
+    position: relative;
     height: 55px;
-    margin: 0 0 65px 0;
+    margin: 0 0 25px 0;
     background: transparent url(../img/stitch.png) left bottom repeat-x;
+}
+
+#loading {
+    display: none;
+    nowhitespace: afterproperty;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    background: transparent url(../img/loading.gif) no-repeat top right;
 }
 
 #mainmenu {
@@ -258,7 +267,6 @@ a:hover {
     margin: 0;
     padding: 0 20px;
     display: block;
-    color: #f36331;
     text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.25);
     text-decoration: none;
     border: none;
@@ -266,19 +274,234 @@ a:hover {
 
 #mainmenu ul li a:hover {
     background-color: rgba(0, 0, 0, 0.3);
+    color: #fff;
+}
+
+#filterform,
+#results {
+    background: rgba(255, 255, 255, 0.5);
+    padding: 30px;
+    border: 1px solid #e2e5e5;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+#filterform div {
+    float: left;
+    margin: 0 18px 0 0;
+}
+
+#filterform div label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+
+#filterform .frm-date {
+    width: 80px;
+}
+
+#filterform .frm-date input {
+    width: 80px;
+}
+
+#filterform .frm-course {
+    width: 100px;
+}
+
+#filterform .frm-course select {
+    width: 100px;
+}
+
+#filterform .frm-lector {
+    width: 150px;
+}
+
+#filterform .frm-lector select {
+    width: 150px;
+}
+
+#filterform .frm-room {
+    width: 70px;
+}
+
+#filterform .frm-room select {
+    width: 70px;
+}
+
+#filterform .frm-strict {
+    width: 70px;
+}
+
+#filterform .frm-strict input {
+    margin: 3px 0 0 3px;
+}
+
+#filterform .frm-reset,
+#filterform .frm-submit {
+    padding: 5px 0 0 0;
+}
+
+#filterform .frm-reset {
+    float: right;
+    width: 140px;
+    margin-right: 10px;
+}
+
+#filterform .frm-submit {
+    float: right;
+    width: 163px;
+    margin: 0;
+}
+
+#pager {
+}
+
+#pager div {
+    width: 200px;
+}
+
+#pager .page-prev {
+    float: left;
+    text-align: left;
+}
+
+#pager .page-next {
+    float: right;
+    text-align: right;
+}
+
+#results {
+    margin: 20px 0 0 0;
+    position: relative;
+}
+
+#results .pager {
+    position: absolute;
+    width: 32px;
+    height: 68px;
+    top: 70px;
+}
+
+#results .pager a {
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+#results .pager a span {
+    display: none;
+}
+
+#results #date-next {
+    right: -32px;
+    background: transparent url(../img/right-arrow.png) no-repeat top left;
+}
+
+#results #date-prev {
+    left: -32px;
+    background: transparent url(../img/left-arrow.png) no-repeat top left;
 }
 
 h1 {
-    color: #f36331;
-    font-family: 'Neucha', cursive;
-    font-size: 45px;
+    color: #e95d37;
+    font-family: 'Droid Sans', sans-serif;
+    font-size: 35px;
     text-shadow: 1px 1px 1px #FFFFFF;
     text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.25);
 }
 
+#results h1 {
+    font-size: 25px;
+    margin: 0 0 20px 0;
+    font-weight: normal;
+}
+
+#resultTable {
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+#resultTable thead tr th {
+    font-weight: bold;
+    padding: 8px 5px;
+    border-bottom: 3px solid #333;
+}
+
+#resultTable thead tr .header {
+    background-image: url(../img/tables/bg.gif);
+    background-repeat: no-repeat;
+    background-position: center right;
+    cursor: pointer;
+}
+
+#resultTable thead tr .headerSortUp {
+    background-image: url(../img/tables/asc.gif)
+}
+
+#resultTable thead tr .headerSortDown {
+    background-image: url(../img/tables/desc.gif)
+}
+
+#resultTable thead tr .headerSortUp,
+#resultTable thead tr .headerSortDown {
+    font-style: italic;
+}
+
+#resultTable tbody td {
+    color: #3d3d3d;
+    padding: 12px 5px;
+    vertical-align: top;
+}
+
+#resultTable tbody td a {
+    text-decoration: none;
+    border-bottom: 1px dotted #333;
+    color: #3d3d3d;
+}
+
+#resultTable tbody tr td a:hover {
+    color: #e95d37;
+}
+
+#resultTable tbody tr.odd td {
+    background-color: #f0f0f6
+}
+
+#resultTable tbody tr:hover td {
+    background: #ffffbb
+}
+
+#resultTable tbody td.info {
+    font-weight: bold;
+    color: #e95d37;
+}
+
+#resultTable tbody td.course {
+    padding-left: 10px;
+    min-width: 115px;
+}
+
+#resultTable tbody td.lector,
+#resultTable tbody td.room,
+#resultTable tbody td.time,
+#resultTable tbody td.info {
+    min-width: 70px
+}
+
+#resultTable tbody td.group {
+    min-width: 30px
+}
 
 #footer {
-    margin: 40px auto 50px auto;
+    margin: 20px auto 50px auto;
     padding: 10px 0 0 0;
     background: transparent url(../img/stitch.png) left top repeat-x;
 }
@@ -287,6 +510,118 @@ h1 {
     margin: 0;
     padding: 0;
     text-align: right;
+}
+
+
+
+/* =============================================================================
+   Buttons
+   ========================================================================== */
+
+.button,
+.button:link,
+.button:visited,
+input.button {
+    background: #222 url(../img/button.png) repeat-x;
+    border: none;
+    display: inline-block;
+    padding: 5px 10px 6px;
+    line-height: 16px !important;
+    color: #fff;
+    text-decoration: none;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+    border-bottom: 1px solid rgba(0,0,0,0.25);
+    position: relative;
+    cursor: pointer;
+}
+
+a.button {
+    height: 18px !important;
+}
+
+.button:hover {
+    background-color: #111;
+    color: #fff;
+}
+
+.button:active {
+    top: 1px
+}
+
+.small.button,
+.small.button:visited {
+    font-size: 11px;
+    padding: ;
+}
+
+.button,
+.button:visited,
+.medium.button,
+.medium.button:visited {
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 16px;
+    text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+}
+
+.large.button,
+.large.button:visited {
+    font-size: 14px;
+    padding: 8px 14px 9px;
+}
+
+.green.button,
+.green.button:visited {
+    background-color: #91bd09
+}
+
+.green.button:hover {
+    background-color: #749a02
+}
+
+.blue.button,
+.blue.button:visited {
+    background-color: #2daebf
+}
+
+.blue.button:hover {
+    background-color: #007d9a
+}
+
+.red.button,
+.red.button:visited {
+    background-color: #e33100
+}
+
+.red.button:hover {
+    background-color: #872300
+}
+
+.magenta.button,
+.magenta.button:visited {
+    background-color: #a9014b
+}
+
+.magenta.button:hover {
+    background-color: #630030
+}
+
+.orange.button,
+.orange.button:visited {
+    background-color: #ff5c00
+}
+
+.orange.button:hover {
+    background-color: #d45500
+}
+
+.yellow.button,
+.yellow.button:visited {
+    background-color: #ffb515
 }
 
 /* =============================================================================

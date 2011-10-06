@@ -22,7 +22,7 @@ $(document).ready(function(){
     });
 
     function tableSort() {
-        $("#infoTable").tablesorter({
+        $("#resultTable").tablesorter({
             sortList: [[5,0],[0,0]],
             widgets: ['zebra']
         });
