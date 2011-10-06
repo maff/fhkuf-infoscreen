@@ -15,9 +15,9 @@ $model = $this->model;
     <section id="results">
 <?php endif; ?>
 
-    <?php $this->title = strftime('%A, %d.%m.%Y', strtotime($model->getDate())) ?>
+    <?php $title = strftime('%A, %d.%m.%Y', strtotime($model->getDate())) ?>
     <h1 id="pagetitle" class="<?php if($model->hasData()) echo "results"; else echo "noresults"; ?>">
-         <?php echo $this->title; ?>
+         <?php echo $title; ?>
     </h1>
 
     <?php $filterUrl = InfoScreen_Model_Request::factory()->getFilterUrl(false); ?>
@@ -75,6 +75,6 @@ $model = $this->model;
 
 <?php
 if($this->ajax) {
-    InfoScreen_Statistics::track($this->title);
+    InfoScreen_Statistics::track($title);
 }
 ?>

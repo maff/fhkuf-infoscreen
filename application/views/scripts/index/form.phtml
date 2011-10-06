@@ -2,7 +2,7 @@
     <form id="filterform" class="clearfix" method="post" action="<?php echo $this->baseUrl() . '/' . $this->mode ?>">
         <div class="frm-date">
             <label for="sel-date">Datum</label>
-            <input id="sel-date" name="date" value="<?php echo $this->date ?>">
+            <input id="sel-date" class="datePickerWidget" name="date" value="<?php echo $this->date ?>">
         </div>
 
         <div class="frm-course">
@@ -34,14 +34,14 @@
 
         <div class="frm-strict">
             <label for="chb-strict">Strict?</label>
-            <input id="chb-strict" type="checkbox" name="strict" value="<?php echo InfoScreen_Model_Request::factory()->isStrict() ? 'true' : 'false' ?>">
+            <input id="chb-strict" type="checkbox" name="strict"<?php echo InfoScreen_Model_Request::factory()->isStrict() ? ' checked="checked"' : '' ?>>
         </div>
 
         <div class="frm-submit">
-            <input class="button medium red" id="input_submit" type="submit" name="submit" value="<?php echo $this->submitText ?>">
+            <input class="button medium red" id="input-submit" type="submit" name="submit" value="<?php echo $this->submitText ?>">
         </div>
 
         <div class="frm-reset">
-            <a class="button medium blue" href="<?php echo $this->baseUrl(); ?>/<?php echo $this->mode ?><?php echo InfoScreen_Model_Request::factory()->getDateUrl(); ?>">Filter zurücksetzen</a>
+            <a class="button medium blue" id="input-reset" href="<?php echo $this->baseUrl(); ?>/<?php echo $this->mode ?><?php echo InfoScreen_Model_Request::factory()->getDateUrl(); ?>">Filter zurücksetzen</a>
         </div>
     </form>

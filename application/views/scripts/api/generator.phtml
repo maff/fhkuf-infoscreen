@@ -4,90 +4,88 @@
 <section id="content">
     <h1><?php echo $this->title ?></h1>
     <div id="apiGenerator">
-        <div id="apiGeneratorResult"></div>
-        <div class="clearfix">
-            <form action="/api/generator" method="post" id="apiGeneratorForm">
-                <div class="column span-8">
-                    <label for="sel_type">Type</label>
-                    <select id="sel_type" name="type">
-                        <option value="data" selected="selected">data (lectures)</option>
-                        <option value="list">list (selectbox lists)</option>
-                    </select>
+        <div id="apiGeneratorResult" class="box"></div>
+        <form action="/api/generator" method="post" id="apiGeneratorForm" class="clearfix">
+            <div class="column">
+                <label for="sel-type">Type</label>
+                <select id="sel-type" name="type">
+                    <option value="data" selected="selected">data (lectures)</option>
+                    <option value="list">list (selectbox lists)</option>
+                </select>
 
-                    <label for="sel_debug">Debug mode</label>
-                    <select id="sel_debug" name="debug">
-                        <option value="false" selected="selected">No</option>
-                        <option value="true">Yes</option>
+                <label for="sel-debug">Debug mode</label>
+                <select id="sel-debug" name="debug">
+                    <option value="false" selected="selected">No</option>
+                    <option value="true">Yes</option>
+                </select>
+            </div>
+
+            <div class="column">
+                <label for="sel-format">Data format</label>
+                <select id="sel-format" name="format">
+                    <option value="ical" id="format_ical" selected="selected">ical</option>
+                    <option value="xml" id="format_xml">xml</option>
+                    <option value="json" id="format_json">json</option>
+                </select>
+            </div>
+
+            <div id="formSections" class="column last">
+                <div id="form-list">
+                    <label for="sel-key">List Key</label>
+                    <select id="sel-key" name="key">
+                        <option value="course" selected="selected">course</option>
+                        <option value="lector">lector</option>
+                        <option value="room">room</option>
                     </select>
                 </div>
-
-                <div class="column span-8">
-                    <label for="sel_format">Data format</label>
-                    <select id="sel_format" name="format">
-                        <option value="json" id="format_json" selected="selected">json</option>
-                        <option value="xml" id="format_xml">xml</option>
-                        <option value="ical" id="format_ical">ical</option>
+                <div id="form-data">
+                    <label for="sel-range">Date Range</label>
+                    <select id="sel-range" name="range">
+                        <option value="day">single day</option>
+                        <option value="relative" selected="selected">14 days in past and future</option>
+                        <option value="weekend">weekends only (4 in past and future)</option>
                     </select>
-                </div>
 
-                <div id="formSections" class="column span-8 last">
-                    <div id="form-list">
-                        <label for="sel_key">List Key</label>
-                        <select id="sel_key" name="key">
-                            <option value="course" selected="selected">course</option>
-                            <option value="lector">lector</option>
-                            <option value="room">room</option>
-                        </select>
-                    </div>
-                    <div id="form-data">
-                        <label for="sel_range">Date Range</label>
-                        <select id="sel_range" name="range">
-                            <option value="day">single day</option>
-                            <option value="relative" selected="selected">14 days in past and future</option>
-                            <option value="weekend">weekends only (4 in past and future)</option>
-                        </select>
+                    <label for="sel-course">Course filter</label>
+                    <select id="sel-course" name="course">
+                        <?php foreach(InfoScreen_Model_List::getInstance('course')->getSelectData() as $course):?>
+                        <option><?php echo $course ?></option>
+                        <?php endforeach; ?>
+                    </select>
 
-                        <label for="sel_course">Course filter</label>
-                        <select id="sel_course" name="course">
-                            <?php foreach(InfoScreen_Model_List::getInstance('course')->getSelectData() as $course):?>
-                            <option><?php echo $course ?></option>
-                            <?php endforeach; ?>
-                        </select>
+                    <label for="sel-lector">Lector filter</label>
+                    <select id="sel-lector" name="lector">
+                        <?php foreach(InfoScreen_Model_List::getInstance('lector')->getSelectData() as $lector):?>
+                        <option><?php echo $lector ?></option>
+                        <?php endforeach; ?>
+                    </select>
 
-                        <label for="sel_lector">Lector filter</label>
-                        <select id="sel_lector" name="lector">
-                            <?php foreach(InfoScreen_Model_List::getInstance('lector')->getSelectData() as $lector):?>
-                            <option><?php echo $lector ?></option>
-                            <?php endforeach; ?>
-                        </select>
+                    <label for="sel-room">Room filter</label>
+                    <select id="sel-room" name="room">
+                        <?php foreach(InfoScreen_Model_List::getInstance('room')->getSelectData() as $room):?>
+                        <option><?php echo $room ?></option>
+                        <?php endforeach; ?>
+                    </select>
 
-                        <label for="sel_room">Room filter</label>
-                        <select id="sel_room" name="room">
-                            <?php foreach(InfoScreen_Model_List::getInstance('room')->getSelectData() as $room):?>
-                            <option><?php echo $room ?></option>
-                            <?php endforeach; ?>
-                        </select>
+                    <label for="sel-datepicker">Date filter</label>
+                    <input id="sel-datepicker" class="datePickerWidget" name="date" value="">
 
-                        <label for="sel_datepicker">Date filter</label>
-                        <input id="sel_datepicker" name="date" value="" />
+                    <label for="sel-strict">Strict filtering</label>
+                    <select id="sel-strict" name="strict">
+                        <option value="true" selected="selected">Yes</option>
+                        <option value="false">No</option>
+                    </select>
 
-                        <label for="sel_strict">Strict filtering</label>
-                        <select id="sel_strict" name="strict">
-                            <option value="false" selected="selected">No</option>
+                    <div id="json-categorized">
+                        <label for="sel-categorized">Categorized results</label>
+                        <select id="sel-categorized" name="categorized">
                             <option value="true">Yes</option>
+                            <option value="false" selected="selected">No</option>
                         </select>
-
-                        <div id="json-categorized">
-                            <label for="sel_categorized">Categorized results</label>
-                            <select id="sel_categorized" name="categorized">
-                                <option value="false" selected="selected">No</option>
-                                <option value="true">Yes</option>
-                            </select>
-                        </div>
                     </div>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
     <noscript>
         <p>Please enable JavaScript to use the API generator.</p>

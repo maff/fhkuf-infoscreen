@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-    <title><?php echo $this->title ?> - <?php echo $this->config->frontend->title; ?></title>
+    <title><?php echo (!empty($this->title)) ? $this->title . ' - ' : '' ?><?php echo $this->config->frontend->title; ?></title>
 
     <meta name="description" content="FH Kufstein Infoscreen">
     <meta name="author" content="Mathias Geat">
@@ -15,6 +15,10 @@
 
     <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl(); ?>/css/style.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl(); ?>/css/infoscreen/jquery-ui-1.8.16.custom.css">
+
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/favicon.ico">
 </head>
 <body>
     <header id="header">
@@ -30,15 +34,29 @@
     <section id="main">
 <?php echo $this->layout()->content; ?>
     </section>
-    <footer id="footer">
-        <p class="footertext">&copy; 2008-2011 <a href="http://ailoo.net/">Mathias Geat</a> (<a href="http://ailoo.net/projects/fh-kufstein-raumbelegung-webservice/">Projektinfo</a>)</p>
+    <footer id="footer" class="clearfix">
+        <?php if ($this->config->frontend->addthis->enabled): ?>
+        <div class="social">
+            <div class="addthis_toolbox addthis_default_style ">
+                <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+                <a class="addthis_button_tweet"></a>
+                <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+            </div>
+        </div>
+        <?php endif; ?>
+        <div class="footertext">&copy; 2008-2011 <a href="http://ailoo.net/">Mathias Geat</a> (<a href="http://ailoo.net/projects/fh-kufstein-raumbelegung-webservice/">Projektinfo</a>)</div>
     </footer>
 
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
-    <script src="js/libs/modernizr-2.0.6.min.js"></script>
-    <script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/js/jquery.datepicker.js"></script>
+    <script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/js/jquery-ui-1.8.16.custom.min.js"></script>
+    <script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/js/jquery.ui.datepicker-de.js"></script>
     <script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/js/jquery.tablesorter.min.js"></script>
     <script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/js/infoscreen.js"></script>
+
+    <?php if ($this->config->frontend->addthis->enabled): ?>
+    <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=<?php echo $this->config->frontend->addthis->account; ?>"></script>
+    <?php endif; ?>
+
     <?php if(in_array($this->mode, array('day', 'week', 'api'))): ?>
     <script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/js/<?php echo $this->mode ?>.js"></script>
     <?php endif; ?>

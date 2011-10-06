@@ -3,17 +3,17 @@ $(document).ready(function(){
     var courseval = "";
     var lectorval = "";
     var roomval = "";
+    var strict = false;
 
-    tableSort();
     initTableFilterLinks();
     initDayPagerLinks();
 
-    $('#input_submit').click(function(){
+    $('#input-submit').click(function(){
         callResults();
         return false;
     });
 
-    $('#input_reset').click(function(){
+    $('#input-reset').click(function(){
         if(!$.browser.msie) {
             resetBoxes();
             callResults();
@@ -21,18 +21,11 @@ $(document).ready(function(){
         }
     });
 
-    function tableSort() {
-        $("#resultTable").tablesorter({
-            sortList: [[5,0],[0,0]],
-            widgets: ['zebra']
-        });
-    }
-
     function initTableFilterLinks() {
         if(!$.browser.msie) {
-            $('#infoTable tbody td a.filterlink').click(function() {
+            $('#resultTable tbody td a.filterlink').click(function() {
                 resetBoxes();
-                $('#sel_' + $(this).attr('rel')).val($(this).text());
+                $('#sel-' + $(this).attr('rel')).val($(this).text());
                 callResults();
                 return false;
             });
@@ -41,8 +34,8 @@ $(document).ready(function(){
 
     function initDayPagerLinks() {
         if(!$.browser.msie) {
-            $('#dayPager a').click(function() {
-                $('#sel_date').val($(this).attr('rel'));
+            $('div.pager a').click(function() {
+                $('#sel-date').val($(this).attr('rel'));
                 callResults();
                 return false;
             });
@@ -55,11 +48,12 @@ $(document).ready(function(){
         if(courseval) url = url + '/course/' + courseval;
         if(lectorval) url = url + '/lector/' + lectorval;
         if(roomval) url = url + '/room/' + roomval;
+        if(strictval == false) url = url + '/strict/false';
 
         if(url) url = base_url + 'day' + url;
         else url = base_url;
 
-        url = url + '/ajax/true';
+        //url = url + '/ajax/true';
 
         return url;
     }
@@ -68,7 +62,7 @@ $(document).ready(function(){
         $('#loading').fadeIn('fast');
         fetchBoxes();
         $.get(getUrl(), '', function(html){
-            $('#main').html(html);
+            $('#results').html(html);
             document.title = $('#pagetitle').text() + " - <?php echo $this->config->frontend->title; ?>";
             tableSort();
             setupPermalink();
@@ -87,18 +81,18 @@ $(document).ready(function(){
         }
     }
 
-
     function resetBoxes() {
-        $('#sel_course').val("");
-        $('#sel_room').val("");
-        $('#sel_lector').val("");
+        $('#sel-course').val('');
+        $('#sel-room').val('');
+        $('#sel-lector').val('');
     }
 
     function fetchBoxes() {
-        dateval = $('#sel_date').val();
-        courseval = $('#sel_course').val().toLowerCase();
-        lectorval = $('#sel_lector').val().toLowerCase();
-        roomval = $('#sel_room').val();
+        dateval = $('#sel-date').val();
+        courseval = $('#sel-course').val().toLowerCase();
+        lectorval = $('#sel-lector').val().toLowerCase();
+        roomval = $('#sel-room').val();
+        strictval = $('#chb-strict').is(":checked");
     }
 
     function setupMenu() {
