@@ -5,7 +5,7 @@ class Zend_View_Helper_MenuLink
     {
         $link = Zend_Controller_Front::getInstance()->getBaseUrl();
         $link .= '/' . $mode;
-        $link .= InfoScreen_Model_Request::factory()->getFilterUrl();
+        $link .= InfoScreen_Model_Request::factory()->getFilterUrl(false);
 
         return $link;
     }

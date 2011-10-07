@@ -17,7 +17,7 @@ $model = $this->model;
 
     <?php $title = strftime('%A, %d.%m.%Y', strtotime($model->getDate())) ?>
     <h1 id="pagetitle" class="<?php if($model->hasData()) echo "results"; else echo "noresults"; ?>">
-         <?php echo $title; ?>
+         <a href="<?php echo InfoScreen_Model_Request::factory()->getFilterUrl(); ?>" title="Permanentlink auf diese Filterkriterien"><?php echo $title; ?></a>
     </h1>
 
     <?php $filterUrl = InfoScreen_Model_Request::factory()->getFilterUrl(false); ?>

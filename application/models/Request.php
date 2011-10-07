@@ -51,6 +51,8 @@ class InfoScreen_Model_Request
     {
         if(isset($options['date']) && $this->validateValue($options['date'])) {
             $this->_date = $options['date'];
+        } else {
+            $this->_date = InfoScreen_Date::parse();
         }
 
         if(isset($options['strict'])) {

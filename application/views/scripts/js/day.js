@@ -3,7 +3,7 @@ $(document).ready(function(){
     var courseval = "";
     var lectorval = "";
     var roomval = "";
-    var strict = false;
+    var strictval = false;
 
     initTableFilterLinks();
     initDayPagerLinks();
@@ -65,7 +65,7 @@ $(document).ready(function(){
             $('#results').html(html);
             document.title = $('#pagetitle').text() + " - <?php echo $this->config->frontend->title; ?>";
             tableSort();
-            setupPermalink();
+            //setupPermalink();
             setupMenu();
             initTableFilterLinks();
             initDayPagerLinks();
@@ -74,7 +74,6 @@ $(document).ready(function(){
     }
 
     function setupPermalink() {
-        return;
         url = getUrl();
         if(url != base_url) {
             $('#pagetitle').wrapInner(' (<a title="Permanentlink auf diese Filterkriterien" href="' + url + '"></a>)');
@@ -103,7 +102,7 @@ $(document).ready(function(){
         if(filters == '') {
             $('#menuWeek a').attr('href', '/week');
         } else {
-            $('#menuWeek a').attr('href', '/week/show/' + filters);
+            $('#menuWeek a').attr('href', '/week/' + filters);
         }
     }
 });
