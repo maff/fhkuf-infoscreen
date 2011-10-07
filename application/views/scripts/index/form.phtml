@@ -1,43 +1,47 @@
 
-    <form method="post" action="<?php echo $this->baseUrl() . '/' . $this->mode ?>" id="filterform">
-        <div class="column span-4">
-            <label for="sel_date">Datum</label>
-            <input id="sel_date" name="date" value="<?php echo $this->date ?>" />
+    <form id="filterform" class="clearfix" method="post" action="<?php echo $this->baseUrl() . '/' . $this->mode ?>">
+        <div class="frm-date">
+            <label for="sel-date">Datum</label>
+            <input id="sel-date" class="datePickerWidget" name="date" value="<?php echo $this->date ?>">
         </div>
 
-        <div class="column span-4">
-            <label for="sel_course">Studiengang</label>
-            <select id="sel_course" name="course">
-                    <?php foreach(InfoScreen_Model_List::getInstance('course')->getSelectData() as $course):?>
-                    <option<?php $this->checkSelected($course, 'course') ?>><?php echo $course ?></option>
-                    <?php endforeach; ?>
+        <div class="frm-course">
+            <label for="sel-course">Studiengang</label>
+            <select id="sel-course" name="course">
+                <?php foreach(InfoScreen_Model_List::getInstance('course')->getSelectData() as $course):?>
+                <option<?php $this->checkSelected($course, 'course') ?>><?php echo $course ?></option>
+                <?php endforeach; ?>
             </select>
         </div>
 
-        <div class="column span-5">
-            <label for="sel_lector">Lektor</label>
-            <select id="sel_lector" name="lector">
+        <div class="frm-lector">
+            <label for="sel-lector">Lektor</label>
+            <select id="sel-lector" name="lector">
                 <?php foreach(InfoScreen_Model_List::getInstance('lector')->getSelectData() as $lector):?>
                 <option<?php $this->checkSelected($lector, 'lector') ?>><?php echo $lector ?></option>
                 <?php endforeach; ?>
             </select>
         </div>
 
-        <div class="column span-2">
-            <label for="sel_room">Raum</label>
-            <select id="sel_room" name="room">
+        <div class="frm-room">
+            <label for="sel-room">Raum</label>
+            <select id="sel-room" name="room">
                 <?php foreach(InfoScreen_Model_List::getInstance('room')->getSelectData() as $room):?>
                 <option<?php $this->checkSelected($room, 'room') ?>><?php echo $room ?></option>
                 <?php endforeach; ?>
             </select>
         </div>
 
-        <div class="submitbox column prepend-1 span-4">
-            <a id="input_reset" href="<?php echo $this->baseUrl(); ?>/<?php echo $this->mode ?><?php echo InfoScreen_Model_Request::factory()->getDateUrl(); ?>">Filter zurücksetzen</a>
+        <div class="frm-strict">
+            <label for="chb-strict">Strict?</label>
+            <input id="chb-strict" type="checkbox" name="strict"<?php echo InfoScreen_Model_Request::factory()->isStrict() ? ' checked="checked"' : '' ?>>
         </div>
 
-        <div class="submitbox column span-4 last">
-            <input id="option_strict" type="hidden" name="strict" value="<?php echo InfoScreen_Model_Request::factory()->isStrict() ? 'true' : 'false' ?>" />
-            <input id="input_submit" type="submit" name="submit" value="<?php echo $this->submitText ?>" />
+        <div class="frm-submit">
+            <input class="button medium red" id="input-submit" type="submit" name="submit" value="<?php echo $this->submitText ?>">
+        </div>
+
+        <div class="frm-reset">
+            <a class="button medium blue" id="input-reset" href="<?php echo $this->baseUrl(); ?>/<?php echo $this->mode ?><?php echo InfoScreen_Model_Request::factory()->getDateUrl(); ?>">Filter zurücksetzen</a>
         </div>
     </form>

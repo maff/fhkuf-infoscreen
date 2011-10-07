@@ -1,88 +1,112 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
-    <meta name="language" content="de" />
-    <meta charset="utf-8" />
-    <title><?php echo $this->title ?> - <?php echo $this->config->frontend->title; ?></title>
-    <link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl(); ?>/css/style.css" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title><?php echo (!empty($this->title)) ? $this->title . ' - ' : '' ?><?php echo $this->config->frontend->title; ?></title>
+
+    <meta name="description" content="FH Kufstein Infoscreen">
+    <meta name="author" content="Mathias Geat">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl(); ?>/css/style.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl(); ?>/css/infoscreen/jquery-ui-1.8.16.custom.css">
+
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/favicon.ico">
 </head>
 <body>
-<div id="menu">
-    <ul>
-        <li id="menuDay"><a href="<?php echo $this->menuLink('day'); ?>">Infoscreen</a></li>
-        <li id="menuWeek"><a href="<?php echo $this->menuLink('week'); ?>">Wochenübersicht</a></li>
-        <li id="menuApi"><a href="<?php echo $this->baseUrl(); ?>/api">API</a></li>
-    </ul>
-</div>
-
-<div class="container">
+    <header id="header">
+        <nav id="mainmenu">
+            <ul>
+                <li id="menuDay"><a href="<?php echo $this->menuLink('day'); ?>">Infoscreen</a></li>
+                <li id="menuWeek"><a href="<?php echo $this->menuLink('week'); ?>">Wochenübersicht</a></li>
+                <li id="menuApi"><a href="<?php echo $this->baseUrl(); ?>/api">API</a></li>
+            </ul>
+        </nav>
+        <div id="loading"></div>
+    </header>
+    <section id="main">
 <?php echo $this->layout()->content; ?>
+    </section>
+    <footer id="footer" class="clearfix">
+        <?php if ($this->config->frontend->addthis->enabled): ?>
+        <div class="social">
+            <div class="addthis_toolbox addthis_default_style ">
+                <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+                <a class="addthis_button_tweet"></a>
+                <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+            </div>
+        </div>
+        <?php endif; ?>
+        <div class="footertext">&copy; 2008-2011 <a href="http://ailoo.net/">Mathias Geat</a> (<a href="http://ailoo.net/projects/fh-kufstein-raumbelegung-webservice/">Projektinfo</a>)</div>
+    </footer>
 
-    <div id="footer" class="span-24">
-        <div class="footermessage span-15">&nbsp;</div>
-        <div class="footertext span-8 prepend-1 last">&copy; 2008-2011 <a href="http://ailoo.net/">Mathias Geat</a> (<a href="http://maff.ailoo.net/projects/fh-kufstein-raumbelegung-webservice/">Projektinfo</a>)</div>
-    </div>
-</div>
-<div id="loading"></div>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+    <script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/js/jquery-ui-1.8.16.custom.min.js"></script>
+    <script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/js/jquery.ui.datepicker-de.js"></script>
+    <script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/js/jquery.tablesorter.min.js"></script>
+    <script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/js/infoscreen.js"></script>
 
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-<script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/js/jquery.datepicker.js"></script>
-<script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/js/jquery.tablesorter.min.js"></script>
-<script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/js/infoscreen.js"></script>
-<?php if(in_array($this->mode, array('day', 'week', 'api'))): ?>
-<script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/js/<?php echo $this->mode ?>.js"></script>
-<?php endif; ?>
+    <?php if ($this->config->frontend->addthis->enabled): ?>
+    <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=<?php echo $this->config->frontend->addthis->account; ?>"></script>
+    <?php endif; ?>
 
-<!--[if IE]>
-<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-<![endif]-->
+    <?php if(in_array($this->mode, array('day', 'week', 'api'))): ?>
+    <script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/js/<?php echo $this->mode ?>.js"></script>
+    <?php endif; ?>
 
-<?php if ($this->config->frontend->analytics->enabled): ?>
-<script type="text/javascript">
+    <?php if ($this->config->frontend->analytics->enabled): ?>
+    <script type="text/javascript">
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', '<?php echo $this->config->frontend->analytics->account; ?>']);
-  _gaq.push(['_trackPageview']);
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', '<?php echo $this->config->frontend->analytics->account; ?>']);
+      _gaq.push(['_trackPageview']);
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
 
-</script>
-<?php endif; ?>
+    </script>
+    <?php endif; ?>
 
-<?php if ($this->config->frontend->piwik->enabled): ?>
-<script type="text/javascript">
-var pkBaseURL = (("https:" == document.location.protocol) ? "https://<?php echo $this->config->frontend->piwik->baseurl; ?>/" : "http://<?php echo $this->config->frontend->piwik->baseurl; ?>/");
-document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
-</script><script type="text/javascript">
-try {
-var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", <?php echo $this->config->frontend->piwik->siteid; ?>);
-piwikTracker.trackPageView();
-piwikTracker.enableLinkTracking();
-} catch( err ) {}
-</script><noscript><p><img src="http://<?php echo $this->config->frontend->piwik->baseurl; ?>/piwik.php?idsite=<?php echo $this->config->frontend->piwik->siteid; ?>" style="border:0" alt="" /></p></noscript>
-<?php endif; ?>
+    <?php if ($this->config->frontend->piwik->enabled): ?>
+    <script type="text/javascript">
+    var pkBaseURL = (("https:" == document.location.protocol) ? "https://<?php echo $this->config->frontend->piwik->baseurl; ?>/" : "http://<?php echo $this->config->frontend->piwik->baseurl; ?>/");
+    document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+    </script><script type="text/javascript">
+    try {
+    var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", <?php echo $this->config->frontend->piwik->siteid; ?>);
+    piwikTracker.trackPageView();
+    piwikTracker.enableLinkTracking();
+    } catch( err ) {}
+    </script><noscript><p><img src="http://<?php echo $this->config->frontend->piwik->baseurl; ?>/piwik.php?idsite=<?php echo $this->config->frontend->piwik->siteid; ?>" style="border:0" alt="" /></p></noscript>
+    <?php endif; ?>
 
-<?php if ($this->config->frontend->uservoice->enabled): ?>
-<script type="text/javascript">
-var uservoiceJsHost = ("https:" == document.location.protocol) ? "https://uservoice.com" : "http://cdn.uservoice.com";
-document.write(unescape("%3Cscript src='" + uservoiceJsHost + "/javascripts/widgets/tab.js' type='text/javascript'%3E%3C/script%3E"))
-</script>
-<script type="text/javascript">
-UserVoice.Tab.show({
-  key: '<?php echo $this->config->frontend->uservoice->key; ?>',
-  host: '<?php echo $this->config->frontend->uservoice->host; ?>',
-  forum: 'general',
-  alignment: 'left',
-  background_color:'#3399FF',
-  text_color: 'white',
-  hover_color: '#333',
-  lang: 'en'
-})
-</script>
-<?php endif; ?>
+    <?php if ($this->config->frontend->uservoice->enabled): ?>
+    <script type="text/javascript">
+    var uservoiceJsHost = ("https:" == document.location.protocol) ? "https://uservoice.com" : "http://cdn.uservoice.com";
+    document.write(unescape("%3Cscript src='" + uservoiceJsHost + "/javascripts/widgets/tab.js' type='text/javascript'%3E%3C/script%3E"))
+    </script>
+    <script type="text/javascript">
+    UserVoice.Tab.show({
+      key: '<?php echo $this->config->frontend->uservoice->key; ?>',
+      host: '<?php echo $this->config->frontend->uservoice->host; ?>',
+      forum: 'general',
+      alignment: 'left',
+      background_color:'#3399FF',
+      text_color: 'white',
+      hover_color: '#333',
+      lang: 'en'
+    })
+    </script>
+    <?php endif; ?>
 </body>
 </html>

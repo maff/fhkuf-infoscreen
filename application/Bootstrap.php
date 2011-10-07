@@ -1,11 +1,61 @@
 <?php
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
+    protected function _initEnvironment()
+    {
+        $this->_initCache();
+        $this->_initTimezone();
+        $this->_initLocale();
+        //$this->_initTranslate();
+        $this->_initLogging();
+    }
+
+    protected function _initTimezone()
+    {
+        date_default_timezone_set('Europe/Berlin');
+    }
+
+    /**
+     * Manual initialization due to application resource problems with translate
+     *
+     * @todo set locale based on user preferences or cookie
+     */
     protected function _initLocale()
     {
-        setlocale (LC_ALL, 'de_DE');
-        date_default_timezone_set('Europe/Vienna');
+        setlocale (LC_TIME, 'de_DE');
+        Zend_Locale::setDefault('de_DE');
+        //Zend_Locale::setCache(Zend_Registry::get('cachemanager')->getCache('locale'));
+
+        $locale = new Zend_Locale();
+        Zend_Registry::set('Zend_Locale', $locale);
     }
+
+    /**
+     * Store cache manager in registry
+     */
+    protected function _initCache()
+    {
+        $manager = $this->getPluginResource('cachemanager')->getCacheManager();
+        Zend_Registry::set('cachemanager', $manager);
+    }
+
+    /**
+     * Manual initialization due to application resource problems
+     */
+    /*protected function _initTranslate()
+    {
+        $translate = new Zend_Translate(
+            array(
+                'adapter' => 'csv',
+                'disableNotices' => true,
+                'content' => APPLICATION_PATH . '/translations',
+                'scan' => Zend_Translate::LOCALE_FILENAME,
+                //'cache' => Zend_Registry::get('cachemanager')->getCache('translate')
+            )
+        );
+
+        Zend_Registry::set('Zend_Translate', $translate);
+    }*/
 
     protected function _initBaseUrl()
     {

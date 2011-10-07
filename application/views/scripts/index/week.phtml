@@ -4,78 +4,91 @@ $model = $this->model;
 ?>
 
 <?php if(!$this->ajax): ?>
-<div id="header" class="weekmode span-24">
-      <?php
-      echo $this->partial('index/form.phtml', array(
-          'date'       => $model->getStartDate(),
-          'mode'       => 'week',
-          'submitText' => 'Übersicht laden'
-      ));
-      ?>
-</div>
+    <?php
+    echo $this->partial('index/form.phtml', array(
+        'date'       => $model->getStartDate(),
+        'mode'       => 'week',
+        'submitText' => 'Wochenübersicht laden'
+    ));
+    ?>
 
-<div id="main" class="weekmode span-24">
+    <section id="results">
 <?php endif; ?>
 
-    <div id="dayPager">
-        <?php $filterUrl = InfoScreen_Model_Request::factory()->getFilterUrl(false); ?>
-        <div class="aleft span-12">
-            <?php $datePrev = $this->weekPager($model->getStartDate(), 'prev'); ?>
-            <a title="vorherige Woche" rel="<?php echo $datePrev ?>" href="<?php echo $this->baseUrl(); ?>/week/date/<?php echo $datePrev ?>/<?php echo $filterUrl ?>">&laquo; zurück</a>
-        </div>
-        <div class="aright span-12 last">
-            <?php $dateNext = $this->weekPager($model->getStartDate(), 'next'); ?>
-            <a title="nächste Woche" rel="<?php echo $dateNext ?>" href="<?php echo $this->baseUrl(); ?>/week/date/<?php echo $dateNext ?>/<?php echo $filterUrl ?>">weiter &raquo;</a>
-        </div>
-    </div>
-
     <?php $this->title = 'Woche ab ' . strftime('%A, %d.%m.%Y', strtotime($model->getStartDate())); ?>
+
+    <?php $filterUrl = InfoScreen_Model_Request::factory()->getFilterUrl(false); ?>
+    <div id="date-prev" class="pager">
+        <?php $datePrev = $this->weekPager($model->getStartDate(), 'prev'); ?>
+        <a title="vorherige Woche" rel="<?php echo $datePrev ?>" href="<?php echo $this->baseUrl(); ?>/week/date/<?php echo $datePrev ?>/<?php echo $filterUrl ?>"><span>&laquo; zurück</span></a>
+    </div>
+    <div id="date-next" class="pager">
+        <?php $dateNext = $this->weekPager($model->getStartDate(), 'next'); ?>
+        <a title="nächste Woche" rel="<?php echo $dateNext ?>" href="<?php echo $this->baseUrl(); ?>/week/date/<?php echo $dateNext ?>/<?php echo $filterUrl ?>"><span>weiter &raquo;</span></a>
+    </div>
 
 <?php
 $i = 0;
 
+$data = $model->getData();
+$count = count($data);
+
 /* @var $day InfoScreen_Model_Day */
 foreach($model->getData() as $day):
 ?>
-    <?php $dayClass = ($i++ % 2 == 0) ? 'even' : 'odd'; ?>
+    <?php
+        $dayClass = ($i++ % 2 == 0) ? 'even' : 'odd';
+        $lastClass = ($i == $count) ? ' last' : '';
+    ?>
 
-    <div class="weekday <?php echo $dayClass ?>">
-        <h3><a href="/day/date/<?php echo $day->getDate(); ?>"><?php echo strftime('%A, %d.%m.%Y', strtotime($day->getDate())); ?></a></h3>
+    <article class="weekday <?php echo $dayClass . $lastClass ?>">
+        <h1><a href="/day/date/<?php echo $day->getDate(); ?>"><?php echo strftime('%A, %d.%m.%Y', strtotime($day->getDate())); ?></a></h1>
         <?php if($day->hasData()): ?>
 
-        <table class="appointmentTable">
+        <table class="dataTable">
+            <thead>
+                <tr>
+                    <th>Studiengang</th>
+                    <th>Fach</th>
+                    <th>Gr.</th>
+                    <th>Lektor</th>
+                    <th>Raum</th>
+                    <th>Beginn</th>
+                    <th>Ende</th>
+                    <th>Info</th>
+                </tr>
+            </thead>
+            <tbody>
             <?php
             $j = 0;
 
             /* @var $lecture InfoScreen_Model_Lecture */
             foreach($day->getFilteredData() as $lecture):
             ?>
-                <?php $lectureClass = ($j++ % 2 == 0) ? 'even' : 'odd'; ?>
+                <?php $class = ($j++ % 2 == 0) ? 'even' : 'odd'; ?>
 
-                <tr class="<?php echo $lectureClass ?>">
-                    <td class="startTime time"><?php echo $lecture->startTime; ?></td>
-                    <td class="endTime time"><?php echo $lecture->endTime; ?></td>
-                    <td class="class"><?php echo $lecture->course; ?></td>
-                    <td class="group"><?php echo $lecture->group; ?></td>
-                    <td class="description">
-                        <strong><?php echo $lecture->description; ?></strong><br />
-                        <?php echo $lecture->lector; ?>
-                    </td>
-                    <td class="room"><?php echo $lecture->room; ?></td>
-                    <td class="info"><?php echo $lecture->info; ?></td>
+                <tr class="<?php echo $class ?>">
+                    <td class="course"><?php echo $this->filterLink('course', $lecture->course) ?></td>
+                    <td class="description"><?php echo $lecture->description ?></td>
+                    <td class="group"><?php echo $lecture->group ?></td>
+                    <td class="lector"><?php echo $this->filterLink('lector', $lecture->lector) ?></td>
+                    <td class="room"><?php echo $this->filterLink('room', $lecture->room) ?></td>
+                    <td class="startTime time"><?php echo $lecture->startTime ?></td>
+                    <td class="endTime time"><?php echo $lecture->endTime ?></td>
+                    <td class="info"><?php echo $lecture->info ?></td>
                 </tr>
             <?php endforeach; ?>
+            </tbody>
         </table>
 
         <?php else: ?>
         <p>Keine Einträge.</p>
         <?php endif; ?>
-    </div>
-
+    </article>
 <?php endforeach; ?>
 
 <?php if(!$this->ajax): ?>
-</div>
+</section>
 <?php endif; ?>
 
 <?php

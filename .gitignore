@@ -1,3 +1,4 @@
+*.old
 public/.htaccess
 application/configs/application.ini
 favicon.ico

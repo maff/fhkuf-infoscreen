@@ -3,7 +3,7 @@ class InfoScreen_Model_Request
 {
     protected $_date;
     protected $_filterValues = array();
-    protected $_strict = false;
+    protected $_strict = true;
 
     protected $_type  = 'data';
     protected $_range = 'relative';
@@ -51,11 +51,13 @@ class InfoScreen_Model_Request
     {
         if(isset($options['date']) && $this->validateValue($options['date'])) {
             $this->_date = $options['date'];
+        } else {
+            $this->_date = InfoScreen_Date::parse();
         }
 
         if(isset($options['strict'])) {
-            if($options['strict'] === true || $options['strict'] === 'true') {
-                $this->_strict = true;
+            if($options['strict'] === false || $options['strict'] === 'false') {
+                $this->_strict = false;
             }
         }
 
@@ -184,8 +186,8 @@ class InfoScreen_Model_Request
 
     public function completeUrl($url)
     {
-        if($this->_strict === true && strpos($url, 'strict') === false) {
-            $url .= '/strict/true';
+        if($this->_strict === false && strpos($url, 'strict') === false) {
+            $url .= '/strict/false';
         }
 
         return $url;

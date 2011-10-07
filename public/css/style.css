@@ -1,131 +1,760 @@
-@charset "utf-8";
-
-@import url('reset.css');
-@import url('grid.css');
-@import url('datepicker.css');
-
-html  { margin: 0; padding: 0; min-height: 101%; }
-body { /*background: #fff url(../img/bar.jpg) repeat-x top left;*/ padding: 0; margin: 0; }
-
-/* base font-size: 14px, vertical rhythm: 21px */
-body  { font-size: 13px; font-family: "Lucida Grande", "Lucida Sans Unicode", Tahoma, Verdana, sans-serif; color: #111; }
-
-p, ul, ol, dl, blockquote, pre, address, table { font-size: 1em; line-height: 1.5em; margin: 0 0 1.5em 0; }
-
-h1, h2, h3, h4, h5, h6 { font-family: Palatino,"Palatino Linotype",Georgia,"Times New Roman",serif; }
-h2 { font-size: 1.57em; line-height: 1; margin: 0 0 1.5em 0; color: #4197e4; } /* 22px */
-h3 { font-size: 1.42em; line-height: 1; margin: 1.5em 0 0.75em 0; color: #333; } /* 20px */
-h4 { font-size: 1.28em; line-height: 1.5; margin: 1.5em 0 0.75em 0; color: #333; } /* 18px */
-h5 { font-size: 1.14em; line-height: 1.5; margin: 1.5em 0 0.75em 0; color: #333; } /* 16px */
-
-a { color: #4197e4; text-decoration: none; }
-a:hover { color: #777; }
-
-ul { list-style: circle; }
-ul li, ol li { margin-left: 1em; padding: 0 0 0 .1em; }
-li ul, li ol { margin: 0; }
-
-dl dt { font-weight: bold; }
-dl dd { padding: 0 0 0 1.5em; margin: 0 0 .5em 0; }
-
-blockquote { padding: 0 1em; font-family: Georgia,serif; font-style: italic; color: #777; }
-
-p img, dl img { padding: 7px; border: 1px solid #dedede; }
-p a:hover img, dl a:hover img { background: #dedede; }
-p img.left { float: left; margin: 0 1.5em 1.5em 0; padding: 0; }
-p img.right { float: right; margin: 0 0 1.5em 1.5em; }
-
-#menu { margin: 0 0 4em 0; padding: 5px 0; background: #404040;}
-#menu ul { margin: 0; padding: 0; list-style: none; }
-#menu ul li { display: inline; }
-#menu ul li a { display: inline; color: #77bfff; }
-#menu ul li a:hover { color: #fff; }
+/*
+ * HTML5 Boilerplate
+ *
+ * What follows is the result of much research on cross-browser styling.
+ * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
+ * Kroc Camen, and the H5BP dev community and team.
+ */
 
 
-#infoTable { font-family:arial; background-color: #CDCDCD; width: 100%; text-align: left; border: 1px solid #ccc; border-collapse: collapse; }
-#infoTable td { border: 1px solid #ccc; }
-#infoTable tr td.info { font-weight: bold; color: #ff0000; }
-#infoTable tbody tr td a { text-decoration: none; border-bottom: 1px dotted #333; color: #111; }
-#infoTable tbody tr td a:hover { color: #ff0000; }
-#infoTable thead tr th, #infoTable tfoot tr th { background-color: #e6EEEE; padding: 4px; }
-#infoTable thead tr .header { background-image: url(../img/tables/bg.gif); background-repeat: no-repeat; background-position: center right; cursor: pointer; }
-#infoTable tbody td { color: #3D3D3D; padding: 4px; background-color: #fff; vertical-align: top; }
-#infoTable tbody tr.odd td { background-color: #f0f0f6; }
-#infoTable tbody tr:hover td { 	background: #ffffbb; }
-#infoTable thead tr th { font-weight: bold; color: #555; }
-#infoTable thead tr .headerSortUp { background-image: url(../img/tables/asc.gif); }
-#infoTable thead tr .headerSortDown { background-image: url(../img/tables/desc.gif); }
-#infoTable thead tr .headerSortDown, #infoTable thead tr .headerSortUp { background-color: #8dbdd8; }
-#infoTable .course { min-width: 95px; }
-#infoTable .lector, #infoTable .room, #infoTable .time, #infoTable .info { min-width: 70px; }
-#infoTable .group { min-width: 30px; }
+/* =============================================================================
+   HTML5 element display
+   ========================================================================== */
 
-.appointmentTable { width: 100%; text-align: left; border-collapse: collapse; }
-.appointmentTable tr { margin: 0 0 10px 0; }
-.appointmentTable td { padding: 10px; background: #f0f0f6; }
-.appointmentTable tr.odd td { background: #fff; }
-.appointmentTable .time { width: 50px; }
-.appointmentTable .course { width: 50px; }
-.appointmentTable .group { width: 20px; }
-.appointmentTable .room { width: 40px; }
-.appointmentTable .info { width: 80px; font-weight: bold; color: #ff0000; }
+article, aside, details, figcaption, figure, footer, header, hgroup, nav, section { display: block; }
+audio[controls], canvas, video { display: inline-block; *display: inline; *zoom: 1; }
 
-#loading { display: none; position: absolute; top: 45px; right: 10px; width: 31px; height: 31px; background: transparent url(../img/loading.gif) no-repeat top right; /*width: auto; padding: 5px 10px; background: #222; color: #fff;*/ }
 
-.alignleft { text-align: left; }
-.alignright { text-align: right; }
+/* =============================================================================
+   Base
+   ========================================================================== */
 
-pre, code, kbd { font-family: monospace; font-size: .85em; white-space: pre; overflow: auto; }
-pre { display: block; background: #f1f1f3; margin: 0 0 1.5em 0; padding: .75em 1.25em; }
-pre.shell { background: #333; color: #fff; }
-code, kbd { display: inline; background: #f1f1f3; }
+/*
+ * 1. Correct text resizing oddly in IE6/7 when body font-size is set using em units
+ *    http://clagnut.com/blog/348/#c790
+ * 2. Force vertical scrollbar in non-IE
+ * 3. Remove Android and iOS tap highlight color to prevent entire container being highlighted
+ *    www.yuiblog.com/blog/2010/10/01/quick-tip-customizing-the-mobile-safari-tap-highlight-color/
+ * 4. Prevent iOS text size adjust on device orientation change, without disabling user zoom
+ *    www.456bereastreet.com/archive/201012/controlling_text_size_in_safari_for_ios_without_disabling_user_zoom/
+ */
 
-/*#filterform { margin: 1.5em 0; }
-#filterform .column label { display: block;	margin: 0; line-height: .75em; }
-#filterform .column input { width: 95%; margin-top: .5em; }*/
-#filterform .column select { width: 100%; }
-#filterform .column label { display: block; font-size: 1.1em; margin: 0 0 .15em 0; }
-#filterform .column.submitbox { text-align: right; }
-#filterform .column.submitbox input, #filterform .column.submitbox a { text-decoration: none; position: relative; top: 1.1em; right: .5em; display: block;	font-size: 13px; font-family: "Lucida Grande", "Lucida Sans Unicode", Tahoma, Verdana, sans-serif; padding: .5em .8em; border: none; margin-left: 0; -moz-border-radius: 2px; -khtml-border-radius: 2px; -webkit-border-radius: 2px; border-radius: 2px; color: #246; background: #e5e5e5; cursor: pointer; }
-#filterform .column.submitbox input:hover, #filterform .column.submitbox a:hover { color: #d54e21; }
-#input_submit {  }
+html { font-size: 100%; overflow-y: scroll; -webkit-overflow-scrolling: touch; -webkit-tap-highlight-color: rgba(0,0,0,0); -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
 
-#apiGenerator { display: none; }
-#apiGeneratorForm { margin-bottom: 25px; }
-#apiGeneratorForm label { display: block; font-weight: bold; margin: 15px 0 3px 0; cursor: pointer; }
-#apiGeneratorForm select { display: block; width: 100%; }
-#apiGeneratorResult { margin-bottom: 25px; }
+body { margin: 0; font-size: 13px; line-height: 1.231; }
 
-p.iCalLinks { text-align: right; margin: 2.5em 0 -1em 0; }
+body, button, input, select, textarea { font-family: Arial, sans-serif; color: #222; }
 
-#header { margin: 0 0 .75em 0; padding: 0 0 1.5em 0; border-bottom: 1px solid #ccc; }
-#dayPager { margin: 0 0 3em 0; }
+/*
+ * These selection declarations have to be separate
+ * No text-shadow: twitter.com/miketaylr/status/12228805301
+ * Also: hot pink!
+ */
 
-#footer { border-top: 1px solid #ccc; padding-top: 1.5em; margin-top: 1.5em; }
-.footermessage { text-align: left; color: #ED3F3F; font-size: .85em; }
-.footermessage a { text-decoration: underline;}
-.footertext { text-align: right; }
+::-moz-selection { background: #e95d37; color: #fff; text-shadow: none; }
+::selection { background: #e95d37; color: #fff; text-shadow: none; }
 
-.note {background: #dfd; padding: 1em; border-top: 1px #bdb dotted; border-bottom: 1px #bdb dotted;}
-.important {background: #ffd; padding: 1em; border-top: 1px #ddb dotted; border-bottom: 1px #ddb dotted;}
-.warning {background: #fdd; padding: 1em; border-top: 1px #dbb dotted; border-bottom: 1px #dbb dotted;}
-.float_left { float: left; display:inline; margin-right: 1em; margin-bottom: 0.15em;  }
-.float_right { float: right; display:inline; margin-left: 1em; margin-bottom: 0.15em;  }
-.center { text-align:center; margin: 0.75em auto }
-.small { font-size: .8em; margin-bottom: 1.875em; line-height: 1.875em; }
-.large  { font-size: 1.2em; line-height: 2.5em; margin-bottom: 1.25em; }
-.hide { display: none; }
 
-.quiet { color: #666; }
-.loud { color: #000; }
-.highlight { background:#ff0; }
-.added { background:#060; color: #fff; }
-.removed { background:#900; color: #fff; }
+/* =============================================================================
+   Links
+   ========================================================================== */
 
-.first { margin-left:0; padding-left:0; }
-.last { margin-right:0; padding-right:0; }
-.top { margin-top:0; padding-top:0; }
-.bottom { margin-bottom:0; padding-bottom:0; }
+a { color: #00e; }
+a:visited { color: #551a8b; }
+a:focus { outline: thin dotted; }
 
-.aleft { text-align: left; }
-.aright { text-align: right; }
+/* Improve readability when focused and hovered in all browsers: people.opera.com/patrickl/experiments/keyboard/test */
+a:hover, a:active { outline: 0; }
+
+
+/* =============================================================================
+   Typography
+   ========================================================================== */
+
+abbr[title] { border-bottom: 1px dotted; }
+
+b, strong { font-weight: bold; }
+
+blockquote { margin: 1em 40px; }
+
+dfn { font-style: italic; }
+
+hr { display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0; }
+
+ins { background: #ff9; color: #000; text-decoration: none; }
+
+mark { background: #ff0; color: #000; font-style: italic; font-weight: bold; }
+
+/* Redeclare monospace font family: en.wikipedia.org/wiki/User:Davidgothberg/Test59 */
+pre, code, kbd, samp { font-family: monospace, monospace; _font-family: 'courier new', monospace; font-size: 1em; }
+
+/* Improve readability of pre-formatted text in all browsers */
+pre { white-space: pre; white-space: pre-wrap; word-wrap: break-word; }
+
+q { quotes: none; }
+q:before, q:after { content: ""; content: none; }
+
+small { font-size: 85%; }
+
+/* Position subscript and superscript content without affecting line-height: gist.github.com/413930 */
+sub, sup { font-size: 75%; line-height: 0; position: relative; vertical-align: baseline; }
+sup { top: -0.5em; }
+sub { bottom: -0.25em; }
+
+
+/* =============================================================================
+   Lists
+   ========================================================================== */
+
+ul, ol { margin: 1em 0; padding: 0 0 0 40px; }
+dd { margin: 0 0 0 40px; }
+nav ul, nav ol { list-style: none; margin: 0; padding: 0; }
+
+
+/* =============================================================================
+   Embedded content
+   ========================================================================== */
+
+/*
+ * Improve image quality when scaled in IE7
+ * code.flickr.com/blog/2008/11/12/on-ui-quality-the-little-things-client-side-image-resizing/
+ */
+
+img { border: 0; -ms-interpolation-mode: bicubic; }
+
+/*
+ * Correct overflow displayed oddly in IE9
+ */
+
+svg:not(:root) {
+    overflow: hidden;
+}
+
+
+/* =============================================================================
+   Figures
+   ========================================================================== */
+
+figure { margin: 0; }
+
+
+/* =============================================================================
+   Forms
+   ========================================================================== */
+
+form { margin: 0; }
+fieldset { border: 0; margin: 0; padding: 0; }
+
+/*
+ * 1. Correct color not inheriting in IE6/7/8/9
+ * 2. Correct alignment displayed oddly in IE6/7
+ */
+
+legend { border: 0; *margin-left: -7px; padding: 0; }
+
+/* Indicate that 'label' will shift focus to the associated form element */
+label { cursor: pointer; }
+
+/*
+ * 1. Correct font-size not inheriting in all browsers
+ * 2. Remove margins in FF3/4 S5 Chrome
+ * 3. Define consistent vertical alignment display in all browsers
+ */
+
+input, select, textarea { font-size: 100%; margin: 0; vertical-align: baseline; *vertical-align: middle; }
+
+/*
+ * 1. Define line-height as normal to match FF3/4 (set using !important in the UA stylesheet)
+ * 2. Correct inner spacing displayed oddly in IE6/7
+ */
+
+input { line-height: normal; *overflow: visible; }
+
+/*
+ * 1. Display hand cursor for clickable form elements
+ * 2. Allow styling of clickable form elements in iOS
+ */
+
+button, input[type="button"], input[type="reset"], input[type="submit"] { cursor: pointer; }
+
+/*
+ * Consistent box sizing and appearance
+ */
+
+input[type="checkbox"], input[type="radio"] { box-sizing: border-box; }
+input[type="search"] { -moz-box-sizing: content-box; -webkit-box-sizing: content-box; box-sizing: content-box; }
+
+/*
+ * Remove inner padding and border in FF3/4
+ * www.sitepen.com/blog/2008/05/14/the-devils-in-the-details-fixing-dojos-toolbar-buttons/
+ */
+
+/*button::-moz-focus-inner, input::-moz-focus-inner { border: 0; padding: 0; }*/
+
+/* Remove default vertical scrollbar in IE6/7/8/9 */
+textarea { overflow: auto; vertical-align: top; }
+
+/* Colors for form validity */
+input:valid, textarea:valid {  }
+input:invalid, textarea:invalid { background-color: #f0dddd; }
+
+
+/* =============================================================================
+   Tables
+   ========================================================================== */
+
+table { border-collapse: collapse; border-spacing: 0; }
+
+/* =============================================================================
+   Primary styles
+   ========================================================================== */
+
+body {
+    background: transparent url(../img/content-area-bg.png);
+}
+
+a,
+a:link,
+a:visited {
+    color: #e95d37;
+}
+
+a {
+    border-bottom: 1px solid #888;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #ed886d;
+    border-bottom: none;
+}
+
+.ui-datepicker a {
+    border: none;
+}
+
+#mainmenu ul,
+#main,
+#footer {
+    width: 960px;
+    margin: 0 auto;
+}
+
+#header {
+    position: relative;
+    height: 55px;
+    margin: 0 0 25px 0;
+    background: transparent url(../img/stitch.png) left bottom repeat-x;
+}
+
+#loading {
+    display: none;
+    nowhitespace: afterproperty;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    background: transparent url(../img/loading.gif) no-repeat top right;
+}
+
+#mainmenu {
+    height: 48px;
+    background: transparent url(../img/header-bg.png) left top repeat-x;
+}
+
+#mainmenu ul {
+    height: 46px;
+    background: transparent url(../img/menu-bg.png) left top repeat-y;
+}
+
+#mainmenu ul {
+    padding: 0;
+}
+
+#mainmenu ul li {
+    display: block;
+    float: left;
+    margin: 0;
+    padding: 0 2px 0 0;
+    background: transparent url(../img/menu-bg.png) right top repeat-y;
+}
+
+#mainmenu ul li a {
+    line-height: 46px;
+    margin: 0;
+    padding: 0 20px;
+    display: block;
+    text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.25);
+    text-decoration: none;
+    border: none;
+}
+
+#mainmenu ul li a:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+    color: #fff;
+}
+
+#filterform,
+#results,
+#apiGeneratorResult {
+    background: rgba(255, 255, 255, 0.5);
+    padding: 30px;
+    border: 1px solid #e2e5e5;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+#filterform div {
+    float: left;
+    margin: 0 18px 0 0;
+}
+
+#filterform div label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+
+#filterform .frm-date {
+    width: 80px;
+}
+
+#filterform .frm-date input {
+    width: 80px;
+}
+
+#filterform .frm-course {
+    width: 100px;
+}
+
+#filterform .frm-course select {
+    width: 100px;
+}
+
+#filterform .frm-lector {
+    width: 150px;
+}
+
+#filterform .frm-lector select {
+    width: 150px;
+}
+
+#filterform .frm-room {
+    width: 70px;
+}
+
+#filterform .frm-room select {
+    width: 70px;
+}
+
+#filterform .frm-strict {
+    width: 70px;
+}
+
+#filterform .frm-strict input {
+    margin: 3px 0 0 3px;
+}
+
+#filterform .frm-reset,
+#filterform .frm-submit {
+    padding: 5px 0 0 0;
+}
+
+#filterform .frm-reset {
+    float: right;
+    width: 140px;
+    margin-right: 10px;
+}
+
+#filterform .frm-submit {
+    float: right;
+    width: 163px;
+    margin: 0;
+}
+
+#results {
+    margin: 15px 0 0 0;
+    position: relative;
+}
+
+#results .pager {
+    position: absolute;
+    width: 32px;
+    height: 68px;
+    top: 55px;
+}
+
+#results .pager a {
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+#results .pager a span {
+    display: none;
+}
+
+#results #date-next {
+    right: -32px;
+    background: transparent url(../img/right-arrow.png) no-repeat top left;
+}
+
+#results #date-prev {
+    left: -32px;
+    background: transparent url(../img/left-arrow.png) no-repeat top left;
+}
+
+h1 {
+    color: #e95d37;
+    font-family: 'Droid Sans', sans-serif;
+    font-size: 35px;
+    text-shadow: 1px 1px 1px #FFFFFF;
+    text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.25);
+    margin: 0 0 20px 0;
+}
+
+h1 a {
+    text-decoration: none;
+    border: none;
+}
+
+#content {
+    margin: 65px 0 35px 0;
+}
+
+#content p {
+    line-height: 1.5;
+}
+
+#results h1 {
+    font-size: 25px;
+    margin: 0 0 15px 0;
+    font-weight: normal;
+}
+
+.dataTable {
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.dataTable thead tr th {
+    font-weight: bold;
+    padding: 8px 5px;
+    border-bottom: 3px solid #333;
+}
+
+.dataTable thead tr .header {
+    background-image: url(../img/tables/bg.gif);
+    background-repeat: no-repeat;
+    background-position: center right;
+    cursor: pointer;
+}
+
+.dataTable thead tr .headerSortUp {
+    background-image: url(../img/tables/asc.gif)
+}
+
+.dataTable thead tr .headerSortDown {
+    background-image: url(../img/tables/desc.gif)
+}
+
+.dataTable thead tr .headerSortUp,
+.dataTable thead tr .headerSortDown {
+    font-style: italic;
+}
+
+.dataTable tbody td {
+    color: #3d3d3d;
+    padding: 12px 5px;
+    vertical-align: top;
+}
+
+.dataTable tbody td a {
+    text-decoration: none;
+    border-bottom: 1px dotted #333;
+    color: #3d3d3d;
+}
+
+.dataTable tbody tr td a:hover {
+    color: #e95d37;
+}
+
+.dataTable tbody tr.odd td {
+    background-color: #f0f0f6
+}
+
+.dataTable tbody tr:hover td {
+    background: #ffffbb
+}
+
+.dataTable tbody td.info {
+    font-weight: bold;
+    color: #e95d37;
+}
+
+.dataTable tbody td.course {
+    padding-left: 10px;
+    width: 115px;
+}
+
+.dataTable tbody td.lector {
+    width: 116px;
+}
+
+.dataTable tbody td.room {
+    width: 60px;
+}
+
+.dataTable tbody td.time {
+    width: 60px;
+}
+
+.dataTable tbody td.info {
+    width: 70px;
+}
+
+.dataTable tbody td.group {
+    width: 30px;
+}
+
+.weekday {
+    margin: 0 0 35px 0;
+}
+
+.weekday.last {
+    margin: 0;
+}
+
+#apiGenerator {
+    display: none
+}
+
+#apiGeneratorForm {
+    margin-bottom: 25px
+}
+
+#apiGenerator .column {
+    float: left;
+    width: 300px;
+    margin-right: 30px;
+}
+
+#apiGenerator .column.last {
+    margin-right: 0;
+}
+
+#apiGeneratorForm label {
+    display: block;
+    font-weight: bold;
+    margin: 15px 0 3px 0;
+    cursor: pointer;
+}
+
+#apiGeneratorForm select {
+    display: block;
+    width: 100%;
+}
+
+#apiGeneratorResult {
+    margin-bottom: 25px;
+    padding: 15px 30px;
+}
+
+#footer {
+    font-family: 'Droid Sans', sans-serif;
+    margin: 20px auto 50px auto;
+    padding: 10px 0 0 0;
+    background: transparent url(../img/stitch.png) left top repeat-x;
+}
+
+#footer .social {
+    width: 500px;
+    float: left;
+}
+
+.social a {
+    border: none;
+}
+
+#footer .footertext {
+    width: 300px;
+    float: right;
+    margin: 0;
+    padding: 0;
+    text-align: right;
+}
+
+
+
+/* =============================================================================
+   Buttons
+   ========================================================================== */
+
+.button,
+.button:link,
+.button:visited,
+input.button {
+    background: #222 url(../img/button.png) repeat-x;
+    border: none;
+    display: inline-block;
+    padding: 5px 10px 6px;
+    line-height: 16px !important;
+    color: #fff;
+    text-decoration: none;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+    border-bottom: 1px solid rgba(0,0,0,0.25);
+    position: relative;
+    cursor: pointer;
+}
+
+a.button {
+    height: 18px !important;
+}
+
+.button:hover {
+    background-color: #111;
+    color: #fff;
+}
+
+.button:active {
+    top: 1px
+}
+
+.small.button,
+.small.button:visited {
+    font-size: 11px;
+    padding: ;
+}
+
+.button,
+.button:visited,
+.medium.button,
+.medium.button:visited {
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 16px;
+    text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+}
+
+.large.button,
+.large.button:visited {
+    font-size: 14px;
+    padding: 8px 14px 9px;
+}
+
+.green.button,
+.green.button:visited {
+    background-color: #91bd09
+}
+
+.green.button:hover {
+    background-color: #749a02
+}
+
+.blue.button,
+.blue.button:visited {
+    background-color: #2daebf
+}
+
+.blue.button:hover {
+    background-color: #007d9a
+}
+
+.red.button,
+.red.button:visited {
+    background-color: #e33100
+}
+
+.red.button:hover {
+    background-color: #872300
+}
+
+.magenta.button,
+.magenta.button:visited {
+    background-color: #a9014b
+}
+
+.magenta.button:hover {
+    background-color: #630030
+}
+
+.orange.button,
+.orange.button:visited {
+    background-color: #ff5c00
+}
+
+.orange.button:hover {
+    background-color: #d45500
+}
+
+.yellow.button,
+.yellow.button:visited {
+    background-color: #ffb515
+}
+
+/* =============================================================================
+   Non-semantic helper classes
+   Please define your styles before this section.
+   ========================================================================== */
+
+/* For image replacement */
+.ir { display: block; text-indent: -999em; overflow: hidden; background-repeat: no-repeat; text-align: left; direction: ltr; }
+.ir br { display: none; }
+
+/* Hide for both screenreaders and browsers:
+   css-discuss.incutio.com/wiki/Screenreader_Visibility */
+.hidden { display: none; visibility: hidden; }
+
+/* Hide only visually, but have it available for screenreaders: by Jon Neal.
+  www.webaim.org/techniques/css/invisiblecontent/  &  j.mp/visuallyhidden */
+.visuallyhidden { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
+
+/* Extends the .visuallyhidden class to allow the element to be focusable when navigated to via the keyboard: drupal.org/node/897638 */
+.visuallyhidden.focusable:active, .visuallyhidden.focusable:focus { clip: auto; height: auto; margin: 0; overflow: visible; position: static; width: auto; }
+
+/* Hide visually and from screenreaders, but maintain layout */
+.invisible { visibility: hidden; }
+
+/* Contain floats: nicolasgallagher.com/micro-clearfix-hack/ */
+.clearfix:before, .clearfix:after { content: ""; display: table; }
+.clearfix:after { clear: both; }
+.clearfix { zoom: 1; }
+
+/* =============================================================================
+   PLACEHOLDER Media Queries for Responsive Design.
+   These override the primary ('mobile first') styles
+   Modify as content requires.
+   ========================================================================== */
+
+@media only screen and (min-width: 480px) {
+  /* Style adjustments for viewports 480px and over go here */
+
+}
+
+@media only screen and (min-width: 768px) {
+  /* Style adjustments for viewports 768px and over go here */
+
+}
+
+
+/* =============================================================================
+   Print styles.
+   Inlined to avoid required HTTP connection: www.phpied.com/delay-loading-your-print-css/
+   ========================================================================== */
+
+@media print {
+  * { background: transparent !important; color: black !important; text-shadow: none !important; filter:none !important; -ms-filter: none !important; } /* Black prints faster: sanbeiji.com/archives/953 */
+  a, a:visited { color: #444 !important; text-decoration: underline; }
+  a[href]:after { content: " (" attr(href) ")"; }
+  abbr[title]:after { content: " (" attr(title) ")"; }
+  .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; }  /* Don't show links for images, or javascript/internal links */
+  pre, blockquote { border: 1px solid #999; page-break-inside: avoid; }
+  thead { display: table-header-group; } /* css-discuss.incutio.com/wiki/Printing_Tables */
+  tr, img { page-break-inside: avoid; }
+  img { max-width: 100% !important; }
+  @page { margin: 0.5cm; }
+  p, h2, h3 { orphans: 3; widows: 3; }
+  h2, h3{ page-break-after: avoid; }
+}
