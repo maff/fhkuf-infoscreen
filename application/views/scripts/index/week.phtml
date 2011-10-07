@@ -20,11 +20,11 @@ $model = $this->model;
     <?php $filterUrl = InfoScreen_Model_Request::factory()->getFilterUrl(false); ?>
     <div id="date-prev" class="pager">
         <?php $datePrev = $this->weekPager($model->getStartDate(), 'prev'); ?>
-        <a title="vorherige Woche" rel="<?php echo $datePrev ?>" href="<?php echo $this->baseUrl(); ?>/week/date/<?php echo $datePrev ?>/<?php echo $filterUrl ?>"><span>&laquo; zurück</span></a>
+        <a title="vorherige Woche" rel="<?php echo $datePrev ?>" href="<?php echo $this->baseUrl(); ?>/week/date/<?php echo $datePrev ?><?php echo $filterUrl ?>"><span>&laquo; zurück</span></a>
     </div>
     <div id="date-next" class="pager">
         <?php $dateNext = $this->weekPager($model->getStartDate(), 'next'); ?>
-        <a title="nächste Woche" rel="<?php echo $dateNext ?>" href="<?php echo $this->baseUrl(); ?>/week/date/<?php echo $dateNext ?>/<?php echo $filterUrl ?>"><span>weiter &raquo;</span></a>
+        <a title="nächste Woche" rel="<?php echo $dateNext ?>" href="<?php echo $this->baseUrl(); ?>/week/date/<?php echo $dateNext ?><?php echo $filterUrl ?>"><span>weiter &raquo;</span></a>
     </div>
 
 <?php
