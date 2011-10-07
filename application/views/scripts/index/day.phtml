@@ -23,11 +23,11 @@ $model = $this->model;
     <?php $filterUrl = InfoScreen_Model_Request::factory()->getFilterUrl(false); ?>
     <div id="date-prev" class="pager">
         <?php $datePrev = $this->dayPager($model->getDate(), 'prev'); ?>
-        <a title="vorheriger Tag" rel="<?php echo $datePrev ?>" href="<?php echo $this->baseUrl(); ?>/day/date/<?php echo $datePrev ?><?php echo $filterUrl ?>"><span>&laquo; zurück</span></a>
+        <a title="vorheriger Tag" data-date="<?php echo $datePrev ?>" href="<?php echo $this->baseUrl(); ?>/day/date/<?php echo $datePrev ?><?php echo $filterUrl ?>"><span>&laquo; zurück</span></a>
     </div>
     <div id="date-next" class="pager">
         <?php $dateNext = $this->dayPager($model->getDate(), 'next'); ?>
-        <a title="nächster Tag" rel="<?php echo $dateNext ?>" href="<?php echo $this->baseUrl(); ?>/day/date/<?php echo $dateNext ?><?php echo $filterUrl ?>"><span>weiter &raquo;</span></a>
+        <a title="nächster Tag" data-date="<?php echo $dateNext ?>" href="<?php echo $this->baseUrl(); ?>/day/date/<?php echo $dateNext ?><?php echo $filterUrl ?>"><span>weiter &raquo;</span></a>
     </div>
 
     <?php if($model->hasData()): ?>

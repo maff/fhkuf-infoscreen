@@ -20,7 +20,7 @@ class Zend_View_Helper_FilterLink
        	    foreach($values as $val) {
        	        $links[] = $this->filterLink($key, trim($val));
             }
-       	        
+
        	    return implode(', ', $links);
        	} else {
             $request = InfoScreen_Model_Request::factory();
@@ -36,7 +36,7 @@ class Zend_View_Helper_FilterLink
             $filterUrl .= '/' . $key . '/' . urlencode($value);
             $filterUrl = $request->completeUrl($filterUrl);
 
-            return '<a class="filterlink" rel="' . $key . '" href="' . $filterUrl . '" title="nach \'' . $value . '\' filtern">' . $value . '</a>';
+            return '<a class="filterlink" data-filterkey="' . $key . '" href="' . $filterUrl . '" title="nach \'' . $value . '\' filtern">' . $value . '</a>';
         }
     }
 }
