@@ -32,6 +32,7 @@ class Application_Setup
             /** Autoloader */
             require_once 'Zend/Loader/Autoloader.php';
             $autoloader = Zend_Loader_Autoloader::getInstance();
+            $autoloader->setFallbackAutoloader(true);
 
             /** Config */
             $defaultConfigFile = APPLICATION_PATH . '/configs/application.default.ini';
