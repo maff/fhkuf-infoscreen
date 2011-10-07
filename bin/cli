@@ -1,0 +1,4 @@
+#!/usr/bin/env php
+<?php
+require realpath(dirname(__FILE__) . '/scripts/environment.php');
+require realpath(dirname(__FILE__) . '/scripts/cli.php');
