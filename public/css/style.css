@@ -433,6 +433,7 @@ h1 a {
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
+    background: transparent url(../img/stitch.png) left bottom repeat-x;
 }
 
 .dataTable thead tr th {
