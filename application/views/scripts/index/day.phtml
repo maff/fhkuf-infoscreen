@@ -15,9 +15,9 @@ $model = $this->model;
     <section id="results">
 <?php endif; ?>
 
-    <?php $title = strftime('%A, %d.%m.%Y', strtotime($model->getDate())) ?>
+    <?php $this->title = strftime('%A, %d.%m.%Y', strtotime($model->getDate())) ?>
     <h1 id="pagetitle" class="<?php if($model->hasData()) echo "results"; else echo "noresults"; ?>">
-         <a href="<?php echo InfoScreen_Model_Request::factory()->getFilterUrl(); ?>" title="Permanentlink auf diese Filterkriterien"><?php echo $title; ?></a>
+         <a href="<?php echo InfoScreen_Model_Request::factory()->getFilterUrl(); ?>" title="Permanentlink auf diese Filterkriterien"><?php echo $this->title; ?></a>
     </h1>
 
     <?php $filterUrl = InfoScreen_Model_Request::factory()->getFilterUrl(false); ?>
@@ -75,6 +75,6 @@ $model = $this->model;
 
 <?php
 if($this->ajax) {
-    InfoScreen_Statistics::track($title);
+    InfoScreen_Statistics::track($this->title);
 }
 ?>
