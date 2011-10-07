@@ -52,6 +52,12 @@ $model = $this->model;
                 foreach($model->getFilteredData() as $lecture):
                 ?>
                     <?php $class = ($i++ % 2 == 0) ? 'even' : 'odd'; ?>
+                    <?php
+                    if(stripos($lecture->info, 'klausur') !== false) {
+                        $class .= ' important';
+                    }
+                    ?>
+
                     <tr class="<?php echo $class ?>">
                         <td class="course"><?php echo $this->filterLink('course', $lecture->course) ?></td>
                         <td class="description"><?php echo $lecture->description ?></td>
