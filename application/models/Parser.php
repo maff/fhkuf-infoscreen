@@ -146,21 +146,25 @@ class InfoScreen_Model_Parser
         $this->_data = array();
         $dom = new Zend_Dom_Query($response->getBody());
 
+        $filter = new Zend_Filter();
+        $filter->addFilter(new Zend_Filter_StringTrim());
+        $filter->addFilter(new InfoScreen_Filter_EntityDecode());
+
         /* @var $element DOMElement */
         foreach ($dom->query('div.kurstable table tbody tr') as $domelement) {
             $htmldata = array();
             $element = new simple_html_dom();
             $element->load($this->_getDOMElementInnerHtml($domelement));
 
-            $htmldata['date'] = trim(@$element->find('td.coldatum', 0)->plaintext);
-            $htmldata['startTime'] = trim(@$element->find('td.colvon', 0)->plaintext);
-            $htmldata['endTime'] = trim(@$element->find('td.colbis', 0)->plaintext);
-            $htmldata['course'] = trim(@$element->find('td.coljg', 0)->plaintext);
-            $htmldata['group'] = trim(@$element->find('td.colgrp', 0)->plaintext);
-            $htmldata['description'] = trim(@$element->find('td.colbez', 0)->plaintext);
-            $htmldata['lector'] = trim(@$element->find('td.collek', 0)->plaintext);
-            $htmldata['room'] = trim(@$element->find('td.colraum', 0)->plaintext);
-            $htmldata['info'] = trim(@$element->find('td.colinfo', 0)->plaintext);
+            $htmldata['date'] = $filter->filter(@$element->find('td.coldatum', 0)->plaintext);
+            $htmldata['startTime'] = $filter->filter(@$element->find('td.colvon', 0)->plaintext);
+            $htmldata['endTime'] = $filter->filter(@$element->find('td.colbis', 0)->plaintext);
+            $htmldata['course'] = $filter->filter(@$element->find('td.coljg', 0)->plaintext);
+            $htmldata['group'] = $filter->filter(@$element->find('td.colgrp', 0)->plaintext);
+            $htmldata['description'] = $filter->filter(@$element->find('td.colbez', 0)->plaintext);
+            $htmldata['lector'] = $filter->filter(@$element->find('td.collek', 0)->plaintext);
+            $htmldata['room'] = $filter->filter(@$element->find('td.colraum', 0)->plaintext);
+            $htmldata['info'] = $filter->filter(@$element->find('td.colinfo', 0)->plaintext);
 
             $this->_data[] = $htmldata;
         }
