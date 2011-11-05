@@ -25,7 +25,7 @@ $(document).ready(function(){
         if(!$.browser.msie) {
             $('#resultTable tbody td a.filterlink').click(function() {
                 resetBoxes();
-                $('#sel-' + $(this).attr('rel')).val($(this).text());
+                $('#sel-' + $(this).attr('data-filterkey')).val($(this).text());
                 callResults();
                 return false;
             });
@@ -35,7 +35,7 @@ $(document).ready(function(){
     function initDayPagerLinks() {
         if(!$.browser.msie) {
             $('div.pager a').click(function() {
-                $('#sel-date').val($(this).attr('rel'));
+                $('#sel-date').val($(this).attr('data-date'));
                 callResults();
                 return false;
             });

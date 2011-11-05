@@ -15,19 +15,19 @@ $model = $this->model;
     <section id="results">
 <?php endif; ?>
 
-    <?php $title = strftime('%A, %d.%m.%Y', strtotime($model->getDate())) ?>
+    <?php $this->title = strftime('%A, %d.%m.%Y', strtotime($model->getDate())) ?>
     <h1 id="pagetitle" class="<?php if($model->hasData()) echo "results"; else echo "noresults"; ?>">
-         <a href="<?php echo InfoScreen_Model_Request::factory()->getFilterUrl(); ?>" title="Permanentlink auf diese Filterkriterien"><?php echo $title; ?></a>
+         <a href="<?php echo InfoScreen_Model_Request::factory()->getFilterUrl(); ?>" title="Permanentlink auf diese Filterkriterien"><?php echo $this->title; ?></a>
     </h1>
 
     <?php $filterUrl = InfoScreen_Model_Request::factory()->getFilterUrl(false); ?>
     <div id="date-prev" class="pager">
         <?php $datePrev = $this->dayPager($model->getDate(), 'prev'); ?>
-        <a title="vorheriger Tag" rel="<?php echo $datePrev ?>" href="<?php echo $this->baseUrl(); ?>/day/date/<?php echo $datePrev ?><?php echo $filterUrl ?>"><span>&laquo; zurück</span></a>
+        <a title="vorheriger Tag" data-date="<?php echo $datePrev ?>" href="<?php echo $this->baseUrl(); ?>/day/date/<?php echo $datePrev ?><?php echo $filterUrl ?>"><span>&laquo; zurück</span></a>
     </div>
     <div id="date-next" class="pager">
         <?php $dateNext = $this->dayPager($model->getDate(), 'next'); ?>
-        <a title="nächster Tag" rel="<?php echo $dateNext ?>" href="<?php echo $this->baseUrl(); ?>/day/date/<?php echo $dateNext ?><?php echo $filterUrl ?>"><span>weiter &raquo;</span></a>
+        <a title="nächster Tag" data-date="<?php echo $dateNext ?>" href="<?php echo $this->baseUrl(); ?>/day/date/<?php echo $dateNext ?><?php echo $filterUrl ?>"><span>weiter &raquo;</span></a>
     </div>
 
     <?php if($model->hasData()): ?>
@@ -52,6 +52,12 @@ $model = $this->model;
                 foreach($model->getFilteredData() as $lecture):
                 ?>
                     <?php $class = ($i++ % 2 == 0) ? 'even' : 'odd'; ?>
+                    <?php
+                    if(stripos($lecture->info, 'klausur') !== false) {
+                        $class .= ' important';
+                    }
+                    ?>
+
                     <tr class="<?php echo $class ?>">
                         <td class="course"><?php echo $this->filterLink('course', $lecture->course) ?></td>
                         <td class="description"><?php echo $lecture->description ?></td>
@@ -75,6 +81,6 @@ $model = $this->model;
 
 <?php
 if($this->ajax) {
-    InfoScreen_Statistics::track($title);
+    InfoScreen_Statistics::track($this->title);
 }
 ?>
